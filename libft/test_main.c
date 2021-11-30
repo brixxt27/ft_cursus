@@ -1,16 +1,19 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
+#define NUM 20
 
 int	main(void)
 {
-	char s1[10] = "1";
-	char s2[20] = "1234567";
+	char	s1[NUM] = "21474836499999999999";
+	//char	s2[NUM] = "as";
+	//char	*s = 0;
 
-	printf("result : %zu\n", ft_strlcat(s1, s2, 7));
-	ft_strlcat(s1, s2, 7);
-	printf("ft_mine : %s\n", s1);
-	strlcat(s1, s2, 7);
-	printf("origin : %s\n", s1);
+	ft_atoi(s1);
+	printf("ft_mine : %d\n", ft_atoi(s1));
+	atoi(s1);
+	printf("origin : %d\n", atoi(s1));
+
 	return (0);
 }
