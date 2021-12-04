@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 13:21:14 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/05 04:27:40 by jayoon           ###   ########.fr       */
+/*   Created: 2021/12/04 23:12:48 by jayoon            #+#    #+#             */
+/*   Updated: 2021/12/05 04:16:48 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int		i;
+	char	*str;
+	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-		i++;
-	while (i >= 0)
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (str == NULL)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	while (i < len)
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i--;
+		str[i] = s[start + i];
+		i++;
 	}
-	return (NULL);
+	str[i] = '\0';
+	return (str);
 }

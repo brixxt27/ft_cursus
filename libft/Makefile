@@ -6,35 +6,36 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2021/12/03 20:06:07 by jayoon           ###   ########.fr        #
+#    Updated: 2021/12/05 03:51:07 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME	=	libft.a
 
-SRCS = ft_bzero.c \
-	   ft_memset.c \
-	   ft_memcmp.c \
-	   ft_tolower.c \
-	   ft_toupper.c \
-	   ft_isalnum.c \
-	   ft_isalpha.c \
-	   ft_isascii.c \
-	   ft_isdigit.c \
-	   ft_isprint.c \
-	   ft_strchr.c \
-	   ft_strrchr.c \
-	   ft_strncmp.c \
-	   ft_strlen.c \
-	   ft_strlcpy.c \
-	   ft_strlcat.c \
-	   ft_strnstr.c \
-	   ft_atoi.c \
-	   ft_calloc.c \
-	   ft_strdup.c \
-	   ft_memcpy.c \
-	   ft_memmove.c \
-	   ft_memchr.c
+SRCS	=	ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isascii.c \
+			ft_isdigit.c \
+			ft_isprint.c \
+			ft_tolower.c \
+			ft_toupper.c \
+			ft_strchr.c \
+			ft_strrchr.c \
+			ft_strncmp.c \
+			ft_strlen.c \
+			ft_strlcpy.c \
+			ft_strlcat.c \
+			ft_strnstr.c \
+			ft_atoi.c \
+			ft_calloc.c \
+			ft_strdup.c \
+			ft_memset.c \
+			ft_bzero.c \
+			ft_memcmp.c \
+			ft_memcpy.c \
+			ft_memmove.c \
+			ft_memchr.c \
+			ft_substr.c
 
 OBJS = $(SRCS:.c=.o)
 
