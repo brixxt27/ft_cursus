@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2021/12/05 03:51:07 by jayoon           ###   ########.fr        #
+#    Updated: 2021/12/05 18:24:46 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS	=	ft_isalnum.c \
 			ft_memcpy.c \
 			ft_memmove.c \
 			ft_memchr.c \
-			ft_substr.c
+			ft_substr.c \
+			ft_strjoin.c
 
 OBJS = $(SRCS:.c=.o)
 
