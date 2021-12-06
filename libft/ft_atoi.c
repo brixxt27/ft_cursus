@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 15:18:43 by jayoon            #+#    #+#             */
-/*   Updated: 2021/11/30 23:49:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2021/12/06 16:37:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int	ft_atoi(const char *str)
 	while (ft_isdigit(*str))
 	{
 		res = res * 10 + *str - '0';
+		if (res > LLONG_MAX + 1ULL && sign == -1)
+			return (0);
+		else if (res > LLONG_MAX && sign == 1)
+			return (-1);
 		str++;
 	}
-	if (res > LLONG_MAX + 1ULL && sign == -1)
-		return (0);
-	else if (res > LLONG_MAX && sign == 1)
-		return (-1);
-	else
-		return ((int)res * sign);
+	return ((int)res * sign);
 }
