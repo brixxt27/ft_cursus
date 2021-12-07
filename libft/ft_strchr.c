@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:41:34 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/05 17:35:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2021/12/07 23:58:34 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0' || *s == c)
+	while (*s != '\0' || c == '\0')
 	{
 		if (*s == (char)c)
 			return ((char *)s);
