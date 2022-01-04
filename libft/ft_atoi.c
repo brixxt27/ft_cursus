@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 15:18:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/04 20:36:03 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/04 20:45:09 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	ft_atoi(const char *str)
 		else
 		{
 			if (sign == -1)
-				return ((int)LONG_MIN);
-			return ((int)LONG_MAX);
+				return (0);
+			return (-1);
 		}
 	}
 	if (res > LLONG_MAX + 1ULL && sign == -1)

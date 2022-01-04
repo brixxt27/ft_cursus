@@ -128,6 +128,9 @@ int main(void)
 
 	printf("f u long long max over 19446744073709551616 : %d\n", ft_atoi("19446744073709551616"));
 
+	printf("a u long long min under -19446744073709551616 : %d\n", atoi("-19446744073709551616"));
+
+	printf("f u long long min under -19446744073709551616 : %d\n", ft_atoi("-19446744073709551616"));
 
 
 	return (0);
