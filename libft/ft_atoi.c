@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 15:18:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/04 20:45:09 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/05 00:43:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,8 @@ static int	ft_isspace(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+static int	check_isspace_and_sign(const char *str, int sign)
 {
-	int					i;
-	int					sign;
-	unsigned long long	res;
-
-	i = 0;
-	sign = 1;
-	res = 0;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
@@ -39,24 +32,40 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
+	return (sign);
+}
+
+static void	cal_result(const char *str, unsigned long long *res)
+{
+	*res = *res * 10 + *str - '0';
+	str++;
+}
+
+int	ft_atoi(const char *str)
+{
+	int					sign_i[2];
+	unsigned long long	res;
+
+	sign_i[0] = 1;
+	sign_i[1] = 0;
+	res = 0;
+	sign_i[0] = check_isspace_and_sign(str, sign_i[0]);
 	while (ft_isdigit(*str))
 	{
-		if (i < 19)
-		{
-			res = res * 10 + *str - '0';
-			str++;
-			i++;
-		}
+		if (sign_i[1] < 19)
+			cal_result(str, &res);
 		else
 		{
-			if (sign == -1)
+			if (sign_i[0] == -1)
 				return (0);
-			return (-1);
+			else
+				return (-1);
 		}
+		sign_i[1]++;
 	}
-	if (res > LLONG_MAX + 1ULL && sign == -1)
+	if (res > LLONG_MAX + 1ULL && sign_i[0] == -1)
 		return (0);
-	else if (res > LLONG_MAX && sign == 1)
+	else if (res > LLONG_MAX && sign_i[0] == 1)
 		return (-1);
-	return ((int)res * sign);
+	return ((int)res * sign_i[0]);
 }

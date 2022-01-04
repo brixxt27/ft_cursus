@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 22:07:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/04 21:12:26 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/04 21:28:04 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*buf;
 
-	if (!count || !size)
-		return (NULL);
 	buf = malloc(count * size);
 	if (!buf)
 		return (NULL);
