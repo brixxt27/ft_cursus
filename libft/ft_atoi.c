@@ -41,15 +41,15 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	res = cal(str, &sign, &i);
-	if (i >= 19)
+	if (res > LLONG_MAX + 1ULL && sign == -1)
+		return ((int)LONG_MIN);
+	else if (res > LLONG_MAX && sign == 1)
+		return ((int)LONG_MAX);
+	if (i > 19)
 	{
 		if (sign == -1)
 			return ((int)LONG_MIN);
 		return ((int)LONG_MAX);
 	}
-	if (res > LLONG_MAX + 1ULL && sign == -1)
-		return (0);
-	else if (res > LLONG_MAX && sign == 1)
-		return (-1);
 	return ((int)res * sign);
 }
