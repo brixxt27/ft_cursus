@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 13:21:14 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/12 16:21:37 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/06 21:16:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 char	*ft_strrchr(const char *s, int c)
 {

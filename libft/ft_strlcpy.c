@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:54:07 by jayoon            #+#    #+#             */
-/*   Updated: 2021/11/23 23:18:26 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/06 21:15:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
