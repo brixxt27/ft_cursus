@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 23:16:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/09 01:46:14 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/09 02:51:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ static size_t	count_word(char const *s, char c)
 	return (cnt);
 }
 
-static char	**free_all_alloc(char **s, size_t i)
+static char	**free_error_substr(char **s, size_t last_i)
 {
-	while (i-- >= 0 && s[i])
+	size_t	i;
+
+	i = 0;
+	while (i <= last_i && s[i])
 	{
 		free(s[i]);
 		s[i] = NULL;
+		i++;
 	}
 	free(s);
 	s = NULL;
@@ -64,7 +68,7 @@ char	**ft_split(char const *s, char c)
 				s++;
 			str[i] = ft_substr(from, 0, s - from);
 			if (str[i] == NULL)
-				return (free_all_alloc(str, i));
+				return (free_error_substr(str, i));
 			i++;
 		}
 		else
