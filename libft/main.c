@@ -7,7 +7,7 @@ int	main(void)
 	size_t	i;
 
 	i = 0;
-	tab = ft_split("sd sds d asd", ' ');
+	tab = ft_split("              olol", ' ');
 	while (tab[i] != NULL)
 	{
 		printf("%s\n", tab[i]);
@@ -20,6 +20,5 @@ int	main(void)
 		i++;
 	}
 	free(tab);
-	system("leaks a.out");
 	return (0);
 }

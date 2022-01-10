@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 20:50:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/09 22:07:15 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/10 10:10:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static size_t	get_digit(int n)
 {
 	size_t	count;
-	
+
 	count = 0;
 	if (n == 0)
 		count++;
