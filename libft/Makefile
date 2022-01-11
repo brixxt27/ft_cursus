@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/11 16:59:01 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/11 22:40:00 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,11 @@ SRCS	=	ft_isalnum.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c
 
+BNS_SRCS	=	ft_lstnew.c
+
 OBJS = $(SRCS:.c=.o)
+
+BNS_OBJS = $(BNS_SRCS:.c=.o)
 
 CC = gcc
 
@@ -57,11 +61,13 @@ INCLUDE = -I
 
 EXE = a.out
 
-##ifdef BONUS
-##	OBJS = $(OBJ) $(OBJ_BONUS)
-##else
-##	OBJS = $(OBJ)
-##endif
+#-----------#
+#	Rules	#
+#-----------#
+
+bonus : $(NAME)
+	$(CC) $(CFLAGS) $(INCLUDE) libft.h -c $(BNS_SRCS)
+	ar rc $(NAME) $(BNS_OBJS)
 
 all : $(NAME)
 
@@ -78,8 +84,5 @@ fclean : clean
 	rm -f $(NAME) $(EXE)
 
 re : fclean all
-
-bonus : $(NAME)
-	ar rc $(NAME) $(BNS_OBJS)
 
 .PHONY : all clean fclean re bonus
