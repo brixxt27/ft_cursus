@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 23:46:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/06 21:10:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:01:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h" 
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
