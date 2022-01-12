@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/11 22:40:00 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/12 10:46:48 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,15 @@ SRCS	=	ft_isalnum.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c
 
-BNS_SRCS	=	ft_lstnew.c
+BNS_SRCS	=	ft_lstnew.c \
+				ft_lstadd_front.c \
+				ft_lstsize.c \
+				ft_lstlast.c \
+				ft_lstadd_back.c \
+				ft_lstdelone.c \
+				ft_lstclear.c \
+				ft_lstiter.c \
+				ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
 
