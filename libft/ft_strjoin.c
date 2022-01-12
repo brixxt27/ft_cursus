@@ -6,33 +6,33 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 17:49:39 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/05 18:49:37 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/07 10:20:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_strcpy(char *dst, const char *src)
+static void	ft_strcpy(char *dst, char const *src)
 {
-	while (*src != '\0')
+	while (*src)
 	{
 		*dst++ = *src++;
 	}
-	return (dst);
+	*dst = '\0';
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
 	size_t	s1_len;
 	size_t	s2_len;
+	char	*str;
 
-	if (s1 == NULL || s2 == NULL)
+	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) *(s1_len + s2_len + 1));
-	if (str == NULL)
+	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (!str)
 		return (NULL);
 	ft_strcpy(str, s1);
 	ft_strlcpy(str + s1_len, s2, s2_len + 1);

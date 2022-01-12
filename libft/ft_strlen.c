@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:33:30 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/12 12:37:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:04:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

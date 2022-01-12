@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 17:45:28 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/03 16:56:03 by jayoon           ###   ########.fr       */
+/*   Created: 2022/01/11 17:15:21 by jayoon            #+#    #+#             */
+/*   Updated: 2022/01/11 17:25:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	ft_putnbr_fd_recursive(long int n, int fd)
 {
-	size_t	i;
+	if (n > 9)
+		ft_putnbr_fd_recursive(n / 10, fd);
+	ft_putchar_fd('0' + (n % 10), fd);
+}
 
-	i = 0;
-	if (dst == src || len == 0)
-		return (dst);
-	if (dst - src < len)
+void	ft_putnbr_fd(int n, int fd)
+{
+	long int	long_n;
+
+	if (n < 0)
 	{
-		while (i >= 0)
-		{
-			i = len - 1;
-			dst[i] = src[i];
-			i--;
-		}
+		ft_putchar_fd('-', fd);
+		long_n = (long int)n * (-1);
 	}
 	else
-		ft_memcpy(dst, src, len);
-	return (dst);
+		long_n = n;
+	ft_putnbr_fd_recursive(long_n, fd);
 }

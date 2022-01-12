@@ -6,12 +6,13 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:25:50 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/02 00:12:04 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/11 17:07:40 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stdlib.h>
 
 typedef struct s_list

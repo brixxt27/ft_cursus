@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 15:18:43 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/06 16:37:43 by jayoon           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "libft.h"
 #include <limits.h>
 
@@ -22,29 +10,46 @@ static int	ft_isspace(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+static unsigned long long	cal(const char *str, int *psign, int *pi)
 {
-	int					sign;
 	unsigned long long	res;
 
-	sign = 1;
 	res = 0;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			sign = -1;
+			*psign = -1;
 		str++;
 	}
 	while (ft_isdigit(*str))
 	{
 		res = res * 10 + *str - '0';
-		if (res > LLONG_MAX + 1ULL && sign == -1)
-			return (0);
-		else if (res > LLONG_MAX && sign == 1)
-			return (-1);
 		str++;
+		(*pi)++;
+	}
+	return (res);
+}
+
+int	ft_atoi(const char *str)
+{
+	int					i;
+	int					sign;
+	unsigned long long	res;
+
+	i = 0;
+	sign = 1;
+	res = cal(str, &sign, &i);
+	if (res > LLONG_MAX + 1ULL && sign == -1)
+		return ((int)LONG_MIN);
+	else if (res > LLONG_MAX && sign == 1)
+		return ((int)LONG_MAX);
+	if (i > 19)
+	{
+		if (sign == -1)
+			return ((int)LONG_MIN);
+		return ((int)LONG_MAX);
 	}
 	return ((int)res * sign);
 }

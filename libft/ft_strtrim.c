@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 23:02:29 by jayoon            #+#    #+#             */
-/*   Updated: 2021/12/07 23:45:45 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/07 11:33:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
+	char	*str;
 	size_t	i;
 	size_t	len;
-	char	*ptr;
 
-	if (s1 == NULL || set == NULL)
+	if (!s1 || !set)
 		return (NULL);
 	i = 0;
 	len = ft_strlen(s1);
@@ -26,9 +26,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (ft_strchr(set, s1[len - 1]) && len > i)
 		len--;
-	ptr = (char *)malloc(sizeof(char) * (len - i + 1));
-	if (ptr == NULL)
+	str = (char *)malloc(sizeof(char) * (len - i + 1));
+	if (!str)
 		return (NULL);
-	ft_strlcpy(ptr, s1 + i, len - i + 1);
-	return (ptr);
+	ft_strlcpy(str, s1 + i, len - i + 1);
+	return (str);
 }
