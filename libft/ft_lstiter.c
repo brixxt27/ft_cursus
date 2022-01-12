@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 18:41:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/12 18:48:54 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/12 19:15:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (!lst || f)
+	if (!lst || !f)
 		return ;
 	while (lst)
 	{

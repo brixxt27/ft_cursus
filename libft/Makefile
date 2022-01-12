@@ -6,13 +6,14 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/12 18:49:49 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/12 19:30:17 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	libft.a
-
-SRCS	=	ft_isalnum.c \
+NAME = libft.a
+CFLAGS = -Wall -Wextra -Werror -I.
+CC = gcc
+SRCS =		ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \
 			ft_isdigit.c \
@@ -46,8 +47,8 @@ SRCS	=	ft_isalnum.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c
-
-BNS_SRCS	=	ft_lstnew.c \
+		
+SRCS_B = 		ft_lstnew.c \
 				ft_lstadd_front.c \
 				ft_lstsize.c \
 				ft_lstlast.c \
@@ -55,42 +56,31 @@ BNS_SRCS	=	ft_lstnew.c \
 				ft_lstdelone.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
-				#ft_lstmap.c
+				ft_lstmap.c	
 
-OBJS = $(SRCS:.c=.o)
+OBJECTS = $(SRCS:%.c=%.o)
 
-BNS_OBJS = $(BNS_SRCS:.c=.o)
+OBJECTS_B = $(SRCS_B:%.c=%.o)
 
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
-
-INCLUDE = -I
-
-EXE = a.out
-
-#-----------#
-#	Rules	#
-#-----------#
-
-bonus : $(NAME)
-	$(CC) $(CFLAGS) $(INCLUDE) libft.h -c $(BNS_SRCS)
-	ar rc $(NAME) $(BNS_OBJS)
+ifdef WITH_BONUS
+	OBJ_FILES = $(OBJECTS) $(OBJECTS_B)
+else
+	OBJ_FILES = $(OBJECTS)
+endif
 
 all : $(NAME)
 
-%.o	: %.c
-	$(CC) $(CFLAGS) $(INCLUDE) libft.h -c -o $@ $< 
+$(NAME) : $(OBJ_FILES)
+		ar rcs $(NAME) $(OBJECTS)
 
-$(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-
-clean :
-	rm -f $(OBJS) $(BNS_OBJS)
+bonus : 
+	make WITH_BONUS=1 all
+clean : 
+	rm -f $(OBJECTS) $(OBJECTS_B)
 
 fclean : clean
-	rm -f $(NAME) $(EXE)
+	rm -f $(NAME)
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+.PHONY: all bonus clean fclean re

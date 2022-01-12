@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 20:50:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/12 09:50:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/12 19:14:41 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t	get_digit(int n)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	size_t	number_of_digits;
+	int		number_of_digits;
 	long	nb;
 
 	nb = n;
@@ -43,10 +43,10 @@ char	*ft_itoa(int n)
 	str = (char *)malloc((number_of_digits + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	str[number_of_digits] = '\0';
-	while (number_of_digits--)
+	str[number_of_digits--] = '\0';
+	while (number_of_digits >= 0)
 	{
-		str[number_of_digits] = nb % 10 + '\0';
+		str[number_of_digits--] = nb % 10 + '0';
 		nb /= 10;
 	}
 	if (n < 0)
