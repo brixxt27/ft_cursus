@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 20:50:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/10 10:10:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/12 09:50:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 	size_t	number_of_digits;
-	int		nb;
+	long	nb;
 
 	nb = n;
-	if (n == -2147483648)
-		return ("-2147483648");
 	number_of_digits = get_digit(nb);
 	if (nb < 0)
 	{

@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 22:42:16 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/12 09:27:07 by jayoon           ###   ########.fr       */
+/*   Created: 2022/01/12 09:22:52 by jayoon            #+#    #+#             */
+/*   Updated: 2022/01/12 09:23:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+#include "libft.h" 
+
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	
+	size_t			i;
+	unsigned char	*d;
+	unsigned char	*s;
+
+	if (dst == src || n == 0)
+		return (dst);
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}	
+	return (dst);
 }

@@ -7,7 +7,7 @@ int	main(void)
 	size_t	i;
 
 	i = 0;
-	tab = ft_split("              olol", ' ');
+	tab = ft_split("aaaaaaaaaccccc", 'a');
 	while (tab[i] != NULL)
 	{
 		printf("%s\n", tab[i]);
