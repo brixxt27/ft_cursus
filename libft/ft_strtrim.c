@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 23:02:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/12 11:20:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/12 18:51:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 	size_t	len;
 
-	if (!s1 && !set)
+	if (!s1 || !set)
 		return (NULL);
-	if (!s1)
-		return (ft_strdup(""));
-	else
-		return (ft_strdup(""));
 	i = 0;
 	len = ft_strlen(s1);
 	while (ft_strchr(set, s1[i]) && i < len)
