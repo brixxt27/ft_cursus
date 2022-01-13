@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/13 17:22:17 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/13 18:48:00 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ $(NAME) : $(OBJ_FILES)
 		ar rcs $(NAME) $(OBJ_FILES)
 
 bonus : 
-		make WITH_BONUS=1 all
+		make WITH_BONUS=1
 
 clean : 
 	rm -f $(OBJECTS) $(OBJECTS_B)
