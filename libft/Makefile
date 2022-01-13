@@ -6,13 +6,14 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/13 18:48:00 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/13 18:53:11 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror -I.
 CC = gcc
+HEADER = ./libft.h
 SRCS =		ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \
@@ -70,7 +71,7 @@ endif
 
 all : $(NAME)
 
-$(NAME) : $(OBJ_FILES)
+$(NAME) : $(OBJ_FILES) $(HEADER)
 		ar rcs $(NAME) $(OBJ_FILES)
 
 bonus : 
