@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/12 19:30:17 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/13 12:09:40 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,10 +71,11 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILES)
-		ar rcs $(NAME) $(OBJECTS)
+		ar rcs $(NAME) $(OBJ_FILES)
 
 bonus : 
-	make WITH_BONUS=1 all
+		make WITH_BONUS=1 all
+
 clean : 
 	rm -f $(OBJECTS) $(OBJECTS_B)
 
