@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/13 18:53:11 by jayoon           ###   ########.fr        #
+#    Updated: 2022/01/14 11:22:51 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror -I.
 CC = gcc
 HEADER = ./libft.h
+EXE = a.out
 SRCS =		ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \
@@ -81,7 +82,7 @@ clean :
 	rm -f $(OBJECTS) $(OBJECTS_B)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(EXE)
 
 re : fclean all
 
