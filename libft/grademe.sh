@@ -1,9 +1,25 @@
 #!/bin/bash
-
+echo -e "\033[32;1m"NORM"\033[m"
+read $a
+norminette ./*.c ./*.h
+echo -e "\033[32;1m"LIBFT TEST"\033[m"
+read $a
+git clone https://github.com/jtoty/Libftest
+cd Libftest/
+./grademe.sh
+sed -i "" 's/~\/libft/..\//' my_config.sh
+./grademe.sh
+cd ..
+echo -e "\033[32;1m"WAR MACHINE"\033[m"
+read $a
+git clone https://github.com/ska42/libft-war-machine
+cd libft-war-machine/
+bash grademe.sh
+bash grademe.sh
+cd ..
 echo -e "\033[32;1m"unit-test"\033[m"
 read $a
 git clone https://github.com/alelievr/libft-unit-test.git
-make bonus
 cd libft-unit-test/
 sed -i "" 's/LIBFTDIR	=	..\/libft/LIBFTDIR	=	..\//' Makefile
 make f
@@ -13,21 +29,6 @@ read $a
 git clone https://github.com/Tripouille/libftTester.git
 cd libftTester/
 make a
-cd ..
-echo -e "\033[32;1m"WAR MACHINE"\033[m"
-read $a
-git clone https://github.com/ska42/libft-war-machine
-cd libft-war-machine/
-bash grademe.sh
-bash grademe.sh
-cd ..
-echo -e "\033[32;1m"LIBFT TEST"\033[m"
-read $a
-git clone https://github.com/jtoty/Libftest
-cd Libftest/
-./grademe.sh
-sed -i "" 's/~\/libft/..\//' my_config.sh
-./grademe.sh
 cd ..
 rm -rf Libftest/ libft-war-machine/ libft-unit-test/ libftTester/
 echo -e "\033[32;1m"make fclean"\033[m"
@@ -51,6 +52,4 @@ ls
 echo -e "\033[32;1m"relink"\033[m"
 read $a
 make
-make bonus
 echo -e "\033[32;1m"DONE"\033[m"
-make fclean
