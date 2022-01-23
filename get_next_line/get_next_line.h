@@ -6,8 +6,14 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:04:10 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/17 13:04:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/01/23 15:11:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
+# include <stdlib.h>
+# include <unistd.h>
+
+#endif

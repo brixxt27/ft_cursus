@@ -1,19 +1,15 @@
-#include <stdlib.h>
-#include <unistd.h>
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
-#endif
+#include "get_next_line.h"
 
 char *get_next_line(int fd)
 {
-    char	*buf;
+    char	*ret;
     int		size;
 
-    buf = (char *)malloc(BUFFER_SIZE);
-    if (!buf)
+    ret = (char *)malloc(BUFFER_SIZE);
+    if (!ret)
         return (NULL);
-    size = read(fd, buf, BUFFER_SIZE);
+    size = read(fd, ret, BUFFER_SIZE);
     if (size == 0)
         return NULL; 
-	return buf;
+	return (ret);
 }

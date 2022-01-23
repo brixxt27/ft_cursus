@@ -15,5 +15,7 @@ int main()
     {
         printf("%s", temp);
     }
+	free(temp);
+	return (0);
 }
 
