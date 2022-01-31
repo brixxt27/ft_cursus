@@ -5,32 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 13:03:59 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/29 19:50:22 by jayoon           ###   ########.fr       */
+/*   Created: 2022/01/31 18:35:37 by jayoon            #+#    #+#             */
+/*   Updated: 2022/01/31 18:45:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdlib.h>
-#define TRUE 1
-#define FALSE 0
-
-typedef struct s_gnl
+char	*ft_read_and_save(int fd, char *save)
 {
-	char		*str;
-	static char	*saving;
-}	t_gnl;
+	char	*buff;
+	int		read_bytes;
 
-char	*get_next_line(int fd);
-char	*read_and_save(int fd, char *saving);
-char	*make_two_array_based_on_new_line(t_gnl *pset);
-int		check_next_new_line(char *str);
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(save, '\n') && read_bytes != 0)
+	{
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff
+	}
+}
 
 char	*get_next_line(int fd)
 {
-	t_gnl	set;
+	char		*line;
+	static char	*save;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	save = ft_read_and_save(fd, save);
+	if (!save)
 		return (NULL);
-	set.saving = read_and_save(fd, set.saving);
+	line = ft_get_line(save);
+	save = ft_save(save);
+	return (line);
 }
