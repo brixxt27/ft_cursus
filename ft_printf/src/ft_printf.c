@@ -11,7 +11,8 @@ int	check_format(va_list ap, const char *str)
 		if (*str == '%' && *(str + 1))
 		{
 			str++;
-			if (is_)
+			if (is_format(*str))
+
 		}
 		else
 		{
