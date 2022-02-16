@@ -1,7 +1,7 @@
 #include <stdarg.h>
-#include "../libft/libft.h"
+#include "../include/ft_printf.h"
 
-int	check_format(va_list ap, const char *str)
+int	ft_check_format(va_list ap, const char *str)
 {
 	int	len;
 
@@ -11,8 +11,8 @@ int	check_format(va_list ap, const char *str)
 		if (*str == '%' && *(str + 1))
 		{
 			str++;
-			if (is_format(*str))
-
+			if (ft_is_format(*str))
+				len += ft_print_format(ap, str);
 		}
 		else
 		{
@@ -32,7 +32,7 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (0);
 	va_start(ap, format);
-	len = check_format(ap, format);
+	len = ft_check_format(ap, format);
 	va_end(ap);
 	return (len);
 }
