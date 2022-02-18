@@ -2,7 +2,11 @@
 
 int	main(void)
 {
-	printf("fdsa %d");
+	int	ret;
+	ret = printf("%s\n", "");
+	//ret = printf("%d", 18446744073709551617);
+	printf("\n");
+	printf("ret : %d\n", ret);
 	/*
 	printf("q : %q \n", 10);
 	printf("w : %w \n", 10);
