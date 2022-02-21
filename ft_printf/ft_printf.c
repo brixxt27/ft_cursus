@@ -8,16 +8,13 @@ int	ft_check_format(va_list ap, const char *str)
 	len = 0;
 	while (*str)
 	{
-		if (*str == '%' && *(str + 1))
+		if (*str != '%')
+			len += ft_putchar_fd(*str, 1);
+		else if (*str == '%' && *(str + 1))
 		{
 			str++;
 			if (ft_is_format(*str))
 				len += ft_print_format(ap, str);
-		}
-		else
-		{
-			ft_putchar_fd(*str, 1);
-			len++;
 		}
 		str++;
 	}
