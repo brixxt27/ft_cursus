@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:33:30 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/21 22:40:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/21 23:00:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_strlen(const char *s)
 {
 	int	i;
 
-	if (!s)
-		return (0);
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i] != '\0')
 		i++;
 	return (i);

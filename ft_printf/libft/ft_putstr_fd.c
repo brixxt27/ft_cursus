@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:10:35 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/21 22:38:47 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/21 22:55:32 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putstr_fd(char *s, int fd)
 
 	len = ft_strlen(s);
 	if (!s)
-		return (0);
+		return (len);
 	write(fd, s, len);
 	return (len);
 }
