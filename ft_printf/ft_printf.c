@@ -14,7 +14,7 @@ int	ft_check_format(va_list ap, const char *str)
 		{
 			str++;
 			if (ft_is_format(*str))
-				len += ft_print_format(ap, str);
+				len += ft_print_format(ap, *str);
 		}
 		str++;
 	}
@@ -33,6 +33,7 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (len);
 }
+
 /*
 #include <stdio.h>
 int	main(void)

@@ -2,7 +2,9 @@
 
 int	main(void)
 {
-	printf("p : %p\n", (void *)16);
+	printf("u : %u\n", sizeof(int));
+	printf("%lu", sizeof(sizeof(int)));
+	//printf("p : %p\n", (void *)16);
 	/*
 	printf("q : %q \n", 10);
 	printf("w : %w \n", 10);
