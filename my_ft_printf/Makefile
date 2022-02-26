@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:02:51 by jayoon            #+#    #+#              #
-#    Updated: 2022/02/26 23:54:43 by jayoon           ###   ########.fr        #
+#    Updated: 2022/02/27 00:31:21 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT_PATH	=	./libft
 LIBFT		=	./libft/libft.a
 
 CC		=	gcc
-CFLAG	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 
 RM		=	rm -f
 
