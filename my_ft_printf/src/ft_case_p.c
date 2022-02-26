@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 02:19:07 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 09:55:47 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/27 00:22:10 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	ft_case_p(void *ptr)
 	str_base = ft_itoa_base(address, L_BASE_16);
 	len += ft_putstr_fd(str_base, 1);
 	free(str_base);
+	str_base = NULL;
 	return (len);
 }

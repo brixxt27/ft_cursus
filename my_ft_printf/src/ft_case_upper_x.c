@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 10:27:50 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 10:32:48 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/27 00:22:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	ft_case_upper_x(unsigned int num)
 	str = ft_itoa_base(num, "0123456789ABCDEF");
 	len = ft_case_s(str);
 	free(str);
+	str = NULL;
 	return (len);
 }
