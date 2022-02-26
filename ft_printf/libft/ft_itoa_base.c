@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 09:18:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 09:33:01 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 23:36:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	ft_hexadecimal_len(unsigned long long n, char *base)
 	}
 	return (len);
 }
-
 
 char	*ft_itoa_base(unsigned long long n, char *base)
 {

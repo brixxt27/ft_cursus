@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:02:51 by jayoon            #+#    #+#              #
-#    Updated: 2022/02/26 10:17:49 by jayoon           ###   ########.fr        #
+#    Updated: 2022/02/26 23:54:43 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,16 +36,14 @@ SRCS		=	./src/ft_case_c.c \
 				./src/ft_printf_util.c \
 				./src/ft_printf.c
 
-OBJS		=	$(SRCS:.c=.o)
-
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(LIBFT_PATH)
-
-all:	$(LIBFT) $(NAME)
+OBJS		=	$(SRCS:%.c=%.o)
 
 $(NAME):	$(OBJS)
+	$(MAKE) bonus -C $(LIBFT_PATH)
 	cp $(LIBFT) $(NAME)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+
+all:	$(LIBFT) $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)
@@ -54,6 +52,7 @@ clean:
 fclean: clean
 	make fclean -C $(LIBFT_PATH)
 	$(RM) $(NAME)
+
 re:	fclean all
 
 .PHONY:	all clean fclean re libft

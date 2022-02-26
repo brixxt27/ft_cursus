@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 20:50:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 05:28:10 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 23:36:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	is_negative(long long n_ll)
 
 static void	set_string(char *str, long long n_ll, int len_int)
 {
-	int flag;
+	int	flag;
 
 	flag = 0;
 	str[len_int--] = '\0';

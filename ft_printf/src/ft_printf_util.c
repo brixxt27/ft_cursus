@@ -6,23 +6,15 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:09:00 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 10:38:20 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 23:49:50 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int     ft_is_format(char c)
+int	ft_print_format(va_list ap, char c)
 {
-	if (c == 'c' || c == 's' || c == 'p' || c == 'd' || c == 'i' || c == 'u'
-		|| c == 'x' || c == 'X' || c == '%')
-		return (1);
-	return (0);
-}
-
-int     ft_print_format(va_list ap, char c)
-{
-	int len;
+	int	len;
 
 	len = 0;
 	if (c == 'c')
