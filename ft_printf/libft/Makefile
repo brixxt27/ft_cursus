@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/14 11:22:51 by jayoon           ###   ########.fr        #
+#    Updated: 2022/02/26 09:14:41 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS =		ft_isalnum.c \
 			ft_strtrim.c \
 			ft_split.c \
 			ft_itoa.c \
+			ft_itoa_base.c \
 			ft_strmapi.c \
 			ft_striteri.c \
 			ft_putchar_fd.c \

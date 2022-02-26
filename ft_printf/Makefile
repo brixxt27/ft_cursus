@@ -6,13 +6,13 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:02:51 by jayoon            #+#    #+#              #
-#    Updated: 2022/02/15 16:18:45 by jayoon           ###   ########.fr        #
+#    Updated: 2022/02/26 09:51:57 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
 LIBFT_PATH	=	./libft
-LIBFT		=	$(LIBFT_FATH)/libft.a
+LIBFT		=	./libft/libft.a
 
 CC		=	gcc
 CFLAG	=	-Wall -Wextra -Werror
@@ -22,7 +22,19 @@ RM		=	rm -f
 AR		=	ar
 ARFLAGS	=	rcs
 
-SRCS		=	./src/
+SRCS		=	./src/ft_case_c.c \
+				./src/ft_case_X.c \
+				./src/ft_case_c.c \
+				./src/ft_case_d_and_i.c \
+				./src/ft_case_p.c \
+				./src/ft_case_percent.c \
+				./src/ft_case_s.c \
+				./src/ft_case_u.c \
+				./src/ft_case_x.c \
+				./src/ft_printf.c \
+				./src/ft_printf_util.c \
+				./src/ft_printf_util.c \
+				./src/ft_printf.c
 
 OBJS		=	$(SRCS:.c=.o)
 

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_case_u.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 18:51:59 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/16 19:02:36 by jayoon           ###   ########.fr       */
+/*   Created: 2022/02/26 09:39:02 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/26 09:56:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "../include/ft_printf.h"
 
-# include <unistd.h>
-# include <stdarg.h>
+int	ft_case_u(unsigned int num)
+{
+	int		len;
+	char	*str;
 
-int     ft_printf(const char *format, ...);
-int     ft_check_format(va_list ap, const char *str);
-int     ft_is_format(char c);
-void	ft_putchar_fd(char c, int fd);
-
-#endif
+	str = ft_itoa_base(num, DECIMAL_BASE);
+	len = ft_case_s(str);
+	free(str);
+	return (len);
+}

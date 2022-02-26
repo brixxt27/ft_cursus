@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include "../include/ft_printf.h"
 
-int	ft_check_format(va_list ap, const char *str)
+static int	ft_check_format(va_list ap, const char *str)
 {
 	int	len;
 
@@ -15,6 +15,8 @@ int	ft_check_format(va_list ap, const char *str)
 			str++;
 			if (ft_is_format(*str))
 				len += ft_print_format(ap, *str);
+			else
+				len += ft_putchar_fd(*str, 1);
 		}
 		str++;
 	}
@@ -33,11 +35,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (len);
 }
-
-/*
-#include <stdio.h>
-int	main(void)
-{
-	return (0);
-}
-*/

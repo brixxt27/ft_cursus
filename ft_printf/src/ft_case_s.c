@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_case_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 09:20:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 09:22:49 by jayoon           ###   ########.fr       */
+/*   Created: 2022/02/26 02:01:58 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/26 05:53:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/ft_printf.h"
 
-int	ft_isalnum(int c)
+int	ft_case_s(char *str)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	else
-		return (0);
+	int len;
+
+	if (!str)
+		str = "(null)";
+	len = ft_putstr_fd(str, 1);	
+	return (len);
 }
