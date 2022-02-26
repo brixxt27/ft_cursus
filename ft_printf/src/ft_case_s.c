@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 02:01:58 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 05:53:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 11:27:50 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_case_s(char *str)
 {
-	int len;
+	int	len;
 
 	if (!str)
 		str = "(null)";
-	len = ft_putstr_fd(str, 1);	
+	len = ft_putstr_fd(str, 1);
 	return (len);
 }

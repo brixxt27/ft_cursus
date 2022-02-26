@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 01:58:21 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 09:55:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 11:28:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_case_c(char c)
 {
-	int len;
+	int	len;
 
 	len = ft_putchar_fd(c, 1);
 	return (len);
