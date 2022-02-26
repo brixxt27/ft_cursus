@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:43:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 23:50:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/27 01:15:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	ft_printf(const char *format, ...)
 	va_list	ap;
 	int		len;
 
-	if (!format)
-		return (0);
 	va_start(ap, format);
 	len = ft_check_format(ap, format);
 	va_end(ap);
