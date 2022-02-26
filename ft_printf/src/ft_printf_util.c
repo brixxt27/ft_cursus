@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 23:09:00 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/26 07:44:16 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 10:33:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int     ft_print_format(va_list ap, char c)
 	else if (c == 'u')
 		len = ft_case_u(va_arg(ap, int));
 	else if (c == 'x')
-		len = ft_case_x(va_arg(ap, unsigned long long));
+		len = ft_case_lower_x(va_arg(ap, unsigned long long));
 	else if (c == 'X')
-		len = ft_case_X(va_arg(ap, unsigned long long));
+		len = ft_case_upper_x(va_arg(ap, unsigned long long));
 	else if (c == '%')
 		len = ft_case_percent(va_arg(ap, int));
 	return (len);
