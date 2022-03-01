@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:02:51 by jayoon            #+#    #+#              #
-#    Updated: 2022/02/27 01:38:20 by jayoon           ###   ########.fr        #
+#    Updated: 2022/03/01 14:20:04 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	libftprintf.a
 LIBFT_PATH	=	./libft
 LIBFT		=	./libft/libft.a
 
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 
 RM		=	rm -f
@@ -38,12 +38,12 @@ SRCS		=	./src/ft_case_c.c \
 
 OBJS		=	$(SRCS:%.c=%.o)
 
+all:	$(NAME)
+
 $(NAME):	$(OBJS)
-	$(MAKE) bonus -C $(LIBFT_PATH)
+	make bonus -C $(LIBFT_PATH)
 	cp $(LIBFT) $(NAME)
 	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-
-all:	$(LIBFT) $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)
