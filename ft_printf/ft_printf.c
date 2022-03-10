@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/24 19:20:48 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/24 19:30:39 by jayoon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include "../include/ft_printf.h"
 
-int	ft_check_format(va_list ap, const char *str)
+static int	ft_check_format(va_list ap, const char *str)
 {
 	int	len;
 
