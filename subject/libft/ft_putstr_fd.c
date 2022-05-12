@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 00:37:35 by jayoon            #+#    #+#             */
-/*   Updated: 2021/11/23 11:58:22 by jayoon           ###   ########.fr       */
+/*   Created: 2022/01/11 17:10:35 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/26 02:06:06 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <unistd.h>
 
-int	ft_isalnum(int c)
+int	ft_putstr_fd(char *s, int fd)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	else
+	int	len;
+
+	if (!s)
 		return (0);
+	len = write(fd, s, ft_strlen(s));
+	return (len);
 }

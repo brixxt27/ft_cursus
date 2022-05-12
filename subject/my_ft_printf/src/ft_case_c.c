@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_case_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 17:10:35 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/11 17:29:38 by jayoon           ###   ########.fr       */
+/*   Created: 2022/02/26 01:58:21 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/26 11:28:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "../include/ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_case_c(char c)
 {
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+	int	len;
+
+	len = ft_putchar_fd(c, 1);
+	return (len);
 }

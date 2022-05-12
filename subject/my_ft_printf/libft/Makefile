@@ -6,15 +6,20 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/01/14 11:22:51 by jayoon           ###   ########.fr        #
+#    Updated: 2022/03/01 14:20:33 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-CFLAGS = -Wall -Wextra -Werror -I.
-CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror
+
+CC = cc
+
 HEADER = ./libft.h
+
 EXE = a.out
+
 SRCS =		ft_isalnum.c \
 			ft_isalpha.c \
 			ft_isascii.c \
@@ -43,6 +48,7 @@ SRCS =		ft_isalnum.c \
 			ft_strtrim.c \
 			ft_split.c \
 			ft_itoa.c \
+			ft_itoa_base.c \
 			ft_strmapi.c \
 			ft_striteri.c \
 			ft_putchar_fd.c \

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 18:51:59 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/24 19:22:40 by jayoon           ###   ########.fr       */
+/*   Created: 2022/01/11 16:56:35 by jayoon            #+#    #+#             */
+/*   Updated: 2022/02/26 02:03:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
+#include <unistd.h>
 
-# include <unistd.h>
-# include <stdarg.h>
+int	ft_putchar_fd(char c, int fd)
+{
+	int	len;
 
-int		ft_printf(const char *format, ...);
-int		ft_check_format(va_list ap, const char *str);
-int		ft_is_format(char c);
-void	ft_putchar_fd(char c, int fd);
-
-#endif
+	len = write(fd, &c, 1);
+	return (len);
+}

@@ -6,15 +6,15 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 20:50:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/12 19:14:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/02/26 23:36:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	get_digit(int n)
+static int	get_len_integer(int n)
 {
-	size_t	count;
+	int	count;
 
 	count = 0;
 	if (n == 0)
@@ -27,29 +27,46 @@ static size_t	get_digit(int n)
 	return (count);
 }
 
+static int	is_negative(long long n_ll)
+{
+	if (n_ll < 0)
+		return (1);
+	return (0);
+}
+
+static void	set_string(char *str, long long n_ll, int len_int)
+{
+	int	flag;
+
+	flag = 0;
+	str[len_int--] = '\0';
+	if (is_negative(n_ll))
+	{
+		n_ll *= -1;
+		flag = 1;
+	}
+	while (len_int >= 0)
+	{
+		str[len_int--] = n_ll % 10 + '0';
+		n_ll /= 10;
+	}
+	if (flag)
+		str[0] = '-';
+}
+
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		number_of_digits;
-	long	nb;
+	char		*str;
+	int			len_int;
+	long long	n_ll;
 
-	nb = n;
-	number_of_digits = get_digit(nb);
-	if (nb < 0)
-	{
-		nb *= -1;
-		number_of_digits++;
-	}
-	str = (char *)malloc((number_of_digits + 1) * sizeof(char));
+	n_ll = n;
+	len_int = get_len_integer(n_ll);
+	if (is_negative(n_ll))
+		len_int++;
+	str = (char *)malloc((len_int + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	str[number_of_digits--] = '\0';
-	while (number_of_digits >= 0)
-	{
-		str[number_of_digits--] = nb % 10 + '0';
-		nb /= 10;
-	}
-	if (n < 0)
-		str[0] = '-';
+	set_string(str, n_ll, len_int);
 	return (str);
 }
