@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 16:02:51 by jayoon            #+#    #+#              #
-#    Updated: 2022/03/01 16:05:06 by jayoon           ###   ########.fr        #
+#    Updated: 2022/03/01 16:37:01 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	libftprintf.a
 LIBFT_PATH	=	./libft
 LIBFT		=	./libft/libft.a
 
-CC		=	cc
+CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
 
 RM		=	rm -f
