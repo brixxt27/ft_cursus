@@ -28,7 +28,7 @@ typedef enum e_is_there_new_line
 } t_nl;
 
 char	*get_next_line(int fd);
-t_buf	*find_node(int fd);
+t_util	*find_node(int fd);
 t_nl	copy_static_to_string(t_util *buf, t_string *ps);
 char	*copy_string_to_ret_and_add_nul(t_string *ps, char *ret);
 void	read_and_copy_static_to_string(t_util *buf, t_string *ps);
