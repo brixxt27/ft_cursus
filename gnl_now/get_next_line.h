@@ -41,7 +41,7 @@ void		read_and_copy_static_to_string(t_util *curr, t_string *ps);
 
 t_status	find_node(t_util **pn, int fd);
 t_status	init_string(t_string *ps);
-t_eol		memcpy_and_check_eol(char *dest, const char *src, size_t len);
+t_eol		memcpy_and_check_eol(char *dst, const char *src, size_t len);
 char		*delete_current_node(t_util **pn);
 char		*delete_all_node(t_util **pn);
 
@@ -51,7 +51,7 @@ t_status	find_node(t_util **pn, int fd);
 t_status	init_string(t_string *ps);
 char		*delete_current_node(t_util **pn);
 t_eol		copy_static_to_string(t_util *curr, t_string *ps);
-t_eol		memcpy_and_check_eol(t_util *curr, t_string *ps);
+t_eol		memcpy_and_check_eol(char *dst, const char *src, size_t len);
 char		*copy_string_to_ret_and_add_nul(t_string *ps, char *ret);
 void		read_and_copy_static_to_string(t_util *curr, t_string *ps);
 char		*delete_all_node(t_util **pn);
