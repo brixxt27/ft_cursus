@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 21:37:36 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 21:44:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ char	*get_next_line(int fd)
 {
 	static t_util	*head;
 	t_string		string;
+	t_util			*curr;
 	
 	if (fd < 0 || BUFFER_SIZE <=0)
 		return (NULL);
-	if (find_node(&head, fd) == FAIL) //head 를 잃어버리면 안 됨...
+	if (find_node(fd, head, &curr) == FAIL)
 		return (NULL);
 	if (init_string(&string) == FAIL)
 		return (delete_current_node(&head));

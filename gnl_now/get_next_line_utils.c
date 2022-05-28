@@ -6,31 +6,27 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 21:37:50 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 21:52:01 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_status	find_node(t_util **pn, int fd)
+t_status	find_node(int fd, t_util *head, t_util **pcurr)
 {
-	t_util	*curr;
-
-	if (*pn == NULL)
+	if (head == NULL)
 	{
-		curr = malloc(sizeof(t_util));
-		if (!curr)
+		*pcurr = malloc(sizeof(t_util));
+		if (!(*pcurr))
 			return (FAIL);
-		curr->fd = fd;
-		curr->index = -1;
-		curr->next = NULL;
-		*pn = curr;
+		(*pcurr)->fd = fd;
+		(*pcurr)->index = -1;
+		(*pcurr)->next = NULL;
 		return (SUCCESS);
 	}
-	while ((*pn)->fd != fd)
-	{
-		*pn = (*pn)->next; 
-	}
+	while (head->fd != fd)
+		head = head->next; 
+	*pcurr = head;
 	return (SUCCESS);
 }
 
