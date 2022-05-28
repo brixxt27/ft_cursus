@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 17:29:54 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 17:30:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_next_line(int fd)
 
 t_eol		copy_static_to_string(t_util *curr, t_string *ps)
 {
-	if (memcpy_and_check_eol(ps->str, curr->buf, ) == EXIST)
+	if (memcpy_and_check_eol(ps->str, curr->buf, ) == EXIST) //뭐하죠
 		return (EXIST);
 	return (NOT_EXIST);
 }
