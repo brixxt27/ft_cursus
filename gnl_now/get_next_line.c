@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 19:20:06 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 20:11:47 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,31 @@ char	*get_next_line(int fd)
 	read_and_copy_static_to_string(node, &string);
 	return (copy_string_to_ret_and_add_nul(&string, ret));
 }
+
+t_eol	copy_static_to_string(t_util *curr, t_string *ps)
+{
+	int	copy_len;
+	int	i;
+
+	copy_len = BUFFER_SIZE - curr->index;
+	i = 0;
+	while (i < copy_len)
+	{
+		ps->str[i] = curr->buf[curr->index];
+		ps->len++;
+		if (curr->buf[curr->index] == '\n')
+		{
+			curr->index++;
+			return (EXIST);
+		}
+		curr->index++;
+		i++;
+	}
+	return (NOT_EXIST);
+}
+
+
+//////////////기존 코드
 
 t_eol		copy_static_to_string(t_util *curr, t_string *ps)
 {
