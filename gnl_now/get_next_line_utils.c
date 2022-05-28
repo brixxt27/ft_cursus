@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 17:14:37 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 21:37:50 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ t_status	find_node(t_util **pn, int fd)
 		curr = malloc(sizeof(t_util));
 		if (!curr)
 			return (FAIL);
-		curr->index = -1;
 		curr->fd = fd;
+		curr->index = -1;
+		curr->next = NULL;
 		*pn = curr;
 		return (SUCCESS);
 	}
@@ -43,7 +44,7 @@ t_status	init_string(t_string *ps)
 	return (SUCCESS);
 }
 
-char		*delete_current_node(t_util **pn)
+char	*delete_current_node(t_util **pn)
 {
 	free(*pn);
 	*pn = NULL;
