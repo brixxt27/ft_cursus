@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 21:44:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/28 22:05:06 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (init_string(&string) == FAIL)
 		return (delete_current_node(&head));
-	if (head->index != -1)
+	
+	/////////// head 를 curr 로 바꿔주기
+	if (curr->index != -1)
 	{
-		if (copy_static_to_string(head, &string) == EXIST)
+		if (copy_static_to_string(curr, &string) == EXIST)
 			return (copy_string_to_ret_and_add_nul(&string));
 	}
-	read_and_copy_static_to_string(fd, head, &string);
+	read_and_copy_static_to_string(fd, head, &string); ///////// head 만 넘기고 안쪽에서 curr 을 구해 사용할 예정
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
@@ -78,7 +80,7 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 	return (ret);
 }
 
-void		read_and_copy_static_to_string(int fd, t_util *curr, t_string *ps)
+void	read_and_copy_static_to_string(int fd, t_util *head, t_string *ps) // head 이용해 curr 찾는 기능 추가
 {
 	int	ret_read;
 

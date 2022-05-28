@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/28 21:59:39 by jayoon            #+#    #+#             */
+/*   Updated: 2022/05/28 22:01:40 by jayoon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
@@ -37,7 +49,7 @@ typedef enum e_status
 char		*get_next_line(int fd);
 t_eol		copy_static_to_string(t_util *curr, t_string *ps);
 char		*copy_string_to_ret_and_add_nul(t_string *ps);
-void		read_and_copy_static_to_string(int fd, t_util *curr, t_string *ps);
+void		read_and_copy_static_to_string(int fd, t_util *head, t_string *ps);
 
 t_status	find_node(int fd, t_util *head, t_util **pcurr);
 t_status	init_string(t_string *ps);
