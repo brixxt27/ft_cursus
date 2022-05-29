@@ -34,16 +34,18 @@ typedef struct s_string
 	size_t	malloc_size;
 }	t_string;
 
-typedef enum e_is_there_eol
+typedef enum e_is_there_eol_or_malloc_error
 {
 	EXIST = 0,
-	NOT_EXIST
+	NOT_EXIST,
+	MALLOC_ERROR
 }	t_eol;
 
-typedef enum e_status
+typedef enum e_bool
 {
 	SUCCESS = 0,
-	FAIL
+	FAIL,
+	ERROR
 }	t_stat;
 
 char	*get_next_line(int fd);

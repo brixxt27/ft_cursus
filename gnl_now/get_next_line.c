@@ -17,6 +17,7 @@ char	*get_next_line(int fd)
 	static t_util	*head;
 	t_string		string;
 	t_util			*curr;
+	t_stat			stat;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -29,8 +30,14 @@ char	*get_next_line(int fd)
 		if (copy_buffer_to_string(curr, &string) == EXIST)
 			return (copy_string_to_ret_and_add_nul(&string));
 	}
-	if (read_and_copy_to_str(fd, head, curr, &string) == FAIL)
-		return (free_string(&string));
+	stat = read_and_copy_to_str(fd, head, curr, &string);
+	if (stat != SUCCESS)
+	{
+		delete_current_node(fd, head);
+		if (stat == FAIL)
+			free_string(&string);
+		return (NULL);
+	}
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
@@ -43,6 +50,11 @@ t_eol	copy_buffer_to_string(t_util *curr, t_string *ps)
 	i = 0;
 	while (i < copy_len)
 	{
+		if (ps->len == ps->malloc_size)
+		{
+			if (stretch_string(ps) == FAIL)
+				return (MALLOC_ERROR);
+		}
 		ps->str[i] = curr->buf[curr->index];
 		ps->len++;
 		if (curr->buf[curr->index] == '\n')
@@ -50,40 +62,27 @@ t_eol	copy_buffer_to_string(t_util *curr, t_string *ps)
 			curr->index++;
 			return (EXIST);
 		}
-		if (ps->len == ps->malloc_size)
-		{
-			// 여기가 문제야! 
-			// NULL malloc 실패했을 때 NULL 반환해줘야 하는데 어떻게 할지 생각해 봐야함
-			// norm	은 문제 없음
-			// 함수도 딱 10 개
-			if (stretch_string(ps) == FAIL)
-				return (NULL);
-		}
 		curr->index++;
 		i++;
 	}
 	return (NOT_EXIST);
 }
 
-static void	memcpy(void *dst, const void *src, size_t len)
-{
-	unsigned char	*cp_dst;
-	unsigned char	*cp_src;
-
-	cp_dst = (unsigned char *)dst;
-	cp_src = (unsigned char *)src;
-	while (len--)
-		*cp_dst++ = *cp_src++;
-}
-
 char	*copy_string_to_ret_and_add_nul(t_string *ps)
 {
-	char	*ret;
+	char			*ret;
+	unsigned char	*cp_dst;
+	unsigned char	*cp_src;
+	size_t			len;
 
 	ret = malloc(BUFFER_SIZE + 1);
 	if (!ret)
 		return (NULL);
-	memcpy(ret, ps->str, ps->len);
+	len = ps->len;
+	cp_dst = (unsigned char *)ret;
+	cp_src = (unsigned char *)ps->str;
+	while (len--)
+		*cp_dst++ = *cp_src++;
 	free_string(ps);
 	ret[ps->len - 1] = '\0';
 	return (ret);
@@ -91,9 +90,11 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 
 t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 {
-	int	ret_read;
+	int		ret_read;
+	t_eol	eol;
 
-	while (개행 나올 때까지 반복)
+	eol = NOT_EXIST;
+	while (eol == NOT_EXIST)
 	{
 		ret_read = read(fd, curr->buf, BUFFER_SIZE);
 		if (ret_read < 0)
@@ -104,6 +105,14 @@ t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 				return (FAIL);
 			return (SUCCESS);
 		}
+		eol = copy_buffer_to_string(curr, ps);
+		if (eol == MALLOC_ERROR)
+			return (ERROR);
 	}
-	// 이어서 작성하기. 반복문 완성 안 함
+	return (SUCCESS);
+}
+
+t_stat	stretch_string(t_string *ps)
+{
+	//마지막으로 이것만 작성하면 됨
 }
