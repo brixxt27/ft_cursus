@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/29 20:52:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/29 22:07:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (init_string(&string) == FAIL)
 		return (delete_current_node(fd, head));
-
-/////////// head 를 curr 로 바꿔주기
 	if (curr->index != -1)
 	{
-		if (copy_static_to_string(curr, &string) == EXIST)
+		if (copy_buffer_to_string(curr, &string) == EXIST)
 			return (copy_string_to_ret_and_add_nul(&string));
 	}
-	read_and_copy_to_str(fd, head, curr, &string);
-/////////norm 겨우 맞춤. head, curr 둘 다 넘길거임 
+	if (read_and_copy_to_str(fd, head, curr, &string) == FAIL)
+		return (free_string(&string));
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
-t_eol	copy_static_to_string(t_util *curr, t_string *ps)
+t_eol	copy_buffer_to_string(t_util *curr, t_string *ps)
 {
 	int	copy_len;
 	int	i;
@@ -51,6 +49,15 @@ t_eol	copy_static_to_string(t_util *curr, t_string *ps)
 		{
 			curr->index++;
 			return (EXIST);
+		}
+		if (ps->len == ps->malloc_size)
+		{
+			// 여기가 문제야! 
+			// NULL malloc 실패했을 때 NULL 반환해줘야 하는데 어떻게 할지 생각해 봐야함
+			// norm	은 문제 없음
+			// 함수도 딱 10 개
+			if (stretch_string(ps) == FAIL)
+				return (NULL);
 		}
 		curr->index++;
 		i++;
@@ -77,17 +84,25 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 	if (!ret)
 		return (NULL);
 	memcpy(ret, ps->str, ps->len);
+	free_string(ps);
 	ret[ps->len - 1] = '\0';
 	return (ret);
 }
 
-void	read_and_copy_to_str(int fd, t_util *head, t_util *cur, t_string *ps)
+t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 {
 	int	ret_read;
 
-	ret_read = read(fd, cur->buf, BUFFER_SIZE);
-	if (ret_read < 0)
+	while (개행 나올 때까지 반복)
 	{
-		delete_all_node()
+		ret_read = read(fd, curr->buf, BUFFER_SIZE);
+		if (ret_read < 0)
+			return (delete_all_node_when_read_error(head));
+		if (ret_read == 0)
+		{
+			if (ps->len == 0)
+				return (FAIL);
+			return (SUCCESS);
+		}
 	}
 }

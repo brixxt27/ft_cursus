@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/29 20:51:58 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/29 21:48:14 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*delete_current_node(int fd, t_util *head)
 	return (NULL);
 }
 
-char	*delete_all_node(t_util *head)
+t_stat	delete_all_node_when_read_error(t_util *head)
 {
 	t_util	*temp;
 
@@ -64,5 +64,12 @@ char	*delete_all_node(t_util *head)
 		head = NULL;
 		head = temp;
 	}
+	return (FAIL);
+}
+
+char	*free_string(t_string *ps)
+{
+	free(ps->str);
+	ps->str = NULL;
 	return (NULL);
 }

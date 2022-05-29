@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 21:59:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/29 20:52:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/29 22:03:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ typedef enum e_status
 }	t_stat;
 
 char	*get_next_line(int fd);
-t_eol	copy_static_to_string(t_util *curr, t_string *ps);
+t_eol	copy_buffer_to_string(t_util *curr, t_string *ps);
 char	*copy_string_to_ret_and_add_nul(t_string *ps);
-void	read_and_copy_to_str(int fd, t_util *head, t_util *cur, t_string *ps);
+t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps);
+t_stat	stretch_string(t_string *ps);
 
 t_stat	find_node(int fd, t_util *head, t_util **pcurr);
 t_stat	init_string(t_string *ps);
 char	*delete_current_node(int fd, t_util *head);
-char	*delete_all_node(t_util *head);
+t_stat	delete_all_node_when_read_error(t_util *head);
+char	*free_string(t_string *ps);
 
 #endif
