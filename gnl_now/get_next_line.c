@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/29 22:07:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/29 22:11:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,5 @@ t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 			return (SUCCESS);
 		}
 	}
+	// 이어서 작성하기. 반복문 완성 안 함
 }
