@@ -6,13 +6,13 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/28 22:04:39 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/29 20:51:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_status	find_node(int fd, t_util *head, t_util **pcurr)
+t_stat	find_node(int fd, t_util *head, t_util **pcurr)
 {
 	if (head == NULL)
 	{
@@ -25,12 +25,12 @@ t_status	find_node(int fd, t_util *head, t_util **pcurr)
 		return (SUCCESS);
 	}
 	while (head->fd != fd)
-		head = head->next; 
+		head = head->next;
 	*pcurr = head;
 	return (SUCCESS);
 }
 
-t_status	init_string(t_string *ps)
+t_stat	init_string(t_string *ps)
 {
 	ps->str = malloc(BUFFER_SIZE);
 	if (!ps->str)
@@ -40,9 +40,29 @@ t_status	init_string(t_string *ps)
 	return (SUCCESS);
 }
 
-char	*delete_current_node(t_util **pn) //////////현재 노드 지우고 다음 노드로 연결해주는 과정 필요
+char	*delete_current_node(int fd, t_util *head)
 {
-	free(*pn);
-	*pn = NULL;
+	char	*temp;
+
+	while (!(head->next) && head->next->fd != fd)
+		head = head->next;
+	temp = head->next;
+	head->next = head->next->next;
+	free(temp);
+	temp = NULL;
+	return (NULL);
+}
+
+char	*delete_all_node(t_util *head)
+{
+	t_util	*temp;
+
+	while (!head)
+	{
+		temp = head->next;
+		free(head);
+		head = NULL;
+		head = temp;
+	}
 	return (NULL);
 }
