@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/29 22:11:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:05:10 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (find_node(fd, head, &curr) == FAIL)
+	if (find_node(fd, &head, &curr) == FAIL)
 		return (NULL);
 	if (init_string(&string) == FAIL)
 		return (delete_current_node(fd, head));
@@ -41,7 +41,7 @@ char	*get_next_line(int fd)
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
-t_eol	copy_buffer_to_string(t_util *curr, t_string *ps)
+t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 {
 	int	copy_len;
 	int	i;
@@ -91,7 +91,7 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 {
 	int		ret_read;
-	t_eol	eol;
+	t_stat	eol;
 
 	eol = NOT_EXIST;
 	while (eol == NOT_EXIST)
@@ -107,12 +107,26 @@ t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 		}
 		eol = copy_buffer_to_string(curr, ps);
 		if (eol == MALLOC_ERROR)
-			return (ERROR);
+			return (MALLOC_ERROR);
 	}
 	return (SUCCESS);
 }
 
 t_stat	stretch_string(t_string *ps)
 {
-	//마지막으로 이것만 작성하면 됨
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	temp = malloc(ps->malloc_size <<= 1);
+	if (!temp)
+		return (FAIL);
+	while (i < ps->malloc_size)
+	{
+		temp[i] = (ps->str)[i];
+		i++;
+	}
+	free_string(ps);
+	ps->str = temp;
+	return (SUCCESS);
 }
