@@ -41,14 +41,37 @@ char	*get_next_line(int fd)
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
+t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
+{
+	int		ret_read;
+	t_stat	eol;
+
+	eol = NOT_EXIST;
+	while (eol == NOT_EXIST)
+	{
+		ret_read = read(fd, curr->buf, BUFFER_SIZE);
+		if (ret_read < 0)
+			return (delete_all_node_when_read_error(head));
+		if (ret_read == 0)
+		{
+			if (ps->len == 0)
+				return (FAIL);
+			return (SUCCESS);
+		}
+		curr->index = 0;
+		eol = copy_buffer_to_string(curr, ps);
+		if (eol == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+	}
+	return (SUCCESS);
+}
+
 t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 {
 	int	copy_len;
 	int	i;
 
 	copy_len = BUFFER_SIZE - curr->index;
-	if (curr->index == -1)
-		copy_len = BUFFER_SIZE;
 	i = 0;
 	while (i < copy_len)
 	{
@@ -57,15 +80,10 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 			if (stretch_string(ps) == FAIL)
 				return (MALLOC_ERROR);
 		}
-		ps->str[i] = curr->buf[curr->index];
+		ps->str[i++] = curr->buf[curr->index++];
 		ps->len++;
 		if (curr->buf[curr->index] == '\n')
-		{
-			curr->index++;
 			return (EXIST);
-		}
-		curr->index++;
-		i++;
 	}
 	return (NOT_EXIST);
 }
@@ -88,30 +106,6 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 	free_string(ps);
 	ret[ps->len - 1] = '\0';
 	return (ret);
-}
-
-t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
-{
-	int		ret_read;
-	t_stat	eol;
-
-	eol = NOT_EXIST;
-	while (eol == NOT_EXIST)
-	{
-		ret_read = read(fd, curr->buf, BUFFER_SIZE);
-		if (ret_read < 0)
-			return (delete_all_node_when_read_error(head));
-		if (ret_read == 0)
-		{
-			if (ps->len == 0)
-				return (FAIL);
-			return (SUCCESS);
-		}
-		eol = copy_buffer_to_string(curr, ps);
-		if (eol == MALLOC_ERROR)
-			return (MALLOC_ERROR);
-	}
-	return (SUCCESS);
 }
 
 t_stat	stretch_string(t_string *ps)

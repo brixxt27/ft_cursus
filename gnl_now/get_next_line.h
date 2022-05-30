@@ -35,7 +35,7 @@ typedef struct s_string
 	size_t	malloc_size;
 }	t_string;
 
-typedef enum e_utils_of_status
+typedef enum e_util_of_status
 {
 	SUCCESS = 0,
 	FAIL,
