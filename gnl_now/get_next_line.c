@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/30 16:05:10 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/30 21:41:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 	int	i;
 
 	copy_len = BUFFER_SIZE - curr->index;
+	if (curr->index == -1)
+		copy_len = BUFFER_SIZE;
 	i = 0;
 	while (i < copy_len)
 	{
