@@ -48,13 +48,12 @@ typedef enum e_util_of_status
 char	*get_next_line(int fd);
 t_stat	copy_buffer_to_string(t_util *curr, t_string *ps);
 char	*copy_string_to_ret_and_add_nul(t_string *ps);
-t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps);
+t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps);
 t_stat	stretch_string(t_string *ps);
 
 t_stat	find_node(int fd, t_util **phead, t_util **pcurr);
 t_stat	init_string(t_string *ps);
 char	*delete_current_node(int fd, t_util *head);
-t_stat	delete_all_node_when_read_error(t_util *head);
 char	*free_string(t_string *ps);
 
 #endif

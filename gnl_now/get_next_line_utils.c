@@ -67,3 +67,22 @@ char	*free_string(t_string *ps)
 	ps->str = NULL;
 	return (NULL);
 }
+
+t_stat	stretch_string(t_string *ps)
+{
+	char	*temp;
+	size_t	i;
+
+	i = 0;
+	temp = malloc(ps->malloc_size <<= 1);
+	if (!temp)
+		return (FAIL);
+	while (i < ps->len)
+	{
+		temp[i] = (ps->str)[i];
+		i++;
+	}
+	free_string(ps);
+	ps->str = temp;
+	return (SUCCESS);
+}

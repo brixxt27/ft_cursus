@@ -30,7 +30,7 @@ char	*get_next_line(int fd)
 		if (copy_buffer_to_string(curr, &string) == EXIST)
 			return (copy_string_to_ret_and_add_nul(&string));
 	}
-	stat = read_and_copy_to_str(fd, head, curr, &string);
+	stat = read_and_copy_to_str(fd, curr, &string);
 	if (stat != SUCCESS)
 	{
 		delete_current_node(fd, head);
@@ -41,7 +41,7 @@ char	*get_next_line(int fd)
 	return (copy_string_to_ret_and_add_nul(&string));
 }
 
-t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
+t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps)
 {
 	t_stat	eol;
 
@@ -70,10 +70,7 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 	int	copy_len;
 	int	i;
 
-	if (curr->ret_read == 0)
-		copy_len = BUFFER_SIZE - curr->index;
-	else
-		copy_len = curr->ret_read - curr->index;
+	copy_len = curr->ret_read - curr->index;
 	i = 0;
 	while (i < copy_len)
 	{
@@ -97,7 +94,7 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 	unsigned char	*cp_src;
 	size_t			len;
 
-	ret = malloc(BUFFER_SIZE + 1);
+	ret = malloc(ps->len + 1);
 	if (!ret)
 		return (NULL);
 	len = ps->len;
@@ -106,25 +103,6 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 	while (len--)
 		*cp_dst++ = *cp_src++;
 	free_string(ps);
-	ret[ps->len - 1] = '\0';
+	ret[ps->len] = '\0';
 	return (ret);
-}
-
-t_stat	stretch_string(t_string *ps)
-{
-	char	*temp;
-	size_t	i;
-
-	i = 0;
-	temp = malloc(ps->malloc_size <<= 1);
-	if (!temp)
-		return (FAIL);
-	while (i < ps->len)
-	{
-		temp[i] = (ps->str)[i];
-		i++;
-	}
-	free_string(ps);
-	ps->str = temp;
-	return (SUCCESS);
 }
