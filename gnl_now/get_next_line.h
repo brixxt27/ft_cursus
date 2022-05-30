@@ -25,6 +25,7 @@ typedef struct s_util
 	int				fd;
 	char			buf[BUFFER_SIZE];
 	int				index;
+	ssize_t			ret_read;
 	struct s_util	*next;
 }	t_util;
 

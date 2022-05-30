@@ -61,20 +61,6 @@ char	*delete_current_node(int fd, t_util *head)
 	return (NULL);
 }
 
-t_stat	delete_all_node_when_read_error(t_util *head)
-{
-	t_util	*temp;
-
-	while (!head)
-	{
-		temp = head->next;
-		free(head);
-		head = NULL;
-		head = temp;
-	}
-	return (FAIL);
-}
-
 char	*free_string(t_string *ps)
 {
 	free(ps->str);

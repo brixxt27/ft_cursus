@@ -43,16 +43,15 @@ char	*get_next_line(int fd)
 
 t_stat	read_and_copy_to_str(int fd, t_util *head, t_util *curr, t_string *ps)
 {
-	int		ret_read;
 	t_stat	eol;
 
 	eol = NOT_EXIST;
 	while (eol == NOT_EXIST)
 	{
-		ret_read = read(fd, curr->buf, BUFFER_SIZE);
-		if (ret_read < 0)
-			return (delete_all_node_when_read_error(head));
-		if (ret_read == 0)
+		curr->ret_read = read(fd, curr->buf, BUFFER_SIZE);
+		if (curr->ret_read < 0)
+			return (FAIL);
+		if (curr->ret_read == 0)
 		{
 			if (ps->len == 0)
 				return (FAIL);
@@ -71,7 +70,10 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 	int	copy_len;
 	int	i;
 
-	copy_len = BUFFER_SIZE - curr->index;
+	if (curr->ret_read == 0)
+		copy_len = BUFFER_SIZE - curr->index;
+	else
+		copy_len = curr->ret_read - curr->index;
 	i = 0;
 	while (i < copy_len)
 	{
@@ -80,8 +82,8 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 			if (stretch_string(ps) == FAIL)
 				return (MALLOC_ERROR);
 		}
-		ps->str[i++] = curr->buf[curr->index++];
-		ps->len++;
+		ps->str[ps->len++] = curr->buf[curr->index++];
+		i++;
 		if (curr->buf[curr->index - 1] == '\n')
 			return (EXIST);
 	}
