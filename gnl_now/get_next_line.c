@@ -82,7 +82,7 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 		}
 		ps->str[i++] = curr->buf[curr->index++];
 		ps->len++;
-		if (curr->buf[curr->index] == '\n')
+		if (curr->buf[curr->index - 1] == '\n')
 			return (EXIST);
 	}
 	return (NOT_EXIST);
@@ -117,7 +117,7 @@ t_stat	stretch_string(t_string *ps)
 	temp = malloc(ps->malloc_size <<= 1);
 	if (!temp)
 		return (FAIL);
-	while (i < ps->malloc_size)
+	while (i < ps->len)
 	{
 		temp[i] = (ps->str)[i];
 		i++;
