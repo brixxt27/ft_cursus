@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 14:31:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/31 18:30:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	*get_next_line(int fd)
 	t_stat			stat;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (delete_current_node(fd, head));
+		return (delete_current_node(fd, head, &head));
 	if (find_node(fd, &head, &curr) == FAIL)
-		return (delete_current_node(fd, head));
+		return (delete_current_node(fd, head, &head));
 	if (init_string(&string) == FAIL)
-		return (delete_current_node(fd, head));
+		return (delete_current_node(fd, head, &head));
 	if (curr->index != -1)
 	{
 		if (copy_buffer_to_string(curr, &string) == EXIST)
@@ -33,7 +33,7 @@ char	*get_next_line(int fd)
 	stat = read_and_copy_to_str(fd, curr, &string);
 	if (stat != SUCCESS)
 	{
-		delete_current_node(fd, head);
+		delete_current_node(fd, head, &head);
 		if (stat == FAIL)
 			free_string(&string);
 		return (NULL);

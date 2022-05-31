@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 16:25:57 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/31 19:03:32 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_stat	find_node(int fd, t_util **phead, t_util **pcurr)
 
 	while (*phead && (*phead)->next && (*phead)->fd != fd)
 		phead = &((*phead)->next);
-	if (*phead && (*phead)->fd == fd )
+	if (*phead && (*phead)->fd == fd)
 	{
 		*pcurr = *phead;
 		return (SUCCESS);
@@ -50,17 +50,25 @@ t_stat	init_string(t_string *ps)
 	return (SUCCESS);
 }
 
-char	*delete_current_node(int fd, t_util *head)
+char	*delete_current_node(int fd, t_util *head, t_util **head_ptr)
 {
 	t_util	*temp;
 
 	if (!head || fd < 0)
 		return (NULL);
-	if (!head->next)
+/*	if (!head->next)
 	{
 		temp = head->next;
 		free(head);
 		head = temp;
+		return (NULL);
+	}
+*/
+	if (head->fd == fd)
+	{
+		temp = head;
+		*head_ptr = head->next;
+		free(temp);
 		return (NULL);
 	}
 	while (head->next && head->next->fd != fd)
@@ -68,7 +76,6 @@ char	*delete_current_node(int fd, t_util *head)
 	temp = head->next;
 	head->next = head->next->next;
 	free(temp);
-	temp = NULL;
 	return (NULL);
 }
 
