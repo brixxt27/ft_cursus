@@ -18,17 +18,16 @@ int	main(void)
 	}
 	if ((fd2 = open("text2", O_RDONLY)) < 0)
 	{
-		printf("Error of file open in fd2");
+		printf("Error of file open in fd1");
 		exit(1);
 	}
-	printf("%d\n", fd2);
-	while (str1 || str2)
+	while (str1 && str2)
 	{
 		printf("%s", str1 = get_next_line(fd1));
+		free(str1);
 		printf("%s", str2 = get_next_line(fd2));
+		free(str2);
 	}
-	//printf("%s\n", get_next_line(0));
 	close(fd1);
-	close(fd2);
 	return (0);
 }

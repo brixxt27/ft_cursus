@@ -6,35 +6,28 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 15:47:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/31 14:22:18 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 t_stat	find_node(int fd, t_util **phead, t_util **pcurr)
 {
-	t_util	*new;
-
-	while (*phead && (*phead)->next && (*phead)->fd != fd)
-		phead = &((*phead)->next);
-	if (*phead && (*phead)->fd == fd )
-	{
-		*pcurr = *phead;
-		return (SUCCESS);
-	}
-	new = malloc(sizeof(t_util));
-	if (!new)
-		return (FAIL);
-	new->fd = fd;
-	new->index = -1;
-	new->next = NULL;
 	if (*phead == NULL)
 	{
-		*phead = new;
+		*pcurr = malloc(sizeof(t_util));
+		if (!(*pcurr))
+			return (FAIL);
+		(*pcurr)->fd = fd;
+		(*pcurr)->index = -1;
+		(*pcurr)->next = NULL;
+		*phead = *pcurr;
 		return (SUCCESS);
 	}
-	(*phead)->next = new;
+	while ((*phead)->fd != fd)
+		phead = &((*phead)->next);
+	*pcurr = *phead;
 	return (SUCCESS);
 }
 
@@ -52,8 +45,6 @@ char	*delete_current_node(int fd, t_util *head)
 {
 	t_util	*temp;
 
-	if (!head)
-		return (NULL);
 	if (!head->next)
 	{
 		temp = head->next;
