@@ -21,13 +21,19 @@ int	main(void)
 		printf("Error of file open in fd1");
 		exit(1);
 	}
+	// printf("%s", str1 = get_next_line(fd1));
+	// free(str1);
+	// str1 = NULL;
+	// printf("%s", str2 = get_next_line(fd2));
+	// free(str2);
+	// str2 = NULL;
 	while (str1 || str2)
 	{
 		printf("%s", str1 = get_next_line(fd1));
-		if (!str1)
+		if (str1)
 			free(str1);
 		printf("%s", str2 = get_next_line(fd2));
-		if (!str2)
+		if (str2)
 			free(str2);
 	}
 	close(fd1);
