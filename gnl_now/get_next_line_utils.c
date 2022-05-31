@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 15:47:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/31 16:08:18 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ t_stat	find_node(int fd, t_util **phead, t_util **pcurr)
 	if (*phead == NULL)
 	{
 		*phead = new;
+		*pcurr = new;
 		return (SUCCESS);
 	}
 	(*phead)->next = new;
+	*pcurr = new;
 	return (SUCCESS);
 }
 
