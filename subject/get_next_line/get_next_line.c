@@ -3,45 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 18:35:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/01/31 18:45:27 by jayoon           ###   ########.fr       */
+/*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
+/*   Updated: 2022/05/31 20:10:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_read_and_save(int fd, char *save)
-{
-	char	*buff;
-	int		read_bytes;
-
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	read_bytes = 1;
-	while (!ft_strchr(save, '\n') && read_bytes != 0)
-	{
-		read_bytes = read(fd, buff, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		buff
-	}
-}
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*save;
+	static t_util	*head;
+	t_string		string;
+	t_util			*curr;
+	t_stat			stat;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	save = ft_read_and_save(fd, save);
-	if (!save)
+		return (delete_current_node(fd, head, &head));
+	if (find_node(fd, &head, &curr) == FAIL)
+		return (delete_current_node(fd, head, &head));
+	if (init_string(&string) == FAIL)
+		return (delete_current_node(fd, head, &head));
+	if (curr->index != -1)
+	{
+		if (copy_buffer_to_string(curr, &string) == EXIST)
+			return (copy_string_to_ret_and_add_nul(&string));
+	}
+	stat = read_and_copy_to_str(fd, curr, &string);
+	if (stat != SUCCESS)
+	{
+		delete_current_node(fd, head, &head);
+		if (stat == FAIL)
+			free_string(&string);
 		return (NULL);
-	line = ft_get_line(save);
-	save = ft_save(save);
-	return (line);
+	}
+	return (copy_string_to_ret_and_add_nul(&string));
+}
+
+t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps)
+{
+	t_stat	eol;
+
+	eol = NOT_EXIST;
+	while (eol == NOT_EXIST)
+	{
+		curr->ret_read = read(fd, curr->buf, BUFFER_SIZE);
+		if (curr->ret_read < 0)
+			return (FAIL);
+		if (curr->ret_read == 0)
+		{
+			if (ps->len == 0)
+				return (FAIL);
+			return (SUCCESS);
+		}
+		curr->index = 0;
+		eol = copy_buffer_to_string(curr, ps);
+		if (eol == MALLOC_ERROR)
+			return (MALLOC_ERROR);
+	}
+	return (SUCCESS);
+}
+
+t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
+{
+	int	copy_len;
+	int	i;
+
+	copy_len = curr->ret_read - curr->index;
+	i = 0;
+	while (i < copy_len)
+	{
+		if (ps->len == ps->malloc_size)
+		{
+			if (stretch_string(ps) == FAIL)
+				return (MALLOC_ERROR);
+		}
+		ps->str[ps->len++] = curr->buf[curr->index++];
+		i++;
+		if (curr->buf[curr->index - 1] == '\n')
+			return (EXIST);
+	}
+	return (NOT_EXIST);
+}
+
+char	*copy_string_to_ret_and_add_nul(t_string *ps)
+{
+	char			*ret;
+	unsigned char	*cp_dst;
+	unsigned char	*cp_src;
+	size_t			len;
+
+	ret = malloc(ps->len + 1);
+	if (!ret)
+		return (NULL);
+	len = ps->len;
+	cp_dst = (unsigned char *)ret;
+	cp_src = (unsigned char *)ps->str;
+	while (len--)
+		*cp_dst++ = *cp_src++;
+	free_string(ps);
+	ret[ps->len] = '\0';
+	return (ret);
 }

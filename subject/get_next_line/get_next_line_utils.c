@@ -3,78 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/31 18:45:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/02/01 00:02:36 by jayoon           ###   ########.fr       */
+/*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
+/*   Updated: 2022/05/31 20:11:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+t_stat	find_node(int fd, t_util **phead, t_util **pcurr)
 {
+	t_util	*new;
+
+	while (*phead && (*phead)->next && (*phead)->fd != fd)
+		phead = &((*phead)->next);
+	if (*phead && (*phead)->fd == fd)
+	{
+		*pcurr = *phead;
+		return (SUCCESS);
+	}
+	new = malloc(sizeof(t_util));
+	if (!new)
+		return (FAIL);
+	new->fd = fd;
+	new->index = -1;
+	new->next = NULL;
+	if (*phead == NULL)
+	{
+		*phead = new;
+		*pcurr = new;
+		return (SUCCESS);
+	}
+	(*phead)->next = new;
+	*pcurr = new;
+	return (SUCCESS);
+}
+
+t_stat	init_string(t_string *ps)
+{
+	ps->str = malloc(BUFFER_SIZE);
+	if (!ps->str)
+		return (FAIL);
+	ps->len = 0;
+	ps->malloc_size = BUFFER_SIZE;
+	return (SUCCESS);
+}
+
+char	*delete_current_node(int fd, t_util *head, t_util **head_ptr)
+{
+	t_util	*temp;
+
+	if (!head || fd < 0)
+		return (NULL);
+	if (head->fd == fd)
+	{
+		temp = head;
+		*head_ptr = head->next;
+		free(temp);
+		return (NULL);
+	}
+	while (head->next && head->next->fd != fd)
+		head = head->next;
+	temp = head->next;
+	head->next = head->next->next;
+	free(temp);
+	return (NULL);
+}
+
+char	*free_string(t_string *ps)
+{
+	free(ps->str);
+	ps->str = NULL;
+	return (NULL);
+}
+
+t_stat	stretch_string(t_string *ps)
+{
+	char	*temp;
 	size_t	i;
 
 	i = 0;
-	if (!str)
-		return (NULL);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strchr(char *s, int c)
-{
-	if (!s)
-		return (NULL);
-	while (*s || *s == '\0')
+	temp = malloc(ps->malloc_size <<= 1);
+	if (!temp)
+		return (FAIL);
+	while (i < ps->len)
 	{
-		if (*s == (char)c)
-			return (s);
-		s++;
-	}
-	return (0);
-}
-
-char	*ft_strcpy(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s2[i])
-	{
-		s1[i] = s2[i];
+		temp[i] = (ps->str)[i];
 		i++;
 	}
-	s1[i] = '\0';
-	return (s1);
-}
-
-char	*ft_strdup_empty(void)
-{
-	char	*buf;
-
-	buf = (char *)malloc(1 * sizeof(char));
-	*buf = '\0';
-	return (buf);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*buf;
-	size_t	s1_len;
-
-	if (!s1)
-		s1 = ft_strdup_empty();
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	buf = (char *)malloc((s1_len + ft_strlen(s2) + 1) * sizeof(char));
-	if (!buf)
-		return (NULL);
-	ft_strcpy(buf, s1);
-	ft_strcpy(buf + s1_len, s2);
-	free(s1);
-	return (buf);
+	free_string(ps);
+	ps->str = temp;
+	return (SUCCESS);
 }
