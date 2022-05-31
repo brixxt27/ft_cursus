@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 15:12:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 19:03:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/05/31 20:11:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,6 @@ char	*delete_current_node(int fd, t_util *head, t_util **head_ptr)
 
 	if (!head || fd < 0)
 		return (NULL);
-/*	if (!head->next)
-	{
-		temp = head->next;
-		free(head);
-		head = temp;
-		return (NULL);
-	}
-*/
 	if (head->fd == fd)
 	{
 		temp = head;
