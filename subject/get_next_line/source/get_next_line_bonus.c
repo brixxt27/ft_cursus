@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 20:11:12 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/01 20:13:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_next_line(int fd)
 	if (curr->index != -1)
 	{
 		if (copy_buffer_to_string(curr, &string) == EXIST)
-			return (copy_string_to_ret_and_add_nul(&string));
+			return (make_return(fd, head, &head, &string));
 	}
 	stat = read_and_copy_to_str(fd, curr, &string);
 	if (stat != SUCCESS)
@@ -38,7 +38,7 @@ char	*get_next_line(int fd)
 			free_string(&string);
 		return (NULL);
 	}
-	return (copy_string_to_ret_and_add_nul(&string));
+	return (make_return(fd, head, &head, &string));
 }
 
 t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps)
@@ -67,8 +67,8 @@ t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps)
 
 t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 {
-	int	copy_len;
-	int	i;
+	ssize_t	copy_len;
+	ssize_t	i;
 
 	copy_len = curr->ret_read - curr->index;
 	i = 0;
@@ -87,7 +87,7 @@ t_stat	copy_buffer_to_string(t_util *curr, t_string *ps)
 	return (NOT_EXIST);
 }
 
-char	*copy_string_to_ret_and_add_nul(t_string *ps)
+char	*make_return(int fd, t_util *head, t_util **phead, t_string *ps)
 {
 	char			*ret;
 	unsigned char	*cp_dst;
@@ -96,7 +96,10 @@ char	*copy_string_to_ret_and_add_nul(t_string *ps)
 
 	ret = malloc(ps->len + 1);
 	if (!ret)
-		return (NULL);
+	{
+		free_string(ps);
+		return (delete_current_node(fd, head, phead));
+	}
 	len = ps->len;
 	cp_dst = (unsigned char *)ret;
 	cp_src = (unsigned char *)ps->str;

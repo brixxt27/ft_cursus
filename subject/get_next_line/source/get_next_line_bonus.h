@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 21:59:39 by jayoon            #+#    #+#             */
-/*   Updated: 2022/05/31 20:36:54 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/01 20:09:45 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_util
 {
 	int				fd;
 	char			buf[BUFFER_SIZE];
-	int				index;
+	ssize_t			index;
 	ssize_t			ret_read;
 	struct s_util	*next;
 }	t_util;
@@ -47,13 +47,13 @@ typedef enum e_util_of_status
 
 char	*get_next_line(int fd);
 t_stat	copy_buffer_to_string(t_util *curr, t_string *ps);
-char	*copy_string_to_ret_and_add_nul(t_string *ps);
+char	*make_return(int fd, t_util *head, t_util **phead, t_string *ps);
 t_stat	read_and_copy_to_str(int fd, t_util *curr, t_string *ps);
 t_stat	stretch_string(t_string *ps);
 
 t_stat	find_node(int fd, t_util **phead, t_util **pcurr);
 t_stat	init_string(t_string *ps);
-char	*delete_current_node(int fd, t_util *head, t_util **head_ptr);
+char	*delete_current_node(int fd, t_util *head, t_util **phead);
 char	*free_string(t_string *ps);
 
 #endif
