@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 16:34:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/01 20:13:20 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/03 14:34:35 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (delete_current_node(fd, head, &head));
 	if (find_node(fd, &head, &curr) == FAIL)
-		return (delete_current_node(fd, head, &head));
+		return (NULL);
 	if (init_string(&string) == FAIL)
 		return (delete_current_node(fd, head, &head));
 	if (curr->index != -1)
