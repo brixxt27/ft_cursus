@@ -1,0 +1,30 @@
+#include "pipex.h"
+#include <unistd.h>
+
+/*
+	1. < infile cmd1 | cmd2 > outfile
+	2. ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+	3. Support << and >> when the first parameter is here_doc :    
+    `$> ./pipex here_doc LIMITER cmd cmd1 file`
+	cmd << LIMITER | cmd1 >> file
+*/
+int	main(int argc, char *argv[], char *envp[])
+{
+	pid_t	pid;
+
+/*
+	pid_t	pid;
+
+	argc 5개 이상이어야 실행
+	argv[1] infile open
+	avgv[argc - 2] outfile open
+	i = 2	// 직렬로 프로세스를 실행하면 안 된다. 병렬로 해야 하므로, 모든 자식을 한 번에 기다려야 한다. argv[2] ~ [argc - 2] 까지 cmd 로 사용
+	pid = fork();
+	while (i < argc - 2)
+		if (pid != 0) // 자식 프로세스가 아니라면
+			fork();
+	
+
+	만약 argc 가 
+*/
+}
