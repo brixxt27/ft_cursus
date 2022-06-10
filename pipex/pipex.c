@@ -1,5 +1,6 @@
 #include "pipex.h"
 #include <unistd.h>
+#include <fcntl.h>
 
 /*
 	1. < infile cmd1 | cmd2 > outfile
@@ -7,12 +8,7 @@
 	3. Support << and >> when the first parameter is here_doc :    
     `$> ./pipex here_doc LIMITER cmd cmd1 file`
 	cmd << LIMITER | cmd1 >> file
-*/
-int	main(int argc, char *argv[], char *envp[])
-{
-	pid_t	pid;
 
-/*
 	pid_t	pid;
 
 	argc 5개 이상이어야 실행
@@ -27,4 +23,16 @@ int	main(int argc, char *argv[], char *envp[])
 
 	만약 argc 가 
 */
+int	main(int argc, char *argv[], char *envp[])
+{
+	pid_t	pid;
+	int		fd;
+
+	if (argc < 5)
+		print_error();
+	/* 
+		1. < infile cmd1 | cmd2 > outfile
+		2. ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
+	 */
+	fd = open(argv[1], O_RDONLY);
 }
