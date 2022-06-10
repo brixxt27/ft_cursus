@@ -29,10 +29,14 @@ int	main(int argc, char *argv[], char *envp[])
 	int		fd;
 
 	if (argc < 5)
-		print_error();
+		print_error(); // print and return exit status 
 	/* 
 		1. < infile cmd1 | cmd2 > outfile
 		2. ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 	 */
 	fd = open(argv[1], O_RDONLY);
+	
+	// 파이프 만들기
+	// fork
+	// execve
 }
