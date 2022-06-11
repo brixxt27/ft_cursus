@@ -34,7 +34,7 @@ void	find_word_of_edge(char const *str, char c, char **start, char **end)
 	}
 }
 
-char	**make_ret(char **ret, char const *str, char c)
+char	**make_ret(char **ret, char const *str, char c, int n)
 {
 	int		i;
 	int		j;
@@ -42,7 +42,7 @@ char	**make_ret(char **ret, char const *str, char c)
 	char	*end;
 
 	i = 0;
-	while (ret[i])
+	while (i < n)
 	{
 		j = 0;
 		find_word_of_edge(str, c, &start, &end);
@@ -64,7 +64,7 @@ int		count_word(char const *str, char c)
 	t_delimeter	is_delimeter;
 
 	cnt = 0;
-	is_delimeter = DEL_NO;
+	is_delimeter = DEL_YES;
 	while (*str)
 	{
 		if (*str == c)
@@ -93,6 +93,6 @@ char	**ft_split(char const *str, char c)
 	if (!ret)
 		return (NULL);
 	ret[num_word] = NULL;
-	ret = make_ret(ret, str, c);
+	ret = make_ret(ret, str, c, num_word);
 	return (ret);
 }
