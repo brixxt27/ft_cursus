@@ -38,13 +38,41 @@ void	*allocate_memory(int size, int count)
 int		count_word(char const *str, char c)
 {
 	int	cnt;
+	int	is_delimeter;
 
+	cnt = 0;
+	is_delimeter = DEL_NO;
 	while (str)
 	{
 		if (*str == c)
+		{
+			is_delimeter = DEL_YES;
 			str++;
+			continue ;
+		}
+		if (is_delimeter == DEL_YES)
+			cnt++;
+		is_delimeter = DEL_NO;
+		str++;
+	}
+	return (cnt);
+}
+
+char	**put_word_in_ret(char **ret, char *str, char c, int num_word)
+{
+	//    abc sdf     123\0
+	char	*start;
+	char	*end;
+
+	while (str && *str == c)
+		str++;
+	start = str;
+	while (str)
+	{
+		
 	}
 }
+
 char	**ft_split(char const *str, char c)
 {
 	char	**ret;
