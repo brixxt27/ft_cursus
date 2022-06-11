@@ -17,7 +17,7 @@ void	find_word_of_edge(char const *str, char c, char **start, char **end)
 	t_delimeter	is_delimeter;
 
 	is_delimeter = DEL_NO;
-	while (str)
+	while (*str)
 	{
 		if (*str == c)
 		{
@@ -65,7 +65,7 @@ int		count_word(char const *str, char c)
 
 	cnt = 0;
 	is_delimeter = DEL_NO;
-	while (str)
+	while (*str)
 	{
 		if (*str == c)
 		{
