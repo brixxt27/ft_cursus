@@ -1,44 +1,67 @@
 #include <stdlib.h>
 #include "pipex.h"
 
-size_t	ft_strlen(char *str)
+char	**free_all_at_fail(char **ret, int i)
 {
-	size_t	len;
-
-	if (!str)
-		return (0);
-	while (str++)
-		len++;
-	return (len);
-}
-
-void	ft_putstr_fd(char *str, int	fd)
-{
-	write(fd, str, ft_strlen(str));
-}
-
-void	check_error(t_error e, void *mem)
-{
-	if (e == E_MALLOC && mem == 0)
+	while (i)
 	{
-		ft_putstr_fd("Memory allocation fails.\n", 2);
-		exit(1);
+		free(ret[i]);
+		ret[i] = NULL;
+		i--;
+	}
+	return (NULL);
+}
+
+void	find_word_of_edge(char const *str, char c, char **start, char **end)
+{
+	t_delimeter	is_delimeter;
+
+	is_delimeter = DEL_NO;
+	while (str)
+	{
+		if (*str == c)
+		{
+			if (is_delimeter == DEL_NO)
+				*end = str - 1;
+			is_delimeter = DEL_YES;
+			str++;
+			continue ;
+		}
+		if (is_delimeter == DEL_YES)
+			*start = str;
+		is_delimeter = DEL_NO;
+		str++;
 	}
 }
 
-void	*allocate_memory(int size, int count)
+char	**make_ret(char **ret, char const *str, char c)
 {
-	void	*mem;
+	int		i;
+	int		j;
+	char	*start;
+	char	*end;
 
-	mem = malloc(size * count);
-	check_error(E_MALLOC, (long int)mem);
-	return (mem);
+	i = 0;
+	while (ret[i])
+	{
+		j = 0;
+		find_word_of_edge(str, c, &start, &end);
+		ret[i] = (char *)malloc((end - start) + 1);
+		if (!ret[i])
+			return (free_all_at_fail(ret, i));
+		while (start <= end)
+		{
+			ret[i][j] = *start++;
+			j++;
+		}
+		ret[i][j] = '\0';
+	}
+	return (ret);
 }
-
 int		count_word(char const *str, char c)
 {
-	int	cnt;
-	int	is_delimeter;
+	int			cnt;
+	t_delimeter	is_delimeter;
 
 	cnt = 0;
 	is_delimeter = DEL_NO;
@@ -58,21 +81,6 @@ int		count_word(char const *str, char c)
 	return (cnt);
 }
 
-char	**put_word_in_ret(char **ret, char *str, char c, int num_word)
-{
-	//    abc sdf     123\0
-	char	*start;
-	char	*end;
-
-	while (str && *str == c)
-		str++;
-	start = str;
-	while (str)
-	{
-		
-	}
-}
-
 char	**ft_split(char const *str, char c)
 {
 	char	**ret;
@@ -81,8 +89,10 @@ char	**ft_split(char const *str, char c)
 	if (!str)
 		return (NULL);
 	num_word = count_word(str, c);
-	ret = (char **)allocate_memory(sizeof(char *), num_word + 1);
-	ret = put_word_in_ret(ret, str, num_word);
-	// 이중 포인터에서 단일 포인터를 malloc 하던 도중에 실패하면 이미 할당해준 애들 전부 free 함수 필요
+	ret = malloc(sizeof(char *) * (num_word + 1));
+	if (!ret)
+		return (NULL);
+	ret[num_word] = NULL;
+	ret = make_ret(ret, str, c);
 	return (ret);
 }

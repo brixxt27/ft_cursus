@@ -20,6 +20,10 @@ typedef enum e_is_delimeter
 	DEL_NO
 }	t_delimeter;
 
+// check error
+void	check_error(t_error e, void *mem);
+// libft.h
 char	**ft_split(char const *str, char c);
+void	ft_putstr_fd(char *str, int	fd);
 
 #endif
