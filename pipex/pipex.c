@@ -1,42 +1,51 @@
+	/*
+	//순서
+	명령행 인자로 프로세스와 옵션 받기
+	파싱하기
+	fork 하기
+	자식 프로세스로 프로세스 실행하기
+	끝
+
+	//형식
+	./pipex "ls -al"
+	*/
 #include "pipex.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
-/*
-	1. < infile cmd1 | cmd2 > outfile
-	2. ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
-	3. Support << and >> when the first parameter is here_doc :    
-    `$> ./pipex here_doc LIMITER cmd cmd1 file`
-	cmd << LIMITER | cmd1 >> file
+int		print_err(const char *str);
+void	parse_argv(t_list *p_list, char **argv);
+// void	proc_child(void);
 
-	pid_t	pid;
-
-	argc 5개 이상이어야 실행
-	argv[1] infile open
-	avgv[argc - 2] outfile open
-	i = 2	// 직렬로 프로세스를 실행하면 안 된다. 병렬로 해야 하므로, 모든 자식을 한 번에 기다려야 한다. argv[2] ~ [argc - 2] 까지 cmd 로 사용
-	pid = fork();
-	while (i < argc - 2)
-		if (pid != 0) // 자식 프로세스가 아니라면
-			fork();
-	
-
-	만약 argc 가 
-*/
 int	main(int argc, char *argv[], char *envp[])
 {
-	pid_t	pid;
-	int		fd;
+	pid_t 	pid;
+	t_list	list;
 
-	if (argc < 5)
-		print_error(); // print and return exit status 
-	/* 
-		1. < infile cmd1 | cmd2 > outfile
-		2. ./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
-	 */
-	fd = open(argv[1], O_RDONLY);
-	
-	// 파이프 만들기
-	// fork
-	// execve
+	if (argc < 2) // 프로그램 이름, 명령어와 옵션 포함한 문자열
+		return (print_err("argc"));
+	parse_argv(&list, argv);
+	// pid = fork();
+	// if (pid == 0)
+	// 	proc_child();
+	// wait(NULL);
+	execve("/bin/ls", argv, envp);
+	return (0);
+}
+
+int		print_err(const char *str)
+{
+	perror(str);
+	return (1);
+}
+
+void	parse_argv(t_list *p_list, char **argv)
+{
+	// argv[1] 스페이스 바 기준으로 split, NULL 로 끝나는 2차원 배열에 하나씩 넣기
+	p_list->execve_argv = ft_split(argv[1], ' ');
+	// path envp 에서 PATH: 로 시작하는 문자열에서 : 기준으로 split
+	// execve_argv[0] 앞에 붙여 넣으며 존재하는 명령어인지 확인
+	// if 있으면 실행
+	// else 에러 메시지 띄우며 종료 
 }
