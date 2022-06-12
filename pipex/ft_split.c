@@ -12,26 +12,29 @@ char	**free_all_at_fail(char **ret, int i)
 	return (NULL);
 }
 
-void	find_word_of_edge(char const *str, char c, char **start, char **end)
+char	*find_word_of_edge(char *curr, char c, char **start, char **end)
 {
 	t_delimeter	is_delimeter;
 
-	is_delimeter = DEL_NO;
-	while (*str)
+	is_delimeter = DEL_YES;
+	*end = NULL;
+	while (*curr == c)
+		curr++;
+	while (*curr && *end == NULL)
 	{
-		if (*str == c)
+		if (*curr == c || *curr == '\0')
 		{
-			if (is_delimeter == DEL_NO)
-				*end = str - 1;
-			is_delimeter = DEL_YES;
-			str++;
-			continue ;
+			*end = curr - 1;
+			break ;
 		}
 		if (is_delimeter == DEL_YES)
-			*start = str;
+			*start = curr;
 		is_delimeter = DEL_NO;
-		str++;
+		curr++;
 	}
+	if (*curr == '\0' && is_delimeter == DEL_NO)
+		*end = curr -1;
+	return (curr);
 }
 
 char	**make_ret(char **ret, char const *str, char c, int n)
@@ -40,13 +43,15 @@ char	**make_ret(char **ret, char const *str, char c, int n)
 	int		j;
 	char	*start;
 	char	*end;
+	char	*curr;
 
 	i = 0;
+	curr = (char *)str;
 	while (i < n)
 	{
 		j = 0;
-		find_word_of_edge(str, c, &start, &end);
-		ret[i] = (char *)malloc((end - start) + 1);
+		curr = find_word_of_edge(curr, c, &start, &end);
+		ret[i] = (char *)malloc((end - start + 1) + 1);
 		if (!ret[i])
 			return (free_all_at_fail(ret, i));
 		while (start <= end)
@@ -55,6 +60,7 @@ char	**make_ret(char **ret, char const *str, char c, int n)
 			j++;
 		}
 		ret[i][j] = '\0';
+		i++;
 	}
 	return (ret);
 }

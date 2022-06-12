@@ -3,12 +3,10 @@
 
 int main(void)
 {
-    char    str[] = "ls -a -l";
-    char    *p;
+    char    *str = "ls -a -l";
     char    **arr;
     int     i;
 
-    p = str;
     // printf("%zu\n", sizeof(str));
     // printf("%s", p);
     i = 0;
