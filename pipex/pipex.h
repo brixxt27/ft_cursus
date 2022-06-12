@@ -16,6 +16,7 @@ typedef enum e_list_of_error
 // split
 typedef enum e_is_delimeter
 {
+	DEL_FIRST_CALL,
 	DEL_YES,
 	DEL_NO
 }	t_delimeter;

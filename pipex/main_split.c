@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    char    *str = "ls -a -l";
+    char    *str = "         a";
     char    **arr;
     int     i;
 
@@ -11,7 +11,7 @@ int main(void)
     // printf("%s", p);
     i = 0;
     arr = ft_split(str, ' ');
-    while (arr[i])
+    while (arr && arr[i])
     {
         printf("%s\n", arr[i]);
         i++;
