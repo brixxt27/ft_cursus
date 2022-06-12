@@ -1,9 +1,10 @@
 #include "pipex.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
-    char    *str = "         a";
+    char    *str = "   ls -a   -l";
     char    **arr;
     int     i;
 
@@ -16,5 +17,11 @@ int main(void)
         printf("%s\n", arr[i]);
         i++;
     }
+    i = 0;
+    while (arr && arr[i])
+    {
+        free(arr[i++]);
+    }
+    free(arr);
     return (0);
 }

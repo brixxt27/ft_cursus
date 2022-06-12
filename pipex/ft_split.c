@@ -12,7 +12,7 @@ static void	free_all_at_fail(char ***p_ret, int i)
 		ret[i] = NULL;
 		i--;
 	}
-	free(ret);
+	free(*p_ret);
 	*p_ret = NULL;
 }
 
