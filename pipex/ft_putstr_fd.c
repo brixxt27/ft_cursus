@@ -6,13 +6,14 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/13 10:27:25 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 00:30:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "pipex.h"
 
-void	ft_putstr_fd(char *str, int	fd)
+void	ft_putstr_fd(char *str, int fd)
 {
 	write(fd, str, ft_strlen(str));
 }

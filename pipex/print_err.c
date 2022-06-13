@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_error.c                                      :+:      :+:    :+:   */
+/*   print_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 10:27:20 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 00:02:10 by jayoon           ###   ########.fr       */
+/*   Created: 2022/06/13 23:45:28 by jayoon            #+#    #+#             */
+/*   Updated: 2022/06/14 00:30:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_error(t_error e, void *mem)
+void	print_err(char *str)
 {
-	if (e == E_MALLOC && !mem)
-	{
-		ft_putstr_fd("Memory allocation fails.\n", 2);
-		exit(1);
-	}
+	ft_putstr_fd(str, 2);
+	exit(1);
 }

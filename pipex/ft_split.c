@@ -6,11 +6,10 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/13 10:27:10 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 00:02:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "pipex.h"
 
 static void	free_all_at_fail(char ***p_ret, int i)
@@ -29,7 +28,7 @@ static void	free_all_at_fail(char ***p_ret, int i)
 }
 
 static const char	*find_word_of_edge(const char *curr, const char c, \
-					const char **start, const char **end)
+										const char **start, const char **end)
 {
 	t_delimeter	is_delimeter;
 
