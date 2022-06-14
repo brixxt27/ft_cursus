@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 17:33:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:43:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ pid_t	fork_process(void)
 	pid_t	pid;
 
 	pid = fork();
+	check_fork_error(pid);
+	return (pid);
 }
 
 int	main(int argc, char *argv[], char *envp[])

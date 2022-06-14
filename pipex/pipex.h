@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 17:33:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 20:42:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 // parse
 void	parse_argv(t_list *p_list, char **argv, char **envp);
 
-// execute
+// process
+void	execute_process(t_list *p_list, char *envp[]);
+pid_t	fork_process(void);
+void	check_fork_error(pid_t pid);
 
 #endif
