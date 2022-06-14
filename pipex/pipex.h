@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 16:08:16 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 17:33:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	check_error(t_error e, void *mem);
 char	**ft_split(char const *str, char c);
 void	ft_putstr_fd(char *str, int fd);
 size_t	ft_strlen(const char *str);
-void	print_err(char *str);
+void	print_error(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_free_malloc(void *mem);

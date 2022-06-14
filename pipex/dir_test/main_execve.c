@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int		print_err(const char *str);
+int		print_error(const char *str);
 
 int	main(void)
 {
@@ -11,13 +11,13 @@ int	main(void)
 	char	*envp[] = {NULL};
 
 	if (argc < 2)
-		return (print_err("argc"));
+		return (print_error("argc"));
 	
 	execve("/bin/ls", argv, envp);
 	return (0);
 }
 
-int		print_err(const char *str)
+int		print_error(const char *str)
 {
 	perror(str);
 	return (1);
