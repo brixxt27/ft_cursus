@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 20:42:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 01:58:47 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum e_is_delimeter
 {
 	DEL_FIRST_CALL,
 	DEL_YES,
-	DEL_NO
+	DEL_NO,
+	DEL_QUOTES
 }	t_delimeter;
 
 // check error

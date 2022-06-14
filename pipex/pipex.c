@@ -6,14 +6,15 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 20:43:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 01:55:24 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <unistd.h>
 #include <fcntl.h>
+#include "pipex.h"
 #include <stdio.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 void	parse_argv(t_list *p_list, char **argv, char **envp)
 {
