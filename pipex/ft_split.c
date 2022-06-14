@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 00:02:31 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 13:32:38 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	make_ret(char ***p_ret, char const *str, char c, int n)
 		(*p_ret)[i++][j] = '\0';
 	}
 }
+
 static int	count_word(char const *str, char c)
 {
 	int			cnt;

@@ -6,21 +6,10 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 01:16:39 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 16:08:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-	/*
-	//순서
-	명령행 인자로 프로세스와 옵션 받기
-	파싱하기
-	fork 하기
-	자식 프로세스로 프로세스 실행하기
-	끝
-
-	//형식
-	./pipex "ls -al"
-	*/
 #include "pipex.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -45,6 +34,28 @@ void	parse_argv(t_list *p_list, char **argv, char **envp)
 	// execve 하는 함수에서 strjoin 으로 하는 과정에서 바꿔줘야겠다.
 }
 
+void	execute_process(t_list *p_list, char *envp[])
+{
+	size_t	i;
+	char	*path;
+
+	i = 0;
+	while (p_list->dir_path[i])
+	{
+		if (i == 0)
+			path = ft_add_slash_strjoin(p_list->dir_path[i] + 5, \
+									p_list->execve_argv[0]);
+		else
+			path = ft_add_slash_strjoin(p_list->dir_path[i], \
+									p_list->execve_argv[0]);
+		check_error(E_MALLOC, path);
+		execve(path, p_list->execve_argv, envp);
+		ft_free_malloc(path);
+		i++;
+	}
+	print_err("Execve can't execute!\n");
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	// pid_t 	pid;
@@ -54,6 +65,9 @@ int	main(int argc, char *argv[], char *envp[])
 		print_err("Not enough argc!\n");
 	parse_argv(&list, argv, envp);
 	// p_list->dir_path[0] 에서 "PATH=" 빼고 각 요소 끝에 / 붙이기
+	execute_process(&list, envp);
+	return (0);
+}
 	/*
 	pid = fork;
 	if (pid == 0)
@@ -61,5 +75,15 @@ int	main(int argc, char *argv[], char *envp[])
 	wait(NULL);
 	execve("/bin/ls", argv, envp);
 	*/
-	return (0);
-}
+
+	/*
+	//순서
+	명령행 인자로 프로세스와 옵션 받기
+	파싱하기
+	fork 하기
+	자식 프로세스로 프로세스 실행하기
+	끝
+
+	//형식
+	./pipex "ls -al"
+	*/

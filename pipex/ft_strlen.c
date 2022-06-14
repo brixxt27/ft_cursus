@@ -6,18 +6,19 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 00:55:18 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/14 16:00:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	len;
 
 	if (!str)
 		return (0);
+	len = 0;
 	while (*str++)
 		len++;
 	return (len);
