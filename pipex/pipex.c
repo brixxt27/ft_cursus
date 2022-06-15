@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/15 17:47:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 18:15:01 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	duplicate2_fd(t_list *p_list)
 	check_error(E_SYSTEM_CALL, (long long)fd);
 }
 
+void	close_file(t_list *p_list)
+{
+	close(p_list->infile_fd);
+	check_error(E_SYSTEM_CALL, (long long)p_list->infile_fd);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	pid_t 	pid;
@@ -45,6 +51,7 @@ int	main(int argc, char *argv[], char *envp[])
 		duplicate2_fd(&list);
 		execute_process(&list, envp);
 	}
+	close_file(&list);
 	wait(NULL);
 	return (0);
 }

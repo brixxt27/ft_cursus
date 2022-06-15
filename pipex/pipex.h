@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/15 17:47:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 18:15:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ pid_t	fork_process(void);
 
 // control_fd
 void	open_infile(t_list *p_list);
+void	close_file(t_list *p_list);
 void	duplicate2_fd(t_list *p_list);
 
 #endif
