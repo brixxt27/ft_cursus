@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate_memory.c                                  :+:      :+:    :+:   */
+/*   parse_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 10:27:16 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/15 17:04:52 by jayoon           ###   ########.fr       */
+/*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
+/*   Updated: 2022/06/15 16:59:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	*allocate_memory(int size, int count)
+void	parse_argv(t_list *p_list, char **argv, char **envp)
 {
-	void	*mem;
-
-	mem = malloc(size * count);
-	check_error(E_MALLOC, (long long)mem);
-	return (mem);
+	p_list->infile_name = argv[1]; 
+	p_list->dir_path = NULL;
+	p_list->execve_argv = ft_split(argv[2], ' ');
+	while (*envp)
+	{
+		if (!ft_strncmp(*envp, "PATH=", 5))
+		{
+			p_list->dir_path = ft_split(*envp, ':');
+			break ;
+		}
+		envp++;
+	}
+	if (p_list->dir_path == NULL)
+		print_error("Not exist path!\n");
 }

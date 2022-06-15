@@ -6,11 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/06/15 15:52:07 by jayoon           ###   ########.fr       */
-=======
-/*   Updated: 2022/06/15 01:58:47 by jayoon           ###   ########.fr       */
->>>>>>> ccf5dd1604a4f3ca6633f723823f58f0f753d822
+/*   Updated: 2022/06/15 17:47:13 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +18,18 @@
 // struct in main function
 typedef struct s_list_of_main
 {
-	char	*infile;
-	// include PATH= in 0, There are not / tail of string.
+	char	*infile_name;
+	int		infile_fd;
 	char	**dir_path;
-	// command in 0, options from 1, NULL in last index
 	char	**execve_argv;
 }	t_list;
+// dir_path : include PATH= in 0, There are not / tail of string.
+// execve_argv : command in 0, options from 1, NULL in last index
 
 typedef enum e_list_of_error
 {
 	E_MALLOC,
-	E_SYSTEM
+	E_SYSTEM_CALL
 }	t_error;
 
 // split
@@ -45,7 +42,7 @@ typedef enum e_is_delimeter
 }	t_delimeter;
 
 // check error
-void	check_error(t_error e, void *mem);
+void	check_error(t_error e, long long ret);
 void	check_fork_error(pid_t pid);
 void	print_error(char *str);
 
@@ -58,15 +55,17 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_free_malloc(void *mem);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
+char	**ft_split_mode_quotes(char const *str, char c);
 
-// parse
+// parse_argumen
 void	parse_argv(t_list *p_list, char **argv, char **envp);
 
 // process
 void	execute_process(t_list *p_list, char *envp[]);
 pid_t	fork_process(void);
 
-// file
-void	open_infile(t_list p_list);
+// control_fd
+void	open_infile(t_list *p_list);
+void	duplicate2_fd(t_list *p_list);
 
 #endif

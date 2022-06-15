@@ -6,21 +6,21 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:20 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 20:45:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 17:04:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdio.h>
 
-void	check_error(t_error e, void *mem)
+void	check_error(t_error e, long long ret)
 {
-	if (e == E_MALLOC && !mem)
+	if (e == E_MALLOC && !ret)
 	{
 		ft_putstr_fd("Memory allocation fails.\n", 2);
 		exit(1);
 	}
-	if (e == E_SYSTEM)
+	if (e != E_MALLOC && ret == -1)
 	{
 		perror(NULL);
 		exit(1);

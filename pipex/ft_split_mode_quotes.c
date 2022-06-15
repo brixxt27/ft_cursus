@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/15 02:40:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/15 17:39:35 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	count_word(char const *str, char c)
 		}
 		if (is_delimeter != DEL_NO)
 			cnt++;
-		while (*str != '\"' || *str != '\'');
+		while (*str != '\"' || *str != '\'')
 			str++;
 		is_delimeter = DEL_NO;
 		str++;
@@ -109,7 +109,7 @@ static int	count_word(char const *str, char c)
 	return (cnt);
 }
 
-char	**ft_split(char const *str, char c)
+char	**ft_split_mode_quotes(char const *str, char c)
 {
 	char	**ret;
 	int		num_word;

@@ -6,11 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/06/15 15:50:32 by jayoon           ###   ########.fr       */
-=======
-/*   Updated: 2022/06/15 01:55:24 by jayoon           ###   ########.fr       */
->>>>>>> ccf5dd1604a4f3ca6633f723823f58f0f753d822
+/*   Updated: 2022/06/15 17:47:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +16,18 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-void	parse_argv(t_list *p_list, char **argv, char **envp)
+void	open_infile(t_list *p_list)
 {
-	p_list->infile = argv[1]; 
-	p_list->dir_path = NULL;
-	p_list->execve_argv = ft_split(argv[2], ' ');
-	while (*envp)
-	{
-		if (!ft_strncmp(*envp, "PATH=", 5))
-		{
-			p_list->dir_path = ft_split(*envp, ':');
-			break ;
-		}
-		envp++;
-	}
-	if (p_list->dir_path == NULL)
-		print_error("Not exist path!\n");
+	p_list->infile_fd = open(p_list->infile_name, O_RDONLY);
+	check_error(E_SYSTEM_CALL, (long long)p_list->infile_fd);
 }
 
-void	execute_process(t_list *p_list, char *envp[])
+void	duplicate2_fd(t_list *p_list)
 {
-	size_t	i;
-	char	*path;
+	int	fd;
 
-	i = 0;
-	while (p_list->dir_path[i])
-	{
-		if (i == 0)
-			path = ft_add_slash_strjoin(p_list->dir_path[i] + 5, \
-									p_list->execve_argv[0]);
-		else
-			path = ft_add_slash_strjoin(p_list->dir_path[i], \
-									p_list->execve_argv[0]);
-		check_error(E_MALLOC, path);
-		execve(path, p_list->execve_argv, envp);
-		ft_free_malloc(path);
-		i++;
-	}
-	print_error("Execve can't execute!\n");
-}
-
-pid_t	fork_process(void)
-{
-	pid_t	pid;
-
-	pid = fork();
-	check_fork_error(pid);
-	return (pid);
+	fd = dup2(p_list->infile_fd, 0);
+	check_error(E_SYSTEM_CALL, (long long)fd);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -80,7 +41,10 @@ int	main(int argc, char *argv[], char *envp[])
 	open_infile(&list);
 	pid = fork_process();
 	if (pid == 0)
+	{
+		duplicate2_fd(&list);
 		execute_process(&list, envp);
+	}
 	wait(NULL);
 	return (0);
 }
