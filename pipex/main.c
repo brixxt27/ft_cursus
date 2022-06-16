@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 01:11:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/17 01:24:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char *argv[], char *envp[])
 	t_files	info_files;
 	t_args	arguments;
 
-	if (argc < 4)
-		print_error("Not enough argc. Input 3, including program name!\n");
+	if (argc < 5)
+		print_error("Not enough argc. Input 5, including program name!\n");
 	ft_set_arguments(&arguments, argc, argv, envp);
 	parse(&list, &info_files, &arguments);
 	open_infile_and_outfile(&info_files);
