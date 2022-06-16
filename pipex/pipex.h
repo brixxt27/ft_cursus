@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/15 18:15:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/16 20:57:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,28 @@
 // struct in main function
 typedef struct s_list_of_main
 {
-	char	*infile_name;
-	int		infile_fd;
-	char	**dir_path;
-	char	**execve_argv;
+	int						pipe[2];
+	char					**dir_path;
+	char					**execve_argv;
+	struct s_list_of_main	*next;
 }	t_list;
 // dir_path : include PATH= in 0, There are not / tail of string.
 // execve_argv : command in 0, options from 1, NULL in last index
+
+typedef struct s_list_of_files
+{
+	int						infile_fd;
+	int						outfile_fd;
+	char					*infile_name;
+	char					*outfile_name;
+}	t_files;
+
+typedef struct s_list_of_arguments
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+}	t_args;
 
 typedef enum e_list_of_error
 {
@@ -56,17 +71,18 @@ void	ft_free_malloc(void *mem);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 char	**ft_split_mode_quotes(char const *str, char c);
+void	ft_set_arguments(t_args *p_args, int argc, char **argv, char **envp);
 
 // parse_argumen
-void	parse_argv(t_list *p_list, char **argv, char **envp);
+void	parse(t_list *p_list, t_args *p_args);
 
 // process
 void	execute_process(t_list *p_list, char *envp[]);
 pid_t	fork_process(void);
 
 // control_fd
-void	open_infile(t_list *p_list);
-void	close_file(t_list *p_list);
-void	duplicate2_fd(t_list *p_list);
+void	open_infile_and_outfile(t_files *p_list);
+void	duplicate2_fd(t_files *p_list);
+void	close_file(t_files *p_list);
 
 #endif

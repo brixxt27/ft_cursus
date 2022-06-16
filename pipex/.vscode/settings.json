@@ -1,6 +1,11 @@
 {
     "files.insertFinalNewline": true,
     "files.associations": {
-        "pipex.h": "c"
+        "pipex.h": "c",
+        "wait.h": "c",
+        "__config": "c",
+        "__functional_03": "c",
+        "functional": "c",
+        "locale": "c"
     }
 }
