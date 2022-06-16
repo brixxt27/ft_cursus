@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/16 21:01:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/17 00:50:04 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <sys/wait.h>
-#include <stdio.h> // 이건 왜 필요하지??
 #include <unistd.h>
+
+void	do_it_child(t_list *p_list, t_files *p_files)
+{
+	duplicate2_fd(p_files);
+	execute_process(p_list);
+}
+
+void	do_it_parent(t_files *p_files)
+{
+	close_file(p_files);
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -26,14 +36,16 @@ int	main(int argc, char *argv[], char *envp[])
 		print_error("Not enough argc. Input 3, including program name!\n");
 	set_arguments(&arguments, argc, argv, envp);
 	parse(&list, &arguments);
-	open_infile(&info_files);
-	pid = fork_process();
-	if (pid == 0)
+	open_infile_and_outfile(&info_files);
+	while (argc-- - 3)
 	{
-		duplicate2_fd(&info_files);
-		execute_process(&list, envp);
+		create_pipe(&list);
+		pid = fork_process();
+		if (pid == CHILD)
+			do_it_child(&list, &info_files);
+		do_it_parent(&info_files);
 	}
-	close_file(&info_files);
-	wait(NULL);
+	while(wait(NULL) != -1);
+	//check_error(E_SYSTEM_CALL, )
 	return (0);
 }

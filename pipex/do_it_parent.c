@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   control_fds.c                                      :+:      :+:    :+:   */
+/*   do_it_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 20:59:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 00:55:38 by jayoon           ###   ########.fr       */
+/*   Created: 2022/06/17 00:55:08 by jayoon            #+#    #+#             */
+/*   Updated: 2022/06/17 00:55:53 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "pipex.h"
 #include <unistd.h>
 
-void	open_infile_and_outfile(t_files *p_files)
+void	close_file(t_files *p_files)
 {
-	p_files->infile_fd = open(p_files->infile_name, O_RDONLY);
-	check_error(E_SYSTEM_CALL, (long long)p_files->infile_fd);
-	p_files->outfile_fd = open(p_files->outfile_name, O_WRONLY);
-	check_error(E_SYSTEM_CALL, (long long)p_files->outfile_fd);
+	int	ret;
+	
+	ret = close(p_files->infile_fd);
+	check_error(E_SYSTEM_CALL, (long long)ret);
 }
 
-void	create_pipe(t_list *p_list)
+void	do_it_parent(t_files *p_files)
 {
-	int		ret_pipe;
-
-	ret_pipe = pipe(p_list->pipefd);
-	check_error(E_SYSTEM_CALL, (long long)ret_pipe);
+	close_file(p_files);
 }
