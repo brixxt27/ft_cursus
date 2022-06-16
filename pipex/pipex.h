@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 00:54:55 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/17 01:16:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 char	**ft_split_mode_quotes(char const *str, char c);
 void	ft_set_arguments(t_args *p_args, int argc, char **argv, char **envp);
 
-// parse_argumen
-void	parse(t_list *p_list, t_args *p_args);
+// parse_arguments
+void	parse(t_list *p_list, t_files *p_files, t_args *p_args);
 
 // process
 void	do_it_parent(t_files *p_files);
