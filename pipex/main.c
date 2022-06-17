@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/16 21:05:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/17 21:13:15 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <sys/wait.h>
-#include <stdio.h> // 이건 왜 필요하지??
 #include <unistd.h>
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	pid_t 	pid;
 	t_list	list;
-	t_args	arguments;
 	t_files	info_files;
+	t_args	arguments;
 
-	if (argc < 4)
-		print_error("Not enough argc. Input 3, including program name!\n");
-	set_arguments(&arguments, argc, argv, envp);
-	parse(&list, &arguments, &info_files);
-	open_infile(&info_files);
-	pid = fork_process();
-	if (pid == 0)
+	if (argc < 5)
+		print_error("Not enough argc. Input 5, including program name!\n");
+	ft_set_arguments(&arguments, argc, argv, envp);
+	parse(&list, &info_files, &arguments);
+	open_infile_and_outfile(&info_files);
+	while (argc-- - 3)
 	{
-		duplicate2_fd(&info_files);
-		execute_process(&list, envp);
+		create_pipe(&list);
+		pid = fork_process();
+		if (pid == CHILD)
+			do_it_child(&list, &info_files);
+		do_it_parent(&info_files);
 	}
-	close_file(&info_files);
-	wait(NULL);
+	while(wait(NULL) != -1);
+	//check_error(E_SYSTEM_CALL, )
 	return (0);
 }
