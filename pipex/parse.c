@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 21:12:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/17 21:48:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	parse_execve_argv(t_list *p_list, int argc, char *argv[])
 {
 	// argc 이용해서 list 만들기
 	p_list->execve_argv = ft_split(argv[2], ' ');
+	// Do I except that p_list_>execve_argv is NULL? ::: jim
 }
 
 static void	parse_path_in_envp(t_list *p_list, char *envp[])
