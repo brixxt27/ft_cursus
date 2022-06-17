@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/16 20:57:02 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/16 21:05:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**ft_split_mode_quotes(char const *str, char c);
 void	ft_set_arguments(t_args *p_args, int argc, char **argv, char **envp);
 
 // parse_argumen
-void	parse(t_list *p_list, t_args *p_args);
+void	parse(t_list *p_list, t_args *p_args, t_files *p_info);
 
 // process
 void	execute_process(t_list *p_list, char *envp[]);

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/16 21:01:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/16 21:05:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 	if (argc < 4)
 		print_error("Not enough argc. Input 3, including program name!\n");
 	set_arguments(&arguments, argc, argv, envp);
-	parse(&list, &arguments);
+	parse(&list, &arguments, &info_files);
 	open_infile(&info_files);
 	pid = fork_process();
 	if (pid == 0)
