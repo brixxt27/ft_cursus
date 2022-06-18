@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/18 22:01:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/18 22:11:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ static void	execute_process(t_list *p_list)
 	print_error("Execve can't execute!\n");
 }
 
+// Consider when process call last child process.
 void	do_it_child(t_list *p_list, t_files *p_files)
 {
 	close_safely(p_list->pipefd[0]);
-	duplicate2_fd(p_files->input_fd, 0);
+	duplicate2_safely(p_files->input_fd, 0);
+	close_safely(p_files->input_fd);
+	duplicate2_safely(p_list->pipefd[1], 1);
+	close_safely(p_list->pipefd[1]);
 	execute_process(p_list);
 }

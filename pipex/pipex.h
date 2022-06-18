@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/18 22:01:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/18 22:09:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_list_of_main
 typedef struct s_list_of_files
 {
 	int		input_fd;
-	int		outfile_fd;
+	int		output_fd;
 	char	*infile_name;
 	char	*outfile_name;
 }	t_files;
@@ -88,7 +88,7 @@ pid_t	fork_process(void);
 
 // control_fd
 void	open_infile_and_outfile(t_files *p_list);
-void	dup2_safely(int from, int to);
+void	duplicate2_safely(int from, int to);
 void	close_file(t_files *p_files);
 void	create_pipe(t_list *p_list);
 
