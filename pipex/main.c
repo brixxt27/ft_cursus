@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 21:13:15 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/18 21:49:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_set_arguments(&arguments, argc, argv, envp);
 	parse(&list, &info_files, &arguments);
 	open_infile_and_outfile(&info_files);
-	while (argc-- - 3)
+	while (arguments.argc--)
 	{
 		create_pipe(&list);
 		pid = fork_process();
@@ -35,6 +35,6 @@ int	main(int argc, char *argv[], char *envp[])
 		do_it_parent(&info_files);
 	}
 	while(wait(NULL) != -1);
-	//check_error(E_SYSTEM_CALL, )
+	//check_error(E_SYSTEM_CALL, ) Think about return value of wait
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/17 21:12:43 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/18 22:01:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_list_of_main
 
 typedef struct s_list_of_files
 {
-	int		infile_fd;
+	int		input_fd;
 	int		outfile_fd;
 	char	*infile_name;
 	char	*outfile_name;
@@ -40,6 +40,7 @@ typedef struct s_list_of_files
 typedef struct s_list_of_arguments
 {
 	int		argc;
+	int		count_argc;
 	char	**argv;
 	char	**envp;
 }	t_args;
@@ -50,19 +51,19 @@ typedef enum e_list_of_error
 	E_SYSTEM_CALL
 }	t_error;
 
-// split
+// split, Think about DEL_QUOTES
 typedef enum e_is_delimeter
 {
 	DEL_FIRST_CALL,
 	DEL_YES,
 	DEL_NO,
-	DEL_QUOTES
 }	t_delimeter;
 
 // check error
 void	check_error(t_error e, long long ret);
+void	check_libft_error(char *error_str, char *mem);
 void	check_fork_error(pid_t pid);
-void	print_error(char *str);
+void	print_error(char *error_str);
 
 // libft.h
 char	**ft_split(char const *str, char c);
@@ -82,13 +83,13 @@ void	parse(t_list *p_list, t_files *p_files, t_args *p_args);
 // process
 void	do_it_parent(t_files *p_files);
 void	do_it_child(t_list *p_list, t_files *p_files);
-void	execute_process(t_list *p_list);
+// void	execute_process(t_list *p_list);
 pid_t	fork_process(void);
 
 // control_fd
 void	open_infile_and_outfile(t_files *p_list);
-void	duplicate2_fd(t_files *p_list);
-void	close_file(t_files *p_list);
+void	dup2_safely(int from, int to);
+void	close_file(t_files *p_files);
 void	create_pipe(t_list *p_list);
 
 #endif
