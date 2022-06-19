@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/18 21:29:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 22:10:54 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	parse_path_in_envp(t_list *p_list, char *envp[])
 void	parse(t_list *p_list, t_files *p_files, t_args *p_args)
 {
 	parse_file_name(p_files, p_args->argc, p_args->argv);
+	// 리스트 자료구조 사용 안 할거니까 
 	parse_execve_argv(p_list, p_args->argc, p_args->argv);
 	parse_path_in_envp(p_list, p_args->envp);
 }

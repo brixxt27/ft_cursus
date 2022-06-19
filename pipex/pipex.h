@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/19 15:59:47 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 22:10:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_list_of_files
 	char	*outfile_name;
 }	t_files;
 
+// list 구조체와 argv, envp 가 중복된다. list 의 argv 는 이미 가공된 것이긴 한데 어떤 이유 때문에 중복 되었다 표현했는지 생각해보기
 typedef struct s_list_of_arguments
 {
 	int		argc;

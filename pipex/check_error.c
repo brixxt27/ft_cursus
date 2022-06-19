@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:20 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/19 16:20:16 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 22:08:38 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	print_error(char *error_str)
 	exit(1);
 }
 
+// fork 함수를 부모 프로세스에서 실패한다면 이전에 만든 자식 프로세스를 종료될 때까지 기다리고, 전부 wait 으로 수거해줘야 한다.
 void	check_fork_error(pid_t pid)
 {
 	if (pid >= 0)
