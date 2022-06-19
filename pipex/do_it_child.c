@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/19 16:03:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 20:40:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	do_it_child(t_list *p_list, t_files *p_files, int count_argc)
 		close_safely(p_list->pipefd[1]);
 	}
 	else
-		duplicate2_safely(1, p_files->output_fd);
+		duplicate2_safely(p_files->output_fd, 1);
 	execute_process(p_list);
 }

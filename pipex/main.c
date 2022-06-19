@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/19 15:54:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 20:40:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ int	main(int argc, char *argv[], char *envp[])
 		if (pid == CHILD)
 			do_it_child(&list, &info_files, arguments.count_argc);
 		do_it_parent(&list, &info_files, arguments.count_argc);
+	}
+	
+	int status;
+	while (1)
+	{
+		if wait(&status) != -1
+			cnt++
+		if wait_ret == pid
+			process_ret = status;
+		if (cnt == argc - 3)
+			break ;
 	}
 	while(wait(NULL) != -1);
 	//check_error(E_SYSTEM_CALL, ) Think about return value of wait
