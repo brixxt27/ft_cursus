@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/18 21:49:25 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 15:54:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_set_arguments(&arguments, argc, argv, envp);
 	parse(&list, &info_files, &arguments);
 	open_infile_and_outfile(&info_files);
-	while (arguments.argc--)
+	while (arguments.count_argc--)
 	{
-		create_pipe(&list);
+		if (arguments.count_argc != LAST_CHILD)
+			create_pipe(&list);
 		pid = fork_process();
 		if (pid == CHILD)
-			do_it_child(&list, &info_files);
-		do_it_parent(&info_files);
+			do_it_child(&list, &info_files, arguments.count_argc);
+		do_it_parent(&list, &info_files, arguments.count_argc);
 	}
 	while(wait(NULL) != -1);
 	//check_error(E_SYSTEM_CALL, ) Think about return value of wait

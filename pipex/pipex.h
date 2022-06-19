@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/18 22:09:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/19 15:59:47 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 # define CHILD 0
+# define LAST_CHILD 0
 
 // struct in main function
 typedef struct s_list_of_main
@@ -48,7 +49,8 @@ typedef struct s_list_of_arguments
 typedef enum e_list_of_error
 {
 	E_MALLOC,
-	E_SYSTEM_CALL
+	E_SYSTEM_CALL,
+	E_NO_PATH
 }	t_error;
 
 // split, Think about DEL_QUOTES
@@ -81,8 +83,8 @@ void	ft_set_arguments(t_args *p_args, int argc, char **argv, char **envp);
 void	parse(t_list *p_list, t_files *p_files, t_args *p_args);
 
 // process
-void	do_it_parent(t_files *p_files);
-void	do_it_child(t_list *p_list, t_files *p_files);
+void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
+void	do_it_child(t_list *p_list, t_files *p_files, int count_argc);
 // void	execute_process(t_list *p_list);
 pid_t	fork_process(void);
 
