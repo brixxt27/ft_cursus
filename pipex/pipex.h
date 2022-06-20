@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/19 22:10:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/20 20:16:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 // struct in main function
 typedef struct s_list_of_main
 {
-	int						pipefd[2];
-	char					**dir_path;
-	char					**execve_argv;
-	char					**envp;
-	struct s_list_of_main	*next;
+	int		pipefd[2];
+	char	**dir_path;
+	char	**execve_argv;
+	char	**envp;
 }	t_list;
 // dir_path : include PATH= in 0, There are not / tail of string.
 // execve_argv : command in 0, options from 1, NULL in last index
@@ -38,13 +37,9 @@ typedef struct s_list_of_files
 	char	*outfile_name;
 }	t_files;
 
-// list 구조체와 argv, envp 가 중복된다. list 의 argv 는 이미 가공된 것이긴 한데 어떤 이유 때문에 중복 되었다 표현했는지 생각해보기
 typedef struct s_list_of_arguments
 {
-	int		argc;
 	int		count_argc;
-	char	**argv;
-	char	**envp;
 }	t_args;
 
 typedef enum e_list_of_error
@@ -68,7 +63,7 @@ void	check_libft_error(char *error_str, char *mem);
 void	check_fork_error(pid_t pid);
 void	print_error(char *error_str);
 
-// libft.h
+// libft
 char	**ft_split(char const *str, char c);
 void	ft_putstr_fd(char *str, int fd);
 size_t	ft_strlen(const char *str);
@@ -78,10 +73,10 @@ void	ft_free_malloc(void *mem);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 char	**ft_split_mode_quotes(char const *str, char c);
-void	ft_set_arguments(t_args *p_args, int argc, char **argv, char **envp);
 
-// parse_arguments
-void	parse(t_list *p_list, t_files *p_files, t_args *p_args);
+// parse
+void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
+void	parse_execve_argv(t_list *p_list, int argc, char *argv[]);
 
 // process
 void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
@@ -89,10 +84,13 @@ void	do_it_child(t_list *p_list, t_files *p_files, int count_argc);
 // void	execute_process(t_list *p_list);
 pid_t	fork_process(void);
 
-// control_fd
+// control_fds
 void	open_infile_and_outfile(t_files *p_list);
 void	duplicate2_safely(int from, int to);
 void	close_file(t_files *p_files);
 void	create_pipe(t_list *p_list);
+
+// utils_pipex
+int		init_num_command(int argc);
 
 #endif
