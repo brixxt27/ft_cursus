@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/20 19:58:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/20 21:53:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ static void	execute_process(t_list *p_list)
 			path = ft_add_slash_strjoin(p_list->dir_path[i], \
 									p_list->execve_argv[0]);
 		check_error(E_MALLOC, (long long)path);
-		ret_execve = execve(path, p_list->execve_argv, p_files->envp);
+		ret_execve = execve(path, p_list->execve_argv, p_list->envp);
 		ft_free_malloc(path);
 		i++;
 	}
 	check_error(E_NO_PATH, (long long)ret_execve);
 }
 
-// Consider when process call last child process.
 void	do_it_child(t_list *p_list, t_files *p_files, int count_argc)
 {
 	if (count_argc != LAST_CHILD)
@@ -53,6 +52,5 @@ void	do_it_child(t_list *p_list, t_files *p_files, int count_argc)
 		duplicate2_safely(p_files->output_fd, 1);
 		close_safely(p_files->output_fd);
 	}
-	execute_process(p_list, p_files);
-	// 인자 정리하기
+	execute_process(p_list);
 }

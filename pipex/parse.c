@@ -6,16 +6,17 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/20 20:10:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/20 21:56:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 // linked list 로 자료를 가지고 있지 않고, loop 내에서 command 마다 변경 된다.
-void	parse_execve_argv(t_list *p_list, int argc, char *argv[])
+void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
+							char *argv[])
 {
-	p_list->execve_argv = ft_split(argv[2], ' ');
+	p_list->execve_argv = ft_split(argv[argc - num_command], ' ');
 	check_libft_error("ft_split", p_list->execve_argv);
 }
 
