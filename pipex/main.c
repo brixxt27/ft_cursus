@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 21:30:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 22:57:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc < 5)
 		print_error("Input is not enough!\n");
-	list.num_command = init_num_command(argc);
+	list.curr_idx = 2;
 	init_utils(&list, envp);
 	parse(&list, &info_files, argc, argv);
 	open_infile_and_outfile(&info_files);

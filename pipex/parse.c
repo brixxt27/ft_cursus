@@ -6,16 +6,16 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:44:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 22:58:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
+void	parse_execve_argv(t_list *p_list, \
 							char *argv[])
 {
-	p_list->execve_argv = ft_split(argv[argc - num_command], ' ');
+	p_list->execve_argv = ft_split(argv[p_list->curr_idx], ' ');
 	check_libft_error("ft_split", (char *)p_list->execve_argv);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:36:39 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 22:57:35 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	execute_process(t_list *p_list)
 		else
 			path = ft_add_slash_strjoin(p_list->path[i], \
 									p_list->execve_argv[0]);
-		check_error(E_MALLOC, (long long)path);
+		check_error(E_MALLOC, (long long)path);	
 		ret_execve = execve(path, p_list->execve_argv, p_list->envp);
 		ft_free_malloc(path);
 		i++;
@@ -36,13 +36,13 @@ static void	execute_process(t_list *p_list)
 	check_error(E_NO_PATH, (long long)ret_execve);
 }
 
-void	do_it_child(t_list *p_list, t_files *p_files, int count_argc)
+void	do_it_child(t_list *p_list, t_files *p_files, int argc)
 {
-	if (count_argc != LAST_CHILD)
+	if (p_list->curr_idx != argc - 2)
 		close_safely(p_list->pipefd[0]);
 	duplicate2_safely(p_files->input_fd, 0);
 	close_safely(p_files->input_fd);
-	if (count_argc != LAST_CHILD)
+	if (p_list->curr_idx != argc - 2)
 	{
 		duplicate2_safely(p_list->pipefd[1], 1);
 		close_safely(p_list->pipefd[1]);

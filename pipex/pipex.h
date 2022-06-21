@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:46:26 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 23:07:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // struct in main function
 typedef struct s_list_of_main
 {
-	int		num_command;
+	int		curr_idx;
 	pid_t	pid;
 	int		pipefd[2];
 	char	**path;
@@ -59,7 +59,7 @@ void	make_pipex(t_list *plist, t_files *pfiles, int argc, char **argv);
 
 // parse
 void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
-void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
+void	parse_execve_argv(t_list *p_list, \
 							char *argv[]);
 
 // process
@@ -67,8 +67,8 @@ pid_t	fork_process(void);
 int		wait_child_and_return_last_child_status(t_list *p_list, int argc);
 
 // wrapping function about process
-void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
-void	do_it_child(t_list *p_list, t_files *p_files, int count_argc);
+void	do_it_parent(t_list *p_list, t_files *p_files, int argc);
+void	do_it_child(t_list *p_list, t_files *p_files, int argc);
 
 // control_fds
 void	open_infile_and_outfile(t_files *p_list);
@@ -77,7 +77,6 @@ void	close_safely(int fd);
 void	create_pipe(t_list *p_list);
 
 // utils_pipex
-int		init_num_command(int argc);
 void	init_utils(t_list *p_list, char **envp);
 
 // check error
