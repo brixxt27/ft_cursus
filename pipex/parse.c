@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 12:32:34 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 20:44:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
 							char *argv[])
 {
 	p_list->execve_argv = ft_split(argv[argc - num_command], ' ');
-	check_libft_error("ft_split", p_list->execve_argv);
+	check_libft_error("ft_split", (char *)p_list->execve_argv);
 }
 
 static void	parse_file_name(t_files *p_files, int argc, char *argv[])
@@ -27,7 +27,6 @@ static void	parse_file_name(t_files *p_files, int argc, char *argv[])
 
 static void	parse_path_in_envp(t_list *p_list, char *envp[])
 {
-	p_list->envp = envp;
 	p_list->path = NULL;
 	while (*envp)
 	{

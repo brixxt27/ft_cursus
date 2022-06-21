@@ -6,11 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:58:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:32:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 21:07:06 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/wait.h>
 #include <unistd.h>
 
 // wait 해줘야 한다.

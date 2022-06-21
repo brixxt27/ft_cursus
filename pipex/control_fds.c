@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 20:59:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 18:56:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 21:27:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	open_infile_and_outfile(t_files *p_files)
 {
 	p_files->input_fd = open(p_files->infile_name, O_RDONLY);
 	check_error(E_SYSTEM_CALL, (long long)p_files->input_fd);
-	p_files->output_fd = open(p_files->outfile_name, O_WRONLY | O_TRUNC | \
+	p_files->output_fd = open(p_files->outfile_name, O_TRUNC | O_WRONLY | \
 								O_CREAT, 0666);
 	check_error(E_SYSTEM_CALL, (long long)p_files->output_fd);
 }

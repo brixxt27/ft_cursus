@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/20 21:53:55 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 20:36:39 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	execute_process(t_list *p_list)
 	int		ret_execve;
 
 	i = 0;
-	while (p_list->dir_path[i])
+	while (p_list->path[i])
 	{
 		if (i == 0)
-			path = ft_add_slash_strjoin(p_list->dir_path[i] + 5, \
+			path = ft_add_slash_strjoin(p_list->path[i] + 5, \
 									p_list->execve_argv[0]);
 		else
-			path = ft_add_slash_strjoin(p_list->dir_path[i], \
+			path = ft_add_slash_strjoin(p_list->path[i], \
 									p_list->execve_argv[0]);
 		check_error(E_MALLOC, (long long)path);
 		ret_execve = execve(path, p_list->execve_argv, p_list->envp);

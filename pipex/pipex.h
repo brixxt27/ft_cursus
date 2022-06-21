@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 20:32:14 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 20:46:26 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	create_pipe(t_list *p_list);
 
 // utils_pipex
 int		init_num_command(int argc);
+void	init_utils(t_list *p_list, char **envp);
 
 // check error
 void	check_error(t_error e, long long ret);
