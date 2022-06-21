@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 20:59:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 18:42:31 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 18:56:32 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	open_infile_and_outfile(t_files *p_files)
 	check_error(E_SYSTEM_CALL, (long long)p_files->output_fd);
 }
 
+// close 에러 처리해줘야 하나?
 void	close_safely(int fd)
 {
 	int	ret;

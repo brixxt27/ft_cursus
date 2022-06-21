@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 18:50:01 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 18:56:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ typedef enum e_is_delimeter
 	DEL_NO,
 }	t_delimeter;
 
+// parse
+void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
+void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
+							char *argv[]);
+
+// process
+pid_t	fork_process(void);
+
+// wrapping function about process
+void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
+void	do_it_child(t_list *p_list, t_files *p_files, int count_argc);
+
+// control_fds
+void	open_infile_and_outfile(t_files *p_list);
+void	duplicate2_safely(int from, int to);
+void	close_safely(int fd);
+void	create_pipe(t_list *p_list);
+
+// utils_pipex
+int		init_num_command(int argc);
+
 // check error
 void	check_error(t_error e, long long ret);
 void	check_libft_error(char *error_str, char *mem);
@@ -71,26 +92,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 char	**ft_split_mode_quotes(char const *str, char c);
 
-// parse
-void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
-void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
-							char *argv[]);
-
-// process
-pid_t	fork_process(void);
-
-// wrapping function about process
-void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
-void	do_it_child(t_list *p_list, t_files *p_files, int count_argc);
-
-// control_fds
-void	open_infile_and_outfile(t_files *p_list);
-void	duplicate2_safely(int from, int to);
-void	close_safely(t_files *p_files);
-void	create_pipe(t_list *p_list);
-
-// utils_pipex
-int		init_num_command(int argc);
 
 /*
 main: while 내부
