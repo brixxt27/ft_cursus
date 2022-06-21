@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 18:56:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 20:32:14 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef enum e_is_delimeter
 	DEL_NO,
 }	t_delimeter;
 
+// make_pipex
+void	make_pipex(t_list *plist, t_files *pfiles, int argc, char **argv);
+
 // parse
 void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
 void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
@@ -61,6 +64,7 @@ void	parse_execve_argv(t_list *p_list, int argc, int num_command, \
 
 // process
 pid_t	fork_process(void);
+int		wait_child_and_return_last_child_status(t_list *p_list, int argc);
 
 // wrapping function about process
 void	do_it_parent(t_list *p_list, t_files *p_files, int count_argc);
@@ -91,7 +95,6 @@ void	ft_free_malloc(void *mem);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
 char	**ft_split_mode_quotes(char const *str, char c);
-
 
 /*
 main: while 내부
