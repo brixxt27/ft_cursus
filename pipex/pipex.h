@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/20 22:05:04 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 12:32:16 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 typedef struct s_list_of_main
 {
 	int		pipefd[2];
-	char	**dir_path;
+	char	**path;
 	char	**execve_argv;
 	char	**envp;
 }	t_list;
-// dir_path : include PATH= in 0, There are not / tail of string.
+// path : include PATH= in 0, There are not / tail of string.
 // execve_argv : command in 0, options from 1, NULL in last index
 
 typedef struct s_list_of_files

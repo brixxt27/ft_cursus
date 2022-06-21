@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/20 22:05:06 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 12:33:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_files	info_files;
 
 	if (argc < 5)
-		print_error("Not input enough arguments! Need to 5.\n");
+		print_error("Input is not enough!\n");
 	num_command = init_num_command(argc);
 	parse(&list, &info_files, argc, argv);
 	open_infile_and_outfile(&info_files);
