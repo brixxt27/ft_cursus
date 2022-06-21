@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 12:32:16 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 18:50:01 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 // struct in main function
 typedef struct s_list_of_main
 {
+	int		num_command;
+	pid_t	pid;
 	int		pipefd[2];
 	char	**path;
 	char	**execve_argv;
@@ -36,11 +38,6 @@ typedef struct s_list_of_files
 	char	*infile_name;
 	char	*outfile_name;
 }	t_files;
-
-typedef struct s_list_of_arguments
-{
-	int		count_argc;
-}	t_args;
 
 typedef enum e_list_of_error
 {

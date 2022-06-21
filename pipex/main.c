@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 12:33:25 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/21 18:51:23 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,24 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	int		num_command;
 	t_list	list;
-	pid_t 	pid;
 	t_files	info_files;
 
 	if (argc < 5)
 		print_error("Input is not enough!\n");
-	num_command = init_num_command(argc);
+	list.num_command = init_num_command(argc);
 	parse(&list, &info_files, argc, argv);
 	open_infile_and_outfile(&info_files);
-	while (num_command)
+	while (list.num_command)
 	{
-		parse_execve_argv(&list, argc, num_command, argv);
-		if (num_command != LAST_CHILD)
+		parse_execve_argv(&list, argc, list.num_command, argv);
+		if (list.num_command != LAST_CHILD)
 			create_pipe(&list);
-		pid = fork_process();
-		if (pid == CHILD)
-			do_it_child(&list, &info_files, num_command);
-		do_it_parent(&list, &info_files, num_command);
-		--num_command;
+		list.pid = fork_process();
+		if (list.pid == CHILD)
+			do_it_child(&list, &info_files, list.num_command);
+		do_it_parent(&list, &info_files, list.num_command);
+		--list.num_command;
 	}
 	int status;
 	while (1)
