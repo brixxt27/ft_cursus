@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/22 12:16:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:04:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,38 +53,40 @@ typedef enum e_is_delimeter
 	DEL_NO,
 }	t_delimeter;
 
-// make_pipex
+// make_pipex.c
 void	make_pipex(t_list *plist, t_files *pfiles, int argc, char **argv);
 
-// parse
+// parse.c
 void	parse(t_list *p_list, t_files *p_files, int argc, char **argv);
 void	parse_execve_argv(t_list *p_list, \
 							char *argv[]);
 
-// process
+// process.c
 pid_t	fork_process(void);
 int		wait_child_and_return_last_child_status(t_list *p_list, int argc);
 
 // wrapping function about process
+// do_it_parent.c
 void	do_it_parent(t_list *p_list, t_files *p_files, int argc);
+// do_it_child.c
 void	do_it_child(t_list *p_list, t_files *p_files, int argc);
 
-// control_fds
+// control_fds.c
 void	open_infile_and_outfile(t_files *p_list);
 void	duplicate2_safely(int from, int to);
 void	close_safely(int fd);
 void	create_pipe(t_list *p_list);
 
-// utils_pipex
+// utils_pipex.c
 void	init_utils(t_list *p_list, char **envp);
 
-// check error
+// check error.c
 void	check_error(t_error e, long long ret);
 void	check_libft_error(char *error_str, char *mem);
 void	check_fork_error(pid_t pid);
 void	print_error(char *error_str);
 
-// libft
+// ./libft/
 char	**ft_split(char const *str, char c);
 void	ft_putstr_fd(char *str, int fd);
 size_t	ft_strlen(const char *str);
@@ -93,7 +95,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_free_malloc(void *mem);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char	*ft_add_slash_strjoin(char const *s1, char const *s2);
-char	**ft_split_mode_quotes(char const *str, char c);
 
 /*
 main: while 내부
