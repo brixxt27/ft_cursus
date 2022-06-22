@@ -6,18 +6,14 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 17:04:13 by jayoon            #+#    #+#              #
-#    Updated: 2022/06/22 17:40:32 by jayoon           ###   ########.fr        #
+#    Updated: 2022/06/22 21:29:50 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
-# LFT_A = libft/libft.a
 LIBFT_DIR = libft
-# GNL_DIR = get_next_line
-# GNL_SRCS = get_next_line.c\
-			get_next_line_utils.c
 SRCS_DIR = srcs
 INC_DIR = include
 SRCS =			$(addprefix $(SRCS_DIR)/,\
@@ -30,7 +26,7 @@ SRCS =			$(addprefix $(SRCS_DIR)/,\
 				make_pipex.c\
 				parse.c\
 				process.c\
-				utils_pipex.c)\
+				utils_pipex.c)
 SRCS_LIBFT =	$(addprefix $(LIBFT_DIR)/,\
 				ft_add_slash_strjoin.c\
 				ft_free_malloc.c\
@@ -39,6 +35,8 @@ SRCS_LIBFT =	$(addprefix $(LIBFT_DIR)/,\
 				ft_strjoin.c\
 				ft_strlcpy.c\
 				ft_strlen.c\
+				ft_strchr.c\
+				ft_strdup.c\
 				ft_strncmp.c)
 # B_SRCS = $(addprefix $(SRCS_DIR)/,\
 # 		main_bonus.c\
@@ -53,7 +51,7 @@ OBJS_LIBFT = $(SRCS_LIBFT:.c=.o)
 ifdef VAR
 	OBJECTS = $(B_OBJS) $(OBJS_LIBFT)
 else
-	OBJECTS = $(OBJS)
+	OBJECTS = $(OBJS) $(OBJS_LIBFT)
 endif
 
 all: $(NAME)
@@ -64,8 +62,6 @@ all: $(NAME)
 $(NAME): $(OBJECTS) $(LFT_A)
 	$(CC) $(CFLAGS) $(DFLAGS) -I $(INC_DIR) -o $@ $^
 
-# $(LFT_A) :
-# 	make -C $(LIBFT_DIR)
 
 clean:
 	rm -f $(OBJS) $(B_OBJS) $(OBJS_LIBFT)

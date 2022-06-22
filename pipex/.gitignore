@@ -9,3 +9,6 @@ pipex
 
 # vscode
 .vscode
+
+# gitignore
+.gitignore

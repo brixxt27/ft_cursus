@@ -6,16 +6,16 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:58:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 21:07:06 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:58:59 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 #include <sys/wait.h>
 #include <unistd.h>
 
 // wait 해줘야 한다.
-pid_t	fork_process(void)
+pid_t	fork_safely(void)
 {
 	pid_t	pid;
 

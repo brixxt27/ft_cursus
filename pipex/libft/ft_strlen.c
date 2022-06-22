@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/14 16:00:25 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 size_t	ft_strlen(const char *str)
 {

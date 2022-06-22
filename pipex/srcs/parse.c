@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:01:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 22:58:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	parse_execve_argv(t_list *p_list, \
 							char *argv[])
@@ -23,6 +23,16 @@ static void	parse_file_name(t_files *p_files, int argc, char *argv[])
 {
 	p_files->infile_name = argv[1];
 	p_files->outfile_name = argv[argc - 1];
+}
+
+static char	*delete_path_word(char *str)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(str + 5);
+	check_libft_error("ft_strdup", tmp);
+	ft_free_malloc(str);
+	return (tmp);
 }
 
 static void	parse_path_in_envp(t_list *p_list, char *envp[])
@@ -39,6 +49,7 @@ static void	parse_path_in_envp(t_list *p_list, char *envp[])
 	}
 	if (p_list->path == NULL)
 		print_error("Not exist path!\n");
+	p_list->path[0] = delete_path_word(p_list->path[0]);
 }
 
 void	parse(t_list *p_list, t_files *p_files, int argc, char **argv)

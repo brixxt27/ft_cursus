@@ -6,21 +6,34 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 20:59:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 21:27:58 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "pipex.h"
+#include "../include/pipex.h"
 #include <unistd.h>
 
-void	open_infile_and_outfile(t_files *p_files)
+void	open_infile_or_outfile(t_list *p_list, t_files *p_files)
 {
-	p_files->input_fd = open(p_files->infile_name, O_RDONLY);
-	check_error(E_SYSTEM_CALL, (long long)p_files->input_fd);
-	p_files->output_fd = open(p_files->outfile_name, O_TRUNC | O_WRONLY | \
-								O_CREAT, 0666);
-	check_error(E_SYSTEM_CALL, (long long)p_files->output_fd);
+	if (p_list->curr_idx == 2)
+		open_safely(p_files, O_RDONLY);
+	else
+		open_safely(p_files, O_TRUNC | O_WRONLY | O_CREAT);
+}
+
+void	open_safely(t_files *p_files, int flag)
+{
+	if (flag == O_RDONLY)
+	{
+		p_files->input_fd = open(p_files->infile_name, flag);
+		check_error(E_SYSTEM_CALL, (long long)p_files->input_fd);
+	}
+	else
+	{
+		p_files->output_fd = open(p_files->outfile_name, flag, 0666);
+		check_error(E_SYSTEM_CALL, (long long)p_files->output_fd);
+	}
 }
 
 // close 에러 처리해줘야 하나?

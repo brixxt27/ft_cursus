@@ -6,13 +6,14 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:13:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 22:57:40 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 void	init_utils(t_list *p_list, char **envp)
 {
+	p_list->curr_idx = 2;
 	p_list->envp = envp;
 }

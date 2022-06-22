@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_slash_strjoin.c                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/05 17:49:39 by jayoon            #+#    #+#             */
+/*   Created: 2021/11/19 15:41:34 by jayoon            #+#    #+#             */
 /*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "../include/pipex.h" 
 
-static void	add_slash_strcpy(char *dst, char const *src)
+char	*ft_strchr(const char *s, int c)
 {
-	while (*src)
+	if (!s)
+		return (NULL);
+	while (*s != '\0' || c == '\0')
 	{
-		*dst++ = *src++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	*dst = '/';
-	*(++dst) = '\0';
-}
-
-char	*ft_add_slash_strjoin(char const *s1, char const *s2)
-{
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*str;
-
-	if (!s1 || !s2)
-		return (NULL);
-	s1_len = ft_strlen(s1) + 1;
-	s2_len = ft_strlen(s2);
-	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!str)
-		return (NULL);
-	add_slash_strcpy(str, s1);
-	ft_strlcpy(str + s1_len, s2, s2_len + 1);
-	return (str);
+	return (NULL);
 }
