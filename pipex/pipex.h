@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/21 23:07:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/22 12:16:46 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 
 # define CHILD 0
-# define LAST_CHILD 1
 
 // struct in main function
 typedef struct s_list_of_main

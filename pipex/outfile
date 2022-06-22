@@ -1,5 +1,4 @@
 a.out
-a.out.dSYM
 allocate_memory.c
 check_error.c
 control_fds.c
@@ -23,4 +22,5 @@ pipex
 pipex.dSYM
 pipex.h
 process.c
+test.sh
 utils_pipex.c

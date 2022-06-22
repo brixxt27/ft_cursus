@@ -1,0 +1,11 @@
+# gitignore file setting
+
+# executable files
+a.out
+pipex
+
+# -g option directory for debuging
+*.dSYM
+
+# vscode
+.vscode
