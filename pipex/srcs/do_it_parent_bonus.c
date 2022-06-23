@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   do_it_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 18:14:17 by jayoon           ###   ########.fr       */
+/*   Created: 2022/06/17 00:55:08 by jayoon            #+#    #+#             */
+/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 #include <unistd.h>
 
-int	main(int argc, char *argv[], char *envp[])
+void	close_file(t_files *p_files)
 {
-	t_list	list;
-	t_files	info_files;
-	int		last_child_status;
+	int	ret;
 
-	if (argc < 5)
-		print_error("Input is not enough!\n");
-	init_utils(&list, envp);
-	parse(&list, &info_files, argc, argv);
-	make_pipex(&list, &info_files, argc, argv);
-	last_child_status = wait_all_child_and_return_status(&list);
-	return (WEXITSTATUS(last_child_status));
+	ret = close(p_files->input_fd);
+	check_error(E_SYSTEM_CALL, (long long)ret);
+}
+
+void	do_it_parent(t_list *p_list, t_files *p_files, int argc)
+{
+	if (p_list->curr_idx != 2)
+		close_safely(p_files->input_fd);
+	if (p_list->curr_idx != argc - 2)
+		close_safely(p_list->pipefd[1]);
+	p_files->input_fd = p_list->pipefd[0];
 }
