@@ -6,12 +6,12 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 20:59:41 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 17:07:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "../include/pipex.h"
+#include "pipex.h"
 #include <unistd.h>
 
 void	open_infile_or_outfile(t_list *p_list, t_files *p_files)

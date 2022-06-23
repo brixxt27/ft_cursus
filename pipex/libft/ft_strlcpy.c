@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 14:54:07 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

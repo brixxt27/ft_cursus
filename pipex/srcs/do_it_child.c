@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:52:58 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 #include <unistd.h>
 
 static void	execute_process(t_list *p_list)

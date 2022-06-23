@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 18:14:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:02:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex.h"
 #include <unistd.h>
 
 int	main(int argc, char *argv[], char *envp[])

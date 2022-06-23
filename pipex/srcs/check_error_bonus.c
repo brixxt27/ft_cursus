@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:20 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:52:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:59:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex_bonus.h"
 #include <stdio.h>
 
 void	check_error(t_error e, long long ret)

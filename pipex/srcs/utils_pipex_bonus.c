@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 20:13:38 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:51:43 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:59:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex_bonus.h"
 
 void	init_utils(t_list *p_list, char **envp)
 {

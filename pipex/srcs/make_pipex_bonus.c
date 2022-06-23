@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:58:48 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:53:30 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:59:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex_bonus.h"
 
 void	make_pipex(t_list *p_list, t_files *p_files, int argc, char **argv)
 {

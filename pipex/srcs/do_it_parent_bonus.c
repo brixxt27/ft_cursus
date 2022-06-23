@@ -6,11 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:55:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 20:51:38 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:59:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pipex.h"
+#include "pipex_bonus.h"
 #include <unistd.h>
 
 void	close_file(t_files *p_files)
