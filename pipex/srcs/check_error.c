@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:20 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 17:57:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:52:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	check_error(t_error e, long long ret)
 	}
 	else if (e == E_NO_PATH)
 	{
-
 		ft_putstr_fd("command not found\n", 2);
 		exit(127);
 	}

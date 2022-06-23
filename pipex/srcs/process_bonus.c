@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   process_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:58:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 17:57:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:54:18 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ pid_t	fork_safely(void)
 
 int	wait_all_child_and_return_status(t_list *p_list)
 {
-	int 	status;
-	int		cnt;
-	int		ret_wait;
-	int		ret;
+	int	status;
+	int	cnt;
+	int	ret_wait;
+	int	ret;
 
 	cnt = FIRST_CMD;
 	while (cnt != p_list->curr_idx)

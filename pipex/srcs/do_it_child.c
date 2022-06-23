@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 00:51:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 20:52:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	execute_process(t_list *p_list)
 		else
 			path = ft_add_slash_strjoin(p_list->path[i], \
 									p_list->execve_argv[0]);
-		check_error(E_MALLOC, (long long)path);	
+		check_error(E_MALLOC, (long long)path);
 		ret_execve = execve(path, p_list->execve_argv, p_list->envp);
 		ft_free_malloc(path);
 		i++;

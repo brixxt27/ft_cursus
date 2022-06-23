@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:27:34 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/23 12:16:06 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 18:28:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 # define CHILD 0
+# define FIRST_CMD 2
 
 // struct in main function
 typedef struct s_list_of_main
@@ -63,7 +64,7 @@ void	parse_execve_argv(t_list *p_list, \
 
 // process.c
 pid_t	fork_safely(void);
-int		wait_all_child(t_list *p_list, int argc);
+int		wait_all_child_and_return_status(t_list *p_list);
 
 // wrapping function about process
 // do_it_parent.c
@@ -80,6 +81,7 @@ void	create_pipe(t_list *p_list);
 
 // utils_pipex.c
 void	init_utils(t_list *p_list, char **envp);
+void	free_string_array(char ***p_ret);
 
 // check error.c
 void	check_error(t_error e, long long ret);
