@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 10:26:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/22 21:56:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:15:48 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	main(int argc, char *argv[], char *envp[])
 	init_utils(&list, envp);
 	parse(&list, &info_files, argc, argv);
 	make_pipex(&list, &info_files, argc, argv);
-	last_child_status = wait_child_and_return_last_child_status(&list, argc);
+	last_child_status = wait_all_chlid(&list, argc);
 	return (WEXITSTATUS(last_child_status));
 }

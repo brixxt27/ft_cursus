@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 17:04:13 by jayoon            #+#    #+#              #
-#    Updated: 2022/06/22 21:29:50 by jayoon           ###   ########.fr        #
+#    Updated: 2022/06/23 13:53:56 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,9 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	make clean
+	make all
 
 # bonus:
 # 	@make VAR=1 all

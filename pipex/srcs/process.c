@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:58:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/06/22 21:58:59 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/06/23 13:46:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-// wait 해줘야 한다.
 pid_t	fork_safely(void)
 {
 	pid_t	pid;
@@ -24,7 +23,7 @@ pid_t	fork_safely(void)
 	return (pid);
 }
 
-int	wait_child_and_return_last_child_status(t_list *p_list, int argc)
+int	wait_all_child(t_list *p_list, int argc)
 {
 	int 	status;
 	int		cnt;
