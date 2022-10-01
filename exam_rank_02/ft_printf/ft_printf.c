@@ -39,9 +39,13 @@ static int	do_d(int num, int remain, int base)
 	int	len;
 	
 	len = 0;
+	if (num == -2147483648)
+	{
+		return (write(1, "-2147483648", 11));
+	}
 	if (num < 0)
 	{
-		write(1, "-", 1);
+		len += write(1, "-", 1);
 		num *= -1;
 	}
 	if (num != 0)
@@ -58,12 +62,12 @@ static int	do_x(unsigned int num, unsigned int remain, int base)
 	len = 0;
 	if (num < 0)
 	{
-		write(1, "-", 1);
+		len += write(1, "-", 1);
 		num *= -1;
 	}
 	if (num != 0)
-		len += do_d(num / base, num % base, 10);
-	if (num != remain)
+		len += do_x(num / base, num % base, 16);
+	if (num != remain || (num == 0 && remain == 0))
 		len += write(1, &BASE[remain], 1);
 	return (len);
 }
