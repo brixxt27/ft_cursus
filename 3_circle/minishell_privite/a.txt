@@ -1,0 +1,6 @@
+total 112
+drwxr-xr-x  5 jayoon  2021_seoul    170 Aug 20 16:09 .
+drwxr-xr-x  3 jayoon  2021_seoul    102 Aug 17 11:08 ..
+-rwxr-xr-x  1 jayoon  2021_seoul  49424 Aug 17 11:16 a.out
+-rw-r--r--  1 jayoon  2021_seoul      0 Aug 20 16:09 a.txt
+-rw-r--r--  1 jayoon  2021_seoul    140 Aug 17 11:16 main.c
