@@ -63,7 +63,7 @@ static void	print_arr(char **arr, t_back *back)
 		j = 0;
 		while (j < back->width)
 		{
-			printf("%c", back->c);
+			printf("%c", arr[i][j]);
 			j++;
 		}
 		printf("\n");
@@ -90,6 +90,7 @@ static char **init_form(t_back *back)
 		}
 		i++;
 	}
+	// print_arr(form, back);
 	return (form);
 }
 
