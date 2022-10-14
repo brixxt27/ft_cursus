@@ -3,12 +3,12 @@
 #include <stdlib.h>
 
 
-typedef struct s_back
+typedef struct s_zone
 {
 	int		width;
 	int		height;
 	char	c;
-}	t_back;
+}	t_zone;
 
 typedef struct s_rect
 {
@@ -46,22 +46,22 @@ static FILE	*fopen_file(char *path)
 	return (file);
 }
 
-static int	init_back(FILE *file, t_back *back)
+static int	parse_zone(FILE *file, t_zone *zone)
 {
-	return (fscanf(file, "%d %d %c", &back->width, &back->height, &back->c));
+	return (fscanf(file, "%d %d %c", &zone->width, &zone->height, &zone->c));
 }
 
-static void	print_arr(char **arr, t_back *back)
+static void	print_arr(char **arr, t_zone *zone)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < back->width)
+	while (i < zone->height)
 	{
 		j = 0;
-		while (j < back->width)
+		while (j < zone->width)
 		{
 			printf("%c", arr[i][j]);
 			j++;
@@ -71,26 +71,26 @@ static void	print_arr(char **arr, t_back *back)
 	}
 }
 
-static char **init_form(t_back *back)
+static char **init_form(t_zone *zone)
 {
 	char	**form;
 	int		i;
 	int		j;
 
 	i = 0;
-	form = malloc(sizeof(char *) * back->height);
-	while (i < back->width)
+	form = malloc(sizeof(char *) * zone->height);
+	while (i < zone->height)
 	{
-		form[i] = malloc(sizeof(char) * back->width);
+		form[i] = malloc(sizeof(char) * zone->width);
 		j = 0;
-		while (j < back->width)
+		while (j < zone->width)
 		{
-			form[i][j] = back->c;
+			form[i][j] = zone->c;
 			j++;
 		}
 		i++;
 	}
-	// print_arr(form, back);
+	// print_arr(form, zone);
 	return (form);
 }
 
@@ -98,7 +98,7 @@ int	main(int argc, char *argv[])
 {
 	FILE	*file;
 	char	**form;
-	t_back	back;
+	t_zone	zone;
 
 	if (argc == 2)
 	{
@@ -108,12 +108,13 @@ int	main(int argc, char *argv[])
 			ft_putstr("Error: Operation file corrupted\n");
 			return (1);
 		}
-		if (init_back(file, &back) != 3)
+		if (parse_zone(file, &zone) != 3)
 		{
 			ft_putstr("Error: Operation file corrupted\n");
 			return (1);
 		}
-		form = init_form(&back);
+		form = init_form(&zone);
+		// parse_rect
 	}
 	else
 		ft_putstr("Error: argument\n");
