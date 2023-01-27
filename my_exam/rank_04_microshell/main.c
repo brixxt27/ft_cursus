@@ -1,4 +1,5 @@
 #include "microshell.h"
+#include <stdio.h>
 
 int	ft_strlen(char* str)
 {
@@ -18,40 +19,15 @@ void	ft_putstr_fd(char* str, int fd)
 	}
 }
 
-//int	get_path_size(char* str)
-//{
-//	int	i = 0;
+void	ft_memcpy(char* dst, const char* src, size_t len)
+{
+	size_t	i = 0;
 
-//	while (1) {
-//		if (str[i] == ' ' || str[i] == '\0')
-//			break;
-//		i++;
-//	}
-//	return i;
-//}
-
-//void	ft_memcpy(char* dst, const char* src, size_t len)
-//{
-//	size_t	i = 0;
-
-//	while (i < len) {
-//		dst[i] = src[i];
-//		++i;
-//	}
-//}
-
-//static void	init_path(char* str, t_execve_info* execve_info)
-//{
-//	int	i = 0;
-
-//	execve_info->path_size = get_path_size(str);
-//	execve_info->path = malloc(sizeof(char) * (execve_info->path_size + 1));
-//	if (execve_info->path == NULL) {
-//		ft_putstr_fd("malloc error\n", FT_STDOUT);
-//		return;
-//	}
-//	ft_memcpy(execve_info->path, str, execve_info->path_size);
-//}
+	while (i < len) {
+		dst[i] = src[i];
+		++i;
+	}
+}
 
 static int	get_cnt_word(char* str)
 {
@@ -72,22 +48,33 @@ static int	get_cnt_word(char* str)
 	return cnt_word;
 }
 
-//static void	init_argv(char* str, t_execve_info* execve_info)
-//{
-//	int	cnt_word = 1;
+static void	fill_str(char* str, char** ret)
+{
+	char*			begin;
+	char*			end;
+	enum e_isword	flag = e_noword;
 
-//	if (execve_info->path_size != ft_strlen(str)) {
-//		cnt_word += get_cnt_word(str, execve_info);
-//	}
-//	execve_info->argv = malloc(sizeof(char*) * (cnt_word + 1));
-//	if (execve_info->argv == NULL) {
-//		ft_putstr_fd("malloc error\n", FT_STDOUT);
-//		return;
-//	}
-//	execve_info->argv = ft_split(str);
-//}
+	while (*str) {
+		if (*str == ' ') {
+			++str;
+			continue;
+		}
+		if (flag == e_noword) {
+			begin = str;
+			flag = e_yesword;
+		}
+		if (*(str + 1) == ' ' || *(str + 1) == '\0') {
+			end = str;
+			*ret = malloc(sizeof(char) * (end - begin + 2));
+			ft_memcpy(*ret, begin, sizeof(char) * (end - begin + 2));
+			flag = e_noword;
+			ret++;
+		}
+		++str;
+	}
+}
 
-char**	ft_split(char* str)
+static char**	ft_split(char* str)
 {
 	int		cnt_word = 0;
 	char**	ret;
@@ -96,12 +83,11 @@ char**	ft_split(char* str)
 	ret = malloc(sizeof(char*) * (cnt_word + 1));
 	if (ret == NULL) {
 		ft_putstr_fd("malloc error\n", FT_STDOUT);
-		return;
+		return NULL;
 	}
-	//for (int i = 0; i < cnt_word; i++) {
-	//	put_str_delimeted_by_space()
-	//}
 	ret[cnt_word] = NULL;
+	fill_str(str, ret);
+	return ret;
 }
 
 static void	init_exceve_args(char* str, t_execve_info* execve_info)
@@ -109,13 +95,36 @@ static void	init_exceve_args(char* str, t_execve_info* execve_info)
 	//int	i = 0;
 
 	execve_info->argv = ft_split(str);
+
 	//init_path(str, execve_info);
 	//init_argv(str, execve_info);
 }
 
+static void	free_all(char** arr)
+{
+	int	i = 0;
+
+	while (1) {
+		if (arr[i] == NULL)
+			break;
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+void	print_all(char** argv)
+{
+	while (*argv) {
+		ft_putstr_fd(*argv, 1);
+		ft_putstr_fd("\n", 1);
+		argv++;
+	}
+}
 
 int	main(int argc, char* argv[], char* envp[])
 {
+	// {
 	t_execve_info	execve_info = 	{
 										NULL,
 										NULL,
@@ -130,7 +139,11 @@ int	main(int argc, char* argv[], char* envp[])
 	while (argv[i]) {
 		init_exceve_args(argv[i], &execve_info);
 
+		print_all(execve_info.argv);
+		free_all(execve_info.argv);
 		i++;
 	}
 	//execve(path, arr, envp);
+	// }
+	// system("leaks a.out");
 }
