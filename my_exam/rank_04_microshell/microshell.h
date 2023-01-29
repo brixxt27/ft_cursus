@@ -4,9 +4,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define FT_STDIN	0
-#define	FT_STDOUT	1
-#define	FT_STDERR	2
+#define STDIN	0
+#define	STDOUT	1
+#define	STDERR	2
 
 enum e_type {
 	e_pipe,
