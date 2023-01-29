@@ -11,6 +11,7 @@
 typedef struct s_execve_info {
 	char*	path;
 	char**	argv;
+	char**	envp;
 	int		path_size;
 }	t_execve_info;
 

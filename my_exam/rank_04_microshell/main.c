@@ -1,5 +1,6 @@
 #include "microshell.h"
 #include <stdio.h>
+#include <string.h>
 
 int	ft_strlen(char* str)
 {
@@ -17,6 +18,13 @@ void	ft_putstr_fd(char* str, int fd)
 	for (int i = 0; i < ft_strlen(str); i++) {
 		write(fd, &str[i], 1);
 	}
+}
+
+void	ft_putstr_fd_three(char* s1, char* s2, char* s3, int fd)
+{
+	ft_putstr_fd(s1, fd);
+	ft_putstr_fd(s2, fd);
+	ft_putstr_fd(s3, fd);
 }
 
 void	ft_memcpy(char* dst, const char* src, size_t len)
@@ -92,12 +100,8 @@ static char**	ft_split(char* str)
 
 static void	init_exceve_args(char* str, t_execve_info* execve_info)
 {
-	//int	i = 0;
-
 	execve_info->argv = ft_split(str);
-
-	//init_path(str, execve_info);
-	//init_argv(str, execve_info);
+	execve_info->path = execve_info->argv[0];
 }
 
 static void	free_all(char** arr)
@@ -122,15 +126,31 @@ void	print_all(char** argv)
 	}
 }
 
+static int	do_it_child(t_execve_info* execve_info)
+{
+	execve(execve_info->path, execve_info->argv, execve_info->envp);
+	ft_putstr_fd_three("error: cannot execve ", execve_info->path, "\n", FT_STDERR);
+	return -1;
+}
+
+//static int	control_pipe(pid_t pipe_fd)
+//{
+
+//}
+
 int	main(int argc, char* argv[], char* envp[])
 {
-	// {
 	t_execve_info	execve_info = 	{
 										NULL,
 										NULL,
+										envp,
 										0
 									};
 	int				i = 1;
+	pid_t			pid;
+	int				pipe_fd[2];
+	int				ret;
+
 
 	if (argc < 2) {
 		return 1;
@@ -139,11 +159,31 @@ int	main(int argc, char* argv[], char* envp[])
 	while (argv[i]) {
 		init_exceve_args(argv[i], &execve_info);
 
-		print_all(execve_info.argv);
+		if (strncmp(argv[i + 1], "|", 1) == 0) {
+			ret = pipe(pipe_fd);
+			if (ret == -1) {
+				ft_putstr_fd("error: fatal\n", FT_STDERR);
+				return 1;
+			}
+		}
+
+		pid = fork();
+		if (pid == -1) {
+			ft_putstr_fd("error: fatal\n", FT_STDERR);
+			return 1;
+		}
+		if (pid == 0) {
+			if (argv[i + 1] == "|")
+				control_pipe(pipe_fd);
+			if (do_it_child(&execve_info) == -1)
+				return 1;
+		}
+		//do_it_parent();
+
+		//print_all(execve_info.argv);
 		free_all(execve_info.argv);
 		i++;
 	}
-	//execve(path, arr, envp);
-	// }
-	// system("leaks a.out");
+	// system("leaks microshell");
+	return 0;
 }
