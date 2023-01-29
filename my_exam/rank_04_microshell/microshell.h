@@ -8,16 +8,22 @@
 #define	FT_STDOUT	1
 #define	FT_STDERR	2
 
+enum e_type {
+	e_pipe,
+	e_semicolon,
+	e_null
+};
+
 typedef struct s_execve_info {
-	char*	path;
-	char**	argv;
-	char**	envp;
-	int		path_size;
+	char*		path;
+	char**		argv;
+	char**		envp;
+	enum e_type	type;
 }	t_execve_info;
 
-enum e_isword {
-	e_noword,
-	e_yesword
-};
+//enum e_isword {
+//	e_noword,
+//	e_yesword
+//};
 
 #endif

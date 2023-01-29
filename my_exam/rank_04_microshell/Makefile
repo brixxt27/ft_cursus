@@ -17,5 +17,5 @@ err:
 debug:
 	make DEBUG=1
 fclean:
-	rm -rf ${TARGET} ${microshell}.dSYM
+	rm -rf ${TARGET} ${TARGET}.dSYM
 .PHONY: debug fclean err
