@@ -1,12 +1,13 @@
 TARGET = microshell
 SRCS =	main.c
 
-ifdef DEBUG
-	CFLAGS += -g
-endif
 ifdef ERR
 else
 	CFLAGS = -Wall -Wextra -Werror
+endif
+
+ifdef DEBUG
+	CFLAGS += -g
 endif
 
 NAME :
