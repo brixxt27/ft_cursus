@@ -3,6 +3,9 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+//err
+#include <stdio.h>
 
 #define STDIN	0
 #define	STDOUT	1
@@ -10,9 +13,9 @@
 
 enum e_type
 {
+	e_null,
 	e_pipe,
-	e_semicolon,
-	e_null
+	e_semicolon
 };
 
 typedef struct s_execve_info
@@ -20,13 +23,14 @@ typedef struct s_execve_info
 	char*		path;
 	char**		argv;
 	char**		envp;
-	enum e_type	type;
+	enum e_type	curr_type;
+	enum e_type	prev_type;
 }	t_execve_info;
 
 typedef struct s_pipe_fd
 {
-	int	pipe_fd[2];
-	int	past_fd;
+	int	curr_pipe[2];
+	int	prev_read_pipe;
 }	t_pipe;
 
 //enum e_isword {
