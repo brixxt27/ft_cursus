@@ -89,8 +89,6 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 	exit(1);
 }
 
-void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
-{
 	// int ret;
 
 	// if (pipe_info->prev_read_pipe != -1)
@@ -99,6 +97,8 @@ void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
 	// 	if (ret == -1)
 	// 		printf("close\n");
 	// }
+void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
+{
 	if (execve_info->prev_type == e_pipe)
 	{
 		close(pipe_info->prev_read_pipe);
