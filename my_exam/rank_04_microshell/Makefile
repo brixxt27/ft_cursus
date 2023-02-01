@@ -17,6 +17,9 @@ err:
 	make ERR=1
 debug:
 	make DEBUG=1
+re:
+	make fclean
+	make
 fclean:
 	rm -rf ${TARGET} ${TARGET}.dSYM
 .PHONY: debug fclean err

@@ -91,22 +91,22 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 
 void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
 {
-	int ret;
+	// int ret;
 
-	if (pipe_info->prev_read_pipe != -1)
+	// if (pipe_info->prev_read_pipe != -1)
+	// {
+	// 	ret = close(pipe_info->prev_read_pipe);
+	// 	if (ret == -1)
+	// 		printf("close\n");
+	// }
+	if (execve_info->prev_type == e_pipe)
 	{
-		ret = close(pipe_info->prev_read_pipe);
-		if (ret == -1)
-			printf("close\n");
+		close(pipe_info->prev_read_pipe);
 	}
 	if (execve_info->curr_type == e_pipe)
 	{
 		close(pipe_info->curr_pipe[1]);
 		pipe_info->prev_read_pipe = pipe_info->curr_pipe[0];
-	}
-	else if (execve_info->prev_type == e_pipe)
-	{
-		close(pipe_info->prev_read_pipe);
 	}
 }
 
@@ -163,7 +163,8 @@ int	main(int argc, char* argv[], char* envp[])
 	int		i = 1;
 	int		ret;
 	pid_t	pid;
-	t_pipe	pipe_info = {{0, 1}, -1};
+	// t_pipe	pipe_info = {{0, 1}, -1};
+	t_pipe	pipe_info = {{0, 1}, 0};
 	int		cnt_process = 0;
 
 	if (argc < 2)
@@ -183,7 +184,7 @@ int	main(int argc, char* argv[], char* envp[])
 		else if (execve_info.prev_type == e_semicolon)
 		{
 			wait_all_process(cnt_process);
-			pipe_info.prev_read_pipe = -1;
+			// pipe_info.prev_read_pipe = -1;
 			cnt_process = 0;
 		}
 
