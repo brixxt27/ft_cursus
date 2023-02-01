@@ -1,5 +1,7 @@
 #include "myshell.h"
 
+#include <fcntl.h>
+
 /**
  * utils
  */
@@ -31,6 +33,9 @@ void	safe_dup2_and_close(int old, int new)
 {
 	int ret;
 
+	//printf("old: %d, new: %d\n", old, new);
+	//printf("fd: %d, is available: %d\n", old, fcntl(old, F_GETFD));
+	//printf("fd: %d, is available: %d\n", new, fcntl(new, F_GETFD));
 	ret = dup2(old, new);
 	if (ret == -1)
 		system_call_err();
@@ -86,12 +91,14 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 
 void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
 {
+	if (pipe_info->prev_read_pipe != -1)
+		close(pipe_info->prev_read_pipe);
 	if (execve_info->curr_type == e_pipe)
 	{
 		close(pipe_info->curr_pipe[1]);
 		pipe_info->prev_read_pipe = pipe_info->curr_pipe[0];
 	}
-	if (execve_info->prev_type == e_pipe)
+	else if (execve_info->prev_type == e_pipe)
 	{
 		close(pipe_info->prev_read_pipe);
 	}
@@ -185,10 +192,13 @@ int	main(int argc, char* argv[], char* envp[])
 			system_call_err();
 		if (pid == 0)
 			do_it_child(&execve_info, &pipe_info);
+		//printf("fd: %d, is available: %d\n", pipe_info.prev_read_pipe, fcntl(pipe_info.prev_read_pipe, F_GETFD));
 		do_it_parent(&execve_info, &pipe_info);
 
 		cnt_process++;
 		i++;
 	}
+	close(pipe_info.prev_read_pipe);
 	wait_all_process(cnt_process);
+	while (1);
 }
