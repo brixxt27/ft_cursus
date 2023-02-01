@@ -1,4 +1,4 @@
-#include "microshell.h"
+#include "myshell.h"
 
 /**
  * utils
@@ -109,6 +109,34 @@ void	wait_all_process(int cnt_process)
 	}
 }
 
+void	ft_cd(t_execve_info* execve_info)
+{
+	int	i = 0;
+	int	ret;
+	//char*	e_argv[2] = {"bin/pwd", NULL};
+
+	while (1)
+	{
+		if (execve_info->argv[i + 1] == NULL)
+			break;
+		i++;
+	}
+	if (i != 1)
+	{
+		ft_putstr_err("error: cd: bad arguments\n");
+		return;
+	}
+	ret = chdir(execve_info->argv[1]);
+	if (ret == -1)
+	{
+		ft_putstr_err("error: cd: cannot change directory to ");
+		ft_putstr_err(execve_info->argv[1]);
+		ft_putstr_err("\n");
+		return;
+	}
+	//execve("/bin/pwd", e_argv, execve_info->envp);
+}
+
 int	main(int argc, char* argv[], char* envp[])
 {
 	t_execve_info	execve_info =
@@ -132,7 +160,8 @@ int	main(int argc, char* argv[], char* envp[])
 	{
 		i = init_execve_info(argv, &execve_info, i);
 		
-		if (execve_info.curr_type == e_pipe)
+		if (strncmp(execve_info.path, "cd", 3) != 0 \
+			&& execve_info.curr_type == e_pipe)
 		{
 			ret = pipe(pipe_info.curr_pipe);
 			if (ret == -1)
@@ -142,6 +171,13 @@ int	main(int argc, char* argv[], char* envp[])
 		{
 			wait_all_process(cnt_process);
 			cnt_process = 0;
+		}
+
+		if (strncmp(execve_info.path, "cd", 3) == 0)
+		{
+			ft_cd(&execve_info);
+			i++;
+			continue;
 		}
 
 		pid = fork();

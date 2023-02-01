@@ -1,5 +1,5 @@
-#ifndef MICROSHELL_H
-#define MICROSHELL_H
+#ifndef MYSHELL_H
+#define MYSHELL_H
 
 #include <unistd.h>
 #include <stdlib.h>
