@@ -11,20 +11,20 @@
 #define	STDOUT	1
 #define	STDERR	2
 
-enum e_type
+enum e_cmd_type
 {
-	e_null,
-	e_pipe,
-	e_semicolon
+	TYPE_NULL,
+	TYPE_PIPE,
+	TYPE_SEMICOLON
 };
 
 typedef struct s_execve_info
 {
-	char*		path;
-	char**		argv;
-	char**		envp;
-	enum e_type	curr_type;
-	enum e_type	prev_type;
+	char*			path;
+	char**			argv;
+	char**			envp;
+	enum e_cmd_type	curr_type;
+	enum e_cmd_type	prev_type;
 }	t_execve_info;
 
 typedef struct s_pipe_fd
@@ -32,10 +32,5 @@ typedef struct s_pipe_fd
 	int	curr_pipe[2];
 	int	prev_read_pipe;
 }	t_pipe;
-
-//enum e_isword {
-//	e_noword,
-//	e_yesword
-//};
 
 #endif

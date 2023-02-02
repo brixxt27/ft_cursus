@@ -1,7 +1,5 @@
 #include "myshell.h"
 
-#include <fcntl.h>
-
 /**
  * utils
  */
@@ -33,9 +31,6 @@ void	safe_dup2_and_close(int old, int new)
 {
 	int ret;
 
-	//printf("old: %d, new: %d\n", old, new);
-	//printf("fd: %d, is available: %d\n", old, fcntl(old, F_GETFD));
-	//printf("fd: %d, is available: %d\n", new, fcntl(new, F_GETFD));
 	ret = dup2(old, new);
 	if (ret == -1)
 		system_call_err();
@@ -57,11 +52,11 @@ int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
 			|| strncmp(argv[i + 1], ";", 2) == 0)
 		{
 			if (argv[i + 1] == NULL)
-				execve_info->curr_type = e_null;
+				execve_info->curr_type = TYPE_NULL;
 			else if (strncmp(argv[i + 1], "|", 2) == 0)
-				execve_info->curr_type = e_pipe;
+				execve_info->curr_type = TYPE_PIPE;
 			else
-				execve_info->curr_type = e_semicolon;
+				execve_info->curr_type = TYPE_SEMICOLON;
 			argv[i + 1] = NULL;
 			i++;
 			break;
@@ -73,12 +68,12 @@ int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
 
 void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 {
-	if (execve_info->curr_type == e_pipe)
+	if (execve_info->curr_type == TYPE_PIPE)
 	{
 		close(pipe_info->curr_pipe[0]);
 		safe_dup2_and_close(pipe_info->curr_pipe[1], 1);
 	}
-	if (execve_info->prev_type == e_pipe)
+	if (execve_info->prev_type == TYPE_PIPE)
 	{
 		safe_dup2_and_close(pipe_info->prev_read_pipe, 0);
 	}
@@ -89,21 +84,13 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 	exit(1);
 }
 
-	// int ret;
-
-	// if (pipe_info->prev_read_pipe != -1)
-	// {
-	// 	ret = close(pipe_info->prev_read_pipe);
-	// 	if (ret == -1)
-	// 		printf("close\n");
-	// }
 void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
 {
-	if (execve_info->prev_type == e_pipe)
+	if (execve_info->prev_type == TYPE_PIPE)
 	{
 		close(pipe_info->prev_read_pipe);
 	}
-	if (execve_info->curr_type == e_pipe)
+	if (execve_info->curr_type == TYPE_PIPE)
 	{
 		close(pipe_info->curr_pipe[1]);
 		pipe_info->prev_read_pipe = pipe_info->curr_pipe[0];
@@ -126,7 +113,6 @@ void	ft_cd(t_execve_info* execve_info)
 {
 	int	i = 0;
 	int	ret;
-	//char*	e_argv[2] = {"bin/pwd", NULL};
 
 	while (1)
 	{
@@ -147,7 +133,6 @@ void	ft_cd(t_execve_info* execve_info)
 		ft_putstr_err("\n");
 		return;
 	}
-	//execve("/bin/pwd", e_argv, execve_info->envp);
 }
 
 int	main(int argc, char* argv[], char* envp[])
@@ -157,13 +142,12 @@ int	main(int argc, char* argv[], char* envp[])
 		NULL,
 		NULL,
 		envp,
-		e_null,
-		e_null
+		TYPE_NULL,
+		TYPE_NULL
 	};
 	int		i = 1;
 	int		ret;
 	pid_t	pid;
-	// t_pipe	pipe_info = {{0, 1}, -1};
 	t_pipe	pipe_info = {{0, 1}, 0};
 	int		cnt_process = 0;
 
@@ -175,16 +159,15 @@ int	main(int argc, char* argv[], char* envp[])
 		i = init_execve_info(argv, &execve_info, i);
 		
 		if (strncmp(execve_info.path, "cd", 3) != 0 \
-			&& execve_info.curr_type == e_pipe)
+			&& execve_info.curr_type == TYPE_PIPE)
 		{
 			ret = pipe(pipe_info.curr_pipe);
 			if (ret == -1)
 				system_call_err();
 		}
-		else if (execve_info.prev_type == e_semicolon)
+		else if (execve_info.prev_type == TYPE_SEMICOLON)
 		{
 			wait_all_process(cnt_process);
-			// pipe_info.prev_read_pipe = -1;
 			cnt_process = 0;
 		}
 
@@ -200,7 +183,6 @@ int	main(int argc, char* argv[], char* envp[])
 			system_call_err();
 		if (pid == 0)
 			do_it_child(&execve_info, &pipe_info);
-		//printf("fd: %d, is available: %d\n", pipe_info.prev_read_pipe, fcntl(pipe_info.prev_read_pipe, F_GETFD));
 		do_it_parent(&execve_info, &pipe_info);
 
 		cnt_process++;
@@ -208,5 +190,4 @@ int	main(int argc, char* argv[], char* envp[])
 	}
 	close(pipe_info.prev_read_pipe);
 	wait_all_process(cnt_process);
-	//while (1);
 }
