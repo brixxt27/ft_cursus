@@ -11,7 +11,7 @@ enum e_standard_fd
 {
 	kStdin,
 	kStdout,
-	kkStderr
+	kStderr
 };
 
 enum e_cmd_type
