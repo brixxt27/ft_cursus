@@ -7,15 +7,18 @@
 //err
 #include <stdio.h>
 
-#define STDIN	0
-#define	STDOUT	1
-#define	STDERR	2
+enum e_standard_fd
+{
+	kStdin,
+	kStdout,
+	kkStderr
+};
 
 enum e_cmd_type
 {
-	TYPE_NULL,
-	TYPE_PIPE,
-	TYPE_SEMICOLON
+	kNull,
+	kPipe,
+	kSemicolon
 };
 
 typedef struct s_execve_info

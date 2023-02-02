@@ -18,7 +18,7 @@ static int	ft_strlen(char* str)
 
 static void	ft_putstr_err(char* str)
 {
-	write(STDERR, str, ft_strlen(str));
+	write(kStderr, str, ft_strlen(str));
 }
 
 static void	system_call_err()
@@ -52,11 +52,11 @@ int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
 			|| strncmp(argv[i + 1], ";", 2) == 0)
 		{
 			if (argv[i + 1] == NULL)
-				execve_info->curr_type = TYPE_NULL;
+				execve_info->curr_type = kNull;
 			else if (strncmp(argv[i + 1], "|", 2) == 0)
-				execve_info->curr_type = TYPE_PIPE;
+				execve_info->curr_type = kPipe;
 			else
-				execve_info->curr_type = TYPE_SEMICOLON;
+				execve_info->curr_type = kSemicolon;
 			argv[i + 1] = NULL;
 			i++;
 			break;
@@ -68,12 +68,12 @@ int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
 
 void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 {
-	if (execve_info->curr_type == TYPE_PIPE)
+	if (execve_info->curr_type == kPipe)
 	{
 		close(pipe_info->curr_pipe[0]);
 		safe_dup2_and_close(pipe_info->curr_pipe[1], 1);
 	}
-	if (execve_info->prev_type == TYPE_PIPE)
+	if (execve_info->prev_type == kPipe)
 	{
 		safe_dup2_and_close(pipe_info->prev_read_pipe, 0);
 	}
@@ -86,11 +86,11 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 
 void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
 {
-	if (execve_info->prev_type == TYPE_PIPE)
+	if (execve_info->prev_type == kPipe)
 	{
 		close(pipe_info->prev_read_pipe);
 	}
-	if (execve_info->curr_type == TYPE_PIPE)
+	if (execve_info->curr_type == kPipe)
 	{
 		close(pipe_info->curr_pipe[1]);
 		pipe_info->prev_read_pipe = pipe_info->curr_pipe[0];
@@ -142,8 +142,8 @@ int	main(int argc, char* argv[], char* envp[])
 		NULL,
 		NULL,
 		envp,
-		TYPE_NULL,
-		TYPE_NULL
+		kNull,
+		kNull
 	};
 	int		i = 1;
 	int		ret;
@@ -159,13 +159,13 @@ int	main(int argc, char* argv[], char* envp[])
 		i = init_execve_info(argv, &execve_info, i);
 		
 		if (strncmp(execve_info.path, "cd", 3) != 0 \
-			&& execve_info.curr_type == TYPE_PIPE)
+			&& execve_info.curr_type == kPipe)
 		{
 			ret = pipe(pipe_info.curr_pipe);
 			if (ret == -1)
 				system_call_err();
 		}
-		else if (execve_info.prev_type == TYPE_SEMICOLON)
+		else if (execve_info.prev_type == kSemicolon)
 		{
 			wait_all_process(cnt_process);
 			cnt_process = 0;
