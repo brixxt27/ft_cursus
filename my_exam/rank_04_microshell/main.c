@@ -41,7 +41,7 @@ void	safe_dup2_and_close(int old, int new)
  * main logics
  */
 
-int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
+int	init_execve_info(char** argv, t_command_info* execve_info, int i)
 {
 	execve_info->path = argv[i];
 	execve_info->argv = &argv[i];
@@ -66,7 +66,7 @@ int	init_execve_info(char** argv, t_execve_info* execve_info, int i)
 	return i;
 }
 
-void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
+void	do_it_child(t_command_info* execve_info, t_pipe* pipe_info)
 {
 	if (execve_info->curr_type == kPipe)
 	{
@@ -84,7 +84,7 @@ void	do_it_child(t_execve_info* execve_info, t_pipe* pipe_info)
 	exit(1);
 }
 
-void	do_it_parent(t_execve_info* execve_info, t_pipe* pipe_info)
+void	do_it_parent(t_command_info* execve_info, t_pipe* pipe_info)
 {
 	if (execve_info->prev_type == kPipe)
 	{
@@ -109,7 +109,7 @@ void	wait_all_process(int cnt_process)
 	}
 }
 
-void	ft_cd(t_execve_info* execve_info)
+void	ft_cd(t_command_info* execve_info)
 {
 	int	i = 0;
 	int	ret;
@@ -137,7 +137,7 @@ void	ft_cd(t_execve_info* execve_info)
 
 int	main(int argc, char* argv[], char* envp[])
 {
-	t_execve_info	execve_info =
+	t_command_info	execve_info =
 	{
 		NULL,
 		NULL,

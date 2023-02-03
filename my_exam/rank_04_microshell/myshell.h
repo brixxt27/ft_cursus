@@ -21,14 +21,14 @@ enum e_cmd_type
 	kSemicolon
 };
 
-typedef struct s_execve_info
+typedef struct s_command_info
 {
 	char*			path;
 	char**			argv;
 	char**			envp;
 	enum e_cmd_type	curr_type;
 	enum e_cmd_type	prev_type;
-}	t_execve_info;
+}	t_command_info;
 
 typedef struct s_pipe_fd
 {
