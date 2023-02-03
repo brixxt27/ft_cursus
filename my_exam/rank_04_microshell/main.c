@@ -145,7 +145,7 @@ int	main(int argc, char* argv[], char* envp[])
 		kNull,
 		kNull
 	};
-	int		i = 1;
+	int		i = 1; // argv[0] 은 프로그램 명
 	int		ret;
 	pid_t	pid;
 	t_pipe	pipe_info = {{0, 1}, 0};
