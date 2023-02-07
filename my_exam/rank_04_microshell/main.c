@@ -1,5 +1,4 @@
 #include "myshell.h"
-#include <fcntl.h>
 
 /**
  * utils
@@ -19,7 +18,7 @@ static int	ft_strlen(char* str)
 
 static void	ft_putstr_err(char* str)
 {
-	write(kStderr, str, ft_strlen(str));
+	write(2, str, ft_strlen(str));
 }
 
 static void	system_call_err()
@@ -132,7 +131,6 @@ void	ft_cd(t_command_info* execve_info)
 		ft_putstr_err("error: cd: cannot change directory to ");
 		ft_putstr_err(execve_info->argv[1]);
 		ft_putstr_err("\n");
-		return;
 	}
 }
 

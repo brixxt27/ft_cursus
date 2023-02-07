@@ -6,13 +6,7 @@
 #include <string.h>
 //err
 #include <stdio.h>
-
-enum e_standard_fd
-{
-	kStdin,
-	kStdout,
-	kStderr
-};
+#include <fcntl.h>
 
 enum e_cmd_type
 {
