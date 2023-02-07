@@ -1,4 +1,5 @@
 #include "myshell.h"
+#include <fcntl.h>
 
 /**
  * utils
@@ -188,6 +189,5 @@ int	main(int argc, char* argv[], char* envp[])
 		cnt_process++;
 		i++;
 	}
-	close(pipe_info.prev_read_pipe);
 	wait_all_process(cnt_process);
 }

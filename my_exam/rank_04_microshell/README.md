@@ -46,6 +46,16 @@ $>./microshell /bin/ls "|" /usr/bin/grep microshell ";" /bin/echo i love my micr
 microshell
 i love my microshell
 $>
+
+./microshell /bin/echo WOOT "; /bin/echo NOPE;" "; ;" ";" /bin/echo YEAH
+WOOT ; /bin/echo NOPE; ; ;
+YEAH
+$>
+
+./microshell "/bin/ls" "|" /usr/bin/grep _____ ";" /bin/cp /usr/bin/grep ./ ";" /bin/ls "|" ./grep grep 2> error.log; cat error.log
+grep
+error: cannot execute ls
+$>
 ```
 Hint:
 	1) execve 에 환경변수를 넣는 것을 잊지 마세요!
