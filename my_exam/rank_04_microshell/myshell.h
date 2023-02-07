@@ -20,8 +20,8 @@ typedef struct s_command_info
 	char*			path;
 	char**			argv;
 	char**			envp;
-	enum e_cmd_type	curr_type;
 	enum e_cmd_type	prev_type;
+	enum e_cmd_type	curr_type;
 }	t_command_info;
 
 typedef struct s_pipe_fd

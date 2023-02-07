@@ -41,7 +41,7 @@ void	safe_dup2_and_close(int old, int new)
  * main logics
  */
 
-int	init_execve_info(char** argv, t_command_info* execve_info, int i)
+int	init_cmd_info(char** argv, t_command_info* execve_info, int i)
 {
 	execve_info->path = argv[i];
 	execve_info->argv = &argv[i];
@@ -161,7 +161,7 @@ int	main(int argc, char* argv[], char* envp[])
 			continue;
 		}
 
-		i = init_execve_info(argv, &execve_info, i);
+		i = init_cmd_info(argv, &execve_info, i);
 		
 		if (strncmp(execve_info.path, "cd", 3) != 0 \
 			&& execve_info.curr_type == kPipe)
