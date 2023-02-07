@@ -155,6 +155,12 @@ int	main(int argc, char* argv[], char* envp[])
 	
 	while (argc > i)
 	{
+		if (strncmp(argv[i], ";", 2) == 0)
+		{
+			i++;
+			continue;
+		}
+
 		i = init_execve_info(argv, &execve_info, i);
 		
 		if (strncmp(execve_info.path, "cd", 3) != 0 \
