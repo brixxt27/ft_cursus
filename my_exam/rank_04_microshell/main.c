@@ -4,7 +4,7 @@
  * utils
  */
 
-static int	ft_strlen(char* str)
+static int	ft_strlen(const char* str)
 {
 	int len = 0;
 
@@ -16,7 +16,7 @@ static int	ft_strlen(char* str)
 	return len;
 }
 
-static void	ft_putstr_err(char* str)
+static void	ft_putstr_err(const char* str)
 {
 	write(2, str, ft_strlen(str));
 }
@@ -170,7 +170,7 @@ int	main(int argc, char* argv[], char* envp[])
 			if (ret == -1)
 				system_call_err();
 		}
-		
+
 		if (execve_info.prev_type == kSemicolon)
 		{
 			wait_all_process(cnt_process);
