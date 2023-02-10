@@ -10,9 +10,8 @@ ifdef DEBUG
 	CFLAGS += -g
 endif
 
-NAME :
+all:
 	gcc ${CFLAGS} $(SRCS) -o ${TARGET}
-
 err:
 	make ERR=1
 debug:

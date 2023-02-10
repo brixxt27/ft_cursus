@@ -170,7 +170,8 @@ int	main(int argc, char* argv[], char* envp[])
 			if (ret == -1)
 				system_call_err();
 		}
-		else if (execve_info.prev_type == kSemicolon)
+		
+		if (execve_info.prev_type == kSemicolon)
 		{
 			wait_all_process(cnt_process);
 			cnt_process = 0;
