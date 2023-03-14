@@ -1,5 +1,9 @@
+### 이슈 관리: [전체 이슈 list](https://github.com/brixxt27/ft_cursus/issues/2)
+
 Assignment name:	microshell
+
 Expected file:		*.c *.h
+
 Allowed function:	malloc, free, write, close, fork, waitpid, signal, kill, chdir, execve, dup, dup2, pipe, strcmp, strncmp
 -----------------------------------------------------------------
 
