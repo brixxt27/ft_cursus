@@ -1,11 +1,14 @@
 ### 이슈 관리: [전체 이슈 list](https://github.com/brixxt27/ft_cursus/issues/2)
 
+---
+
 Assignment name:	microshell
 
 Expected file:		*.c *.h
 
 Allowed function:	malloc, free, write, close, fork, waitpid, signal, kill, chdir, execve, dup, dup2, pipe, strcmp, strncmp
------------------------------------------------------------------
+
+---
 
 아래와 같은 프로그램을 작성하시오.
 1. 실행하기 위한 command line 은 프로그램의 인자가 될 것이다.
