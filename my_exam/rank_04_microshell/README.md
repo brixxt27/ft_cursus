@@ -59,7 +59,7 @@ WOOT ; /bin/echo NOPE; ; ;
 YEAH
 $>
 
-./microshell "/bin/ls" "|" /usr/bin/grep _____ ";" /bin/cp /usr/bin/grep ./ ";" /bin/ls "|" ./grep grep 2> error.log; cat error.log
+./microshell "ls" "|" /usr/bin/grep _____ ";" /bin/cp /usr/bin/grep ./ ";" /bin/ls "|" ./grep grep 2> error.log; cat error.log
 grep
 error: cannot execute ls
 $>
