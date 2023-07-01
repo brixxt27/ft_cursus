@@ -1,3 +1,6 @@
+#ifndef WARLOCK_HPP
+#define WARLOCK_HPP
+
 #include <string>
 #include <iostream>
 
@@ -21,3 +24,5 @@ private:
   std::string name_;
   std::string title_;
 };
+
+#endif

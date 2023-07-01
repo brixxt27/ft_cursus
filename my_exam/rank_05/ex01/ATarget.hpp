@@ -1,3 +1,6 @@
+#ifndef ATARGET_HPP
+#define ATARGET_HPP
+
 #include <string>
 
 class ASpell;
@@ -21,3 +24,5 @@ private:
   ATarget(const ATarget& other);
   ATarget operator=(const ATarget& rhs);
 };
+
+#endif

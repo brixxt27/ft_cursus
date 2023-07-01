@@ -1,3 +1,6 @@
+#ifndef WARLOCK_HPP
+#define WARLOCK_HPP
+
 #include <string>
 #include <iostream>
 #include <map>
@@ -32,3 +35,5 @@ private:
   Warlock operator=(const Warlock& rhs);
   Warlock(const Warlock& other);
 };
+
+#endif

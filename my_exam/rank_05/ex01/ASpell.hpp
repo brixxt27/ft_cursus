@@ -1,3 +1,6 @@
+#ifndef ASPELL_HPP
+#define ASPELL_HPP
+
 #include <string>
 
 class ATarget;
@@ -27,3 +30,5 @@ protected:
   ASpell(const ASpell& other);
   ASpell operator=(const ASpell& rhs);
 };
+
+#endif
