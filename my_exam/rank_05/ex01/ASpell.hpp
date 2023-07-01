@@ -11,8 +11,8 @@ public:
   std::string getName() const;
   std::string getEffects() const;
 
-  // ASpell* clone() const;
-  virtual ASpell* clone() const;
+  ASpell* clone() const;
+  // virtual ASpell* clone() const;
 
   void launch(const ATarget& target) const;
 

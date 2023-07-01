@@ -14,6 +14,9 @@ int main()
 
   fw->printTest();
 
+  ASpell* nfw = fw->clone();
+  nfw->printTest();
+
   // richard.learnSpell(fwoosh);
 
   // richard.introduce();
