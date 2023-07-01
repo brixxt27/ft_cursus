@@ -31,6 +31,10 @@ by copy. It will have the following functions:
 * ASpell* createSpell(string const &), that receives a string corresponding to
   the name of a spell, creates it, and returns it.
 
+
+
+
+
 Modify the Warlock, now, make it have a spell book that will be created with
 him and destroyed with him. Also make his learnSpell and forgetSpell functions
 call those of the spell book.

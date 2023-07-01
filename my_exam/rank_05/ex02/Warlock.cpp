@@ -1,5 +1,6 @@
 #include "Warlock.hpp"
 #include "ASpell.hpp"
+#include "ATarget.hpp"
 
 Warlock::Warlock(std::string name, std::string title)
   : name_(name)
@@ -35,27 +36,33 @@ void Warlock::introduce() const
 
 void Warlock::learnSpell(ASpell* spell)
 {
-  spell_map.insert(std::pair<std::string, ASpell*>(spell->getName(), spell));
+  book_.learnSpell(spell);
 }
 
 // If it's not a known spell, does nothing.
 void Warlock::forgetSpell(std::string spell_name)
 {
-  std::map<std::string, ASpell*>::iterator it = spell_map.find(spell_name);
-
-  if (it == spell_map.end())
-    return;
-
-  spell_map.erase(spell_name);
+  book_.forgetSpell(spell_name);
 }
 
 // If it's not a known spell, does nothing.
 void Warlock::launchSpell(std::string spell_name, ATarget& target)
 {
-  std::map<std::string, ASpell*>::iterator it = spell_map.find(spell_name);
+  const std::map<std::string, ASpell*> spells = book_.getSpell();
 
-  if (it == spell_map.end())
+  std::map<std::string, ASpell*>::const_iterator cit = spells.find(spell_name);
+  
+  if (cit == spells.end())
+    return ;
+  
+  cit->second->launch(target);
+}
+
+/**
+  std::map<std::string, ASpell*>::iterator it = spell_map_.find(spell_name);
+
+  if (it == spell_map_.end())
     return;
 
   it->second->launch(target);
-}
+ */

@@ -1,6 +1,9 @@
+#ifndef WARLOCK_HPP
+#define WARLOCK_HPP
 #include <string>
 #include <iostream>
-#include <map>
+
+#include "SpellBook.hpp"
 
 class ASpell;
 class ATarget;
@@ -26,9 +29,12 @@ public:
 private:
   std::string name_;
   std::string title_;
-  std::map<std::string, ASpell*> spell_map;
 
+  SpellBook book_;
+
+  /** private functions */
   Warlock();
   Warlock operator=(const Warlock& rhs);
   Warlock(const Warlock& other);
 };
+#endif

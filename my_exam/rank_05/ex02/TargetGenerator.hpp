@@ -1,0 +1,4 @@
+#ifndef TARGETGENERATOR_HPP
+#define TARGETGENERATOR_HPP
+
+#endif
