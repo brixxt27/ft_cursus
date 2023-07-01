@@ -10,10 +10,9 @@ int main()
   Fwoosh* fwoosh = new Fwoosh();
 
   ASpell* fw = fwoosh->clone();
-  ATarget* bb = bob.clone();
+  // ATarget* bb = bob.clone();
 
-  std::cout << "fw's name is " << fw->getName() << std::endl;
-  std::cout << "bb's name is " << bb->getType() << std::endl;
+  fw->printTest();
 
   // richard.learnSpell(fwoosh);
 

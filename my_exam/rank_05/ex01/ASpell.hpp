@@ -16,6 +16,9 @@ public:
 
   void launch(const ATarget& target) const;
 
+  // example of polymorphism
+  virtual void printTest() const;
+
 protected:
   std::string name_;
   std::string effects_;

@@ -5,6 +5,8 @@ class Fwoosh : public ASpell
 public:
   Fwoosh();
 
-  ASpell* clone() const;
-  // virtual ASpell* clone() const;
+  virtual ASpell* clone() const;
+
+  // test function
+  void printTest() const;
 };
