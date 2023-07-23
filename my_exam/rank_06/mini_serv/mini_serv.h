@@ -19,8 +19,7 @@ enum e_stdio {
 };
 
 enum e_list {
-  kDummy = -2,
-  kNode = -1
+  kDummyFd = -1
 };
 
 typedef struct sClient {
@@ -30,8 +29,9 @@ typedef struct sClient {
 } ClientNode;
 
 typedef struct sClientList {
-  ClientNode* head;
   int num;
+  ClientNode* head;
+  ClientNode* tail;
 } ClientList;
 
 typedef struct sFdSet {
