@@ -38,13 +38,14 @@ int servFd;
 int connFd;
 int nextId;
 int maxFd;
-const int buffSize = 4096;
+const int kBuffSize = 424242;
+const int kClientSize = 1024;
 
-char writeBuff[buffSize];
-char readBuff[buffSize];
-char tempBuff[buffSize];
+char writeBuff[kBuffSize];
+char readBuff[kBuffSize];
+char tempBuff[kBuffSize];
 
-Client client[1024];
+Client client[kClientSize];
 fd_set originFd, readCopy, writeCopy;
 
 void initServ(void) {
@@ -108,7 +109,7 @@ void initClient(void) {
 void recvMsgToClient(int fd) {
 	int ret;
 
-	ret = recv(fd, readBuff, buffSize - 1, 0);
+	ret = recv(fd, readBuff, kBuffSize - 1, 0);
 	if (ret == 0) {
 		// disconnect client
 		sprintf(writeBuff, "server: client %d just left\n", client[fd].id);
