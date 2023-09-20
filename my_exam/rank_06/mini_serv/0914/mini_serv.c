@@ -35,7 +35,10 @@ int nextId = 0;
 int maxFd = 0;
 int servfd;
 const int kBuffSize = 42424;
+const int writeSize = 1024;
 char buff[kBuffSize];
+char readBuff[kBuffSize];
+char writeBuff[kBuffSize];
 Client client[1024];
 fd_set readfds, writefds, originfds;
 
@@ -43,11 +46,11 @@ fd_set readfds, writefds, originfds;
  * main loginc
 */
 
-void sendAll(int exception) {
+void sendAll(int exception, char* str) {
 	for (int i = 0; i <= maxFd; i++) {
 		if (FD_ISSET(i, &writefds)) {
 			if (exception != i) {
-				send(i, buff, kBuffSize, 0);
+				send(i, str, strlen(str), 0);
 			}
 		}
 	}
@@ -97,24 +100,34 @@ void	initClient(void) {
 	client[connfd].id = nextId;
 	nextId++;
 	sprintf(buff, "server: client %d just arrived\n", client[connfd].id);
-	sendAll(connfd);
+	sendAll(connfd, buff);
 	memset(buff, 0, strlen("server: client %d just arrived\n"));
 }
 
 void receiveFromClient(int fd) {
-	int ret = recv(fd, buff, kBuffSize, 0);
+	int ret = recv(fd, readBuff, kBuffSize, 0);
 
-	if (ret == 0) {
+	if (ret <= 0) {
 		sprintf(buff, "server: client %d just left\n", client[fd].id);
-		sendAll(fd);
+		sendAll(fd, buff);
 		FD_CLR(fd, &originfds);
 		close(fd);
 		memset(buff, 0, strlen("server: client %d just left\n"));
 	}
 	else {
-
+		for (int i = 0, j = 0; i < ret; i++, j++) {
+			buff[j] = readBuff[i];
+			if (buff[j] == '\n') {
+				buff[j] = '\0';
+				j = -1;
+				sprintf(writeBuff, "client %d: %s\n", client[fd].id, buff);
+				sendAll(fd, writeBuff);
+				memset(writeBuff, 0, writeSize);
+				memset(buff, 0, writeSize);
+			}
+		}
 	}
-
+	memset(readBuff, 0, writeSize);
 }
 
 int main(int argc, char** argv)
